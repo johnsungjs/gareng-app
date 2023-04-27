@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:gareng_front/widgets/CardGrid.dart';
 import 'package:gareng_front/widgets/Carousel.dart';
 import 'package:gareng_front/widgets/CustomCard.dart';
 import 'package:gareng_front/widgets/SearchBar.dart';
@@ -10,76 +11,52 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      // Text("3 logo atassssssssssssssssssssssssssssssss"),
-      SizedBox(
-        height: 20,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("Logo"),
-          Text("Location"),
-          Text("Notif Logo"),
-        ],
-      ),
-      // Text("Carousel"),
-      SizedBox(
-        height: 20,
-      ),
-      Carousel(),
-      SizedBox(
-        height: 20,
-      ),
-      // Text("SearchBar"),
-      SearchBar(),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("Popular Food"),
-          Text("View All"),
-        ],
-      ),
-      // Text("Grids Of Menu"),
-      Expanded(
-        child: GridView.count(
-          crossAxisCount: 2,
-          children: [
-            CustomCard(
-                title: "title1",
-                image:
-                    "https://thumbs.dreamstime.com/b/toyota-ae-diecast-car-model-isolated-white-background-toyota-ae-249136538.jpg"),
-            CustomCard(
-                title: "title2",
-                image:
-                    "https://thumbs.dreamstime.com/b/toyota-ae-diecast-car-model-isolated-white-background-toyota-ae-249136538.jpg"),
-            CustomCard(
-                title: "title3",
-                image:
-                    "https://thumbs.dreamstime.com/b/toyota-ae-diecast-car-model-isolated-white-background-toyota-ae-249136538.jpg"),
-            CustomCard(
-                title: "title4",
-                image:
-                    "https://thumbs.dreamstime.com/b/toyota-ae-diecast-car-model-isolated-white-background-toyota-ae-249136538.jpg"),
-            CustomCard(
-                title: "title4",
-                image:
-                    "https://thumbs.dreamstime.com/b/toyota-ae-diecast-car-model-isolated-white-background-toyota-ae-249136538.jpg"),
-            CustomCard(
-                title: "title4",
-                image:
-                    "https://thumbs.dreamstime.com/b/toyota-ae-diecast-car-model-isolated-white-background-toyota-ae-249136538.jpg"),
-            CustomCard(
-                title: "title4",
-                image:
-                    "https://thumbs.dreamstime.com/b/toyota-ae-diecast-car-model-isolated-white-background-toyota-ae-249136538.jpg"),
-            CustomCard(
-                title: "title4",
-                image:
-                    "https://thumbs.dreamstime.com/b/toyota-ae-diecast-car-model-isolated-white-background-toyota-ae-249136538.jpg"),
-          ],
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: SearchBar(),
         ),
-      ),
-    ]);
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(children: [
+              const SizedBox(
+                height: 12,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.abc)),
+                    const Text("Location"),
+                    const Text("Notif Logo"),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              const Carousel(),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text("Popular Food"),
+                    Text("View All"),
+                  ],
+                ),
+              ),
+              // Text("Grids Of Menu"),
+              const Padding(padding: EdgeInsets.all(24), child: CardGrid()),
+            ]),
+          ),
+        ),
+      ],
+    );
   }
 }

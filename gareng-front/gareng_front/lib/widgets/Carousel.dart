@@ -13,6 +13,8 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   late final PageController pageController;
+
+  final ScrollController scrollController = ScrollController();
   int pageNo = 0;
 
   Timer? carouselTimer;
@@ -22,8 +24,14 @@ class _CarouselState extends State<Carousel> {
       if (pageNo == 5) {
         pageNo = 0;
       }
-      pageController.animateToPage(pageNo,
-          duration: const Duration(seconds: 1), curve: Curves.easeInOutCirc);
+      if (scrollController.hasClients) {
+        pageController.animateToPage(
+          pageNo,
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeInOutCirc,
+        );
+      }
+
       pageNo++;
     });
   }

@@ -7,6 +7,11 @@ class PromoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("This is Promo Page, EDIT HERE");
+    return SingleChildScrollView(
+        child: Column(
+      children: const [
+        Text("This is Promo Page, EDIT HERE"),
+      ],
+    ));
   }
 }

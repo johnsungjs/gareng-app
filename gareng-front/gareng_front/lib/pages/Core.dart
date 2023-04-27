@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/pages/HomePage.dart';
 import 'package:gareng_front/pages/PromoPage.dart';
 import 'package:gareng_front/pages/SettingPage.dart';
 import 'package:gareng_front/pages/WishlistPage.dart';
-import 'package:gareng_front/widgets/CustomCard.dart';
 
 class Core extends StatefulWidget {
   const Core({super.key});
@@ -16,11 +13,11 @@ class Core extends StatefulWidget {
 
 class _CoreState extends State<Core> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    PromoPage(),
-    WishlistPage(),
-    SettingPage(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const HomePage(),
+    const PromoPage(),
+    const WishlistPage(),
+    const SettingPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -32,7 +29,6 @@ class _CoreState extends State<Core> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("AppBar Here")),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -46,7 +42,7 @@ class _CoreState extends State<Core> {
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Account'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color.fromARGB(255, 0, 42, 77),
+        selectedItemColor: const Color.fromARGB(255, 0, 42, 77),
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),

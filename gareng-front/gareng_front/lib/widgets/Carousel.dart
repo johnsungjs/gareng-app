@@ -31,7 +31,6 @@ class _CarouselState extends State<Carousel> {
           curve: Curves.easeInOutCirc,
         );
       }
-
       pageNo++;
     });
   }

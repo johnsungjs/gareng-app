@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gareng_front/constants/itemsDummy.dart';
+import 'package:gareng_front/pages/DetailItem.dart';
 
 class CardGrid extends StatefulWidget {
   const CardGrid({super.key});
@@ -23,67 +24,69 @@ class _CardGridState extends State<CardGrid> {
       ),
       itemCount: itemsDummy.length,
       itemBuilder: (_, index) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.amberAccent.shade100,
-          ),
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16)),
-                child: Image.network(
-                  itemsDummy.elementAt(index)['images'],
-                  height: 170,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+                    DetailItem(item: itemsDummy.elementAt(index))));
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.grey.shade100,
+            ),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16)),
+                  child: Image.network(
+                    itemsDummy.elementAt(index)['images'],
+                    height: 170,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      itemsDummy.elementAt(index)['title'],
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .merge(const TextStyle(
-                            fontWeight: FontWeight.w700,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                      width: double.infinity,
-                    ),
-                    Text(
-                      itemsDummy.elementAt(index)['price'],
-                      style: Theme.of(context).textTheme.titleSmall!.merge(
-                          TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: Colors.grey.shade500)),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                      width: double.infinity,
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(CupertinoIcons.heart)),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(CupertinoIcons.cart)),
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        itemsDummy.elementAt(index)['title'],
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 18),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                        width: double.infinity,
+                      ),
+                      Text(
+                        itemsDummy.elementAt(index)['price'],
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                        width: double.infinity,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(CupertinoIcons.heart)),
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(CupertinoIcons.cart)),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

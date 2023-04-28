@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(18.0),
           child: SearchBar(),
         ),
         Expanded(
@@ -28,26 +28,30 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.abc)),
-                    const Text("Location"),
-                    const Text("Notif Logo"),
+                    const Text(
+                      "Hello John!",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                    ),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.notifications_active_outlined)),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 12,
               ),
               const Carousel(),
               const SizedBox(
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text("Popular Food"),
-                    Text("View All"),
+                    Text(
+                      "Our Menu",
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ],
                 ),
               ),

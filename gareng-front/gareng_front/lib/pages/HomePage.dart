@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/widgets/CardGrid.dart';
 import 'package:gareng_front/widgets/Carousel.dart';
 import 'package:gareng_front/widgets/CustomCard.dart';
 import 'package:gareng_front/widgets/SearchBar.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               // Text("Grids Of Menu"),
-              const Padding(padding: EdgeInsets.all(24), child: CardGrid()),
+              Padding(padding: const EdgeInsets.all(24), child: CardGrid()),
             ]),
           ),
         ),

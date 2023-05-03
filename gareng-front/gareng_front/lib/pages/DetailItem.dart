@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:gareng_front/models/product_model.dart';
 
 class DetailItem extends StatefulWidget {
   DetailItem({super.key, required this.item});
 
-  Map item;
+  Product item;
 
   @override
   State<DetailItem> createState() => _DetailItemState();
@@ -30,7 +31,7 @@ class _DetailItemState extends State<DetailItem> {
 
   @override
   Widget build(BuildContext context) {
-    int itemPriceTotal = int.parse(widget.item["price"]) * itemQuantity;
+    int itemPriceTotal = int.parse(widget.item.price) * itemQuantity;
 
     return Scaffold(
       appBar: AppBar(
@@ -62,14 +63,14 @@ class _DetailItemState extends State<DetailItem> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network(widget.item['images']),
+            Image.network(widget.item.images),
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.item["title"],
+                    widget.item.title,
                     style: const TextStyle(fontSize: 24),
                   ),
                   const Icon(Icons.star),
@@ -82,7 +83,7 @@ class _DetailItemState extends State<DetailItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.item["price"],
+                    widget.item.price,
                     style: const TextStyle(fontSize: 18),
                   ),
                   Row(
@@ -123,10 +124,17 @@ class _DetailItemState extends State<DetailItem> {
                   //     onPressed: () {}, child: const Text("Place Order")),
                   FilledButton(
                       style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            const EdgeInsets.all(22),
+                          ),
                           backgroundColor:
-                              MaterialStatePropertyAll(Colors.black)),
+                              const MaterialStatePropertyAll(Colors.black)),
                       onPressed: () {},
-                      child: const Text("Place Order"))
+                      child: const Text(
+                        "Place Order",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ))
                 ],
               ),
             ),

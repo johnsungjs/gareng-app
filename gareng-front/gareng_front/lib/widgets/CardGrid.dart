@@ -1,16 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gareng_front/constants/itemsDummy.dart';
+import 'package:gareng_front/models/cart_controller.dart';
+import 'package:gareng_front/models/product_model.dart';
 import 'package:gareng_front/pages/DetailItem.dart';
+import 'package:get/get.dart';
 
 class CardGrid extends StatefulWidget {
-  const CardGrid({super.key});
+  CardGrid({super.key});
 
   @override
   State<CardGrid> createState() => _CardGridState();
 }
 
 class _CardGridState extends State<CardGrid> {
+  final cartController = Get.put(CartController());
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -22,13 +26,13 @@ class _CardGridState extends State<CardGrid> {
         mainAxisSpacing: 12,
         mainAxisExtent: 300,
       ),
-      itemCount: itemsDummy.length,
+      itemCount: Product.products.length,
       itemBuilder: (_, index) {
         return GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) =>
-                    DetailItem(item: itemsDummy.elementAt(index))));
+                    DetailItem(item: Product.products[index])));
           },
           child: Container(
             decoration: BoxDecoration(
@@ -42,7 +46,7 @@ class _CardGridState extends State<CardGrid> {
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16)),
                   child: Image.network(
-                    itemsDummy.elementAt(index)['images'],
+                    Product.products[index].images,
                     height: 170,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -54,7 +58,7 @@ class _CardGridState extends State<CardGrid> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        itemsDummy.elementAt(index)['title'],
+                        Product.products[index].title,
                         style: const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 18),
                       ),
@@ -63,7 +67,7 @@ class _CardGridState extends State<CardGrid> {
                         width: double.infinity,
                       ),
                       Text(
-                        itemsDummy.elementAt(index)['price'],
+                        Product.products[index].price,
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
@@ -78,7 +82,10 @@ class _CardGridState extends State<CardGrid> {
                               onPressed: () {},
                               icon: const Icon(CupertinoIcons.heart)),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                cartController
+                                    .addProduct(Product.products[index]);
+                              },
                               icon: const Icon(CupertinoIcons.cart)),
                         ],
                       )

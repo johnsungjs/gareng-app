@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/models/cart_controller.dart';
+import 'package:gareng_front/pages/NotificationPage.dart';
 import 'package:gareng_front/widgets/CardGrid.dart';
 import 'package:gareng_front/widgets/Carousel.dart';
 import 'package:gareng_front/widgets/CustomCard.dart';
@@ -37,7 +38,10 @@ class HomePage extends StatelessWidget {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                        },
                         icon: const Icon(Icons.notifications_active_outlined)),
                   ],
                 ),

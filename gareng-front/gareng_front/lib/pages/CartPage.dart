@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/models/product_model.dart';
 import 'package:get/get.dart';
+import 'package:gareng_front/widgets/CardTotal.dart';
 
 class CartPage extends StatelessWidget {
   final CartController controller = Get.find();
@@ -11,31 +12,42 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
+      () => Column(
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            "Your Shopping Cart",
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  SizedBox(
+                    height: 600,
+                    child: ListView.builder(
+                        itemCount: controller.products.length,
+                        itemBuilder: (_, index) {
+                          return CartProductCard(
+                            controller: controller,
+                            product: controller.products.keys.toList()[index],
+                            quantity:
+                                controller.products.values.toList()[index],
+                            index: index,
+                          );
+                        }),
+                  ),
+                ],
+              ),
             ),
-            Text(
-              "Your Shopping Cart",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
-            ),
-            SizedBox(
-              height: 600,
-              child: ListView.builder(
-                  itemCount: controller.products.length,
-                  itemBuilder: (_, index) {
-                    return CartProductCard(
-                      controller: controller,
-                      product: controller.products.keys.toList()[index],
-                      quantity: controller.products.values.toList()[index],
-                      index: index,
-                    );
-                  }),
-            ),
-          ],
-        ),
+          ),
+          CardTotal()
+        ],
       ),
     );
   }

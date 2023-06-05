@@ -1,0 +1,68 @@
+Authentication
+
+login
+-loginRequest
+username
+password
+
+-loginResponse
+accessToken
+refreshToken
+
+-process
+1. check login data in database
+2. generate accessToken and refreshToken
+3. add refresh token data to database
+4. return token to client
+
+Register
+-registerRequest
+username
+password
+address
+sex
+age
+email
+
+-registerResponse
+message
+
+-process
+1. validate register data
+2. hash password with bcrypt
+3. add user data to database
+4. return message success
+
+Logout
+-logoutRequest
+refreshToken
+
+-logoutResponse
+message
+
+-process
+1. check refreshToken in database
+2. delete refreshToken in database
+3. return message success
+
+===========================================================
+HttpObject
+1. LoginRequest
+2. LoginResponse
+3. RegisterRequest
+4. RegisterResponse
+5. LogoutRequest
+6. LogoutResponse
+7. ResponseHandler (httpStatus, message, data)
+
+Entity
+1. User (id, uuid, username, password, address, sex, age, email)
+2. RefreshTokenHistory (id, token)
+
+Controller
+1. AuthenticationController (login, register, logout)
+
+Helper
+1. JwtUtils (generateAccessToken, generateRefreshToken)
+2. UserUtils (addUser)
+3. RefreshTokenHistoryUtil(addRefreshToken)

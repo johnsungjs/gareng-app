@@ -20,7 +20,7 @@ Register
 username
 password
 address
-sex
+gender
 age
 email
 
@@ -56,8 +56,12 @@ HttpObject
 7. ResponseHandler (httpStatus, message, data)
 
 Entity
-1. User (id, uuid, username, password, address, sex, age, email)
+1. User (id, uuid, username, password, address, gender, age, email)
 2. RefreshTokenHistory (id, token)
+
+Repository
+1. UserRepository
+2. RefreshTokenHistoryRepository
 
 Controller
 1. AuthenticationController (login, register, logout)
@@ -66,3 +70,6 @@ Helper
 1. JwtUtils (generateAccessToken, generateRefreshToken)
 2. UserUtils (addUser)
 3. RefreshTokenHistoryUtil(addRefreshToken)
+
+Constant
+1. JwtConstant

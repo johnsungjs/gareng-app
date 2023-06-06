@@ -1,0 +1,21 @@
+2023-06-06 14:57:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS [*]USER( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), password VARCHAR(50), address VARCHAR(50), sex VARCHAR(6), age INT, email VARCHAR(50) )"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS USER( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), password VARCHAR(50), address VARCHAR(50), sex VARCHAR(6), age INT, email VARCHAR(50) ) [42001-214]
+2023-06-06 14:58:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS [*]USER( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), password VARCHAR(50), address VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) )"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS USER( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), password VARCHAR(50), address VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) ) [42001-214]
+2023-06-06 15:00:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS [*]USER( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), password VARCHAR(50), address VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) )"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS USER( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), password VARCHAR(50), address VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) ) [42001-214]
+2023-06-06 15:01:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS [*]USER( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) )"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS USER( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) ) [42001-214]
+2023-06-06 15:03:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS [*][USER]( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) )"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS [USER]( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) ) [42001-214]
+2023-06-06 15:08:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS [*][USERS]( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) )"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS [USERS]( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) ) [42001-214]
+2023-06-06 15:13:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS [*][USERS]( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50)"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS [USERS]( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) [42001-214]

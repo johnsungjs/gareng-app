@@ -1,4 +1,4 @@
-package com.gareng.app.gareng.Helper;
+package com.gareng.app.gareng.helper;
 
 public class UserUtils {
     

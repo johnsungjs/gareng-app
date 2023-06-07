@@ -19,6 +19,17 @@ public class User {
     private String password;
     private String address;
     private String gender;
-    private String age;
+    private Integer age;
     private String email;
+
+    public User(String uuid, String username, String password, String address, String gender, Integer age,
+            String email) {
+        this.uuid = uuid;
+        this.username = username;
+        this.password = password;
+        this.address = address;
+        this.gender = gender;
+        this.age = age;
+        this.email = email;
+    }
 }

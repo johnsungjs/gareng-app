@@ -15,4 +15,7 @@ public class RefreshTokenHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String  token;
+    public RefreshTokenHistory(String token) {
+        this.token = token;
+    }
 }

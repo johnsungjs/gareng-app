@@ -71,5 +71,9 @@ Helper
 2. UserUtils (addUser)
 3. RefreshTokenHistoryUtil(addRefreshToken)
 
+Utility
+1. JwtUtils
+2. BcryptUtils
+
 Constant
 1. JwtConstant

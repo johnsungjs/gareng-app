@@ -1,4 +1,4 @@
-package com.gareng.app.gareng.helper;
+package com.gareng.app.gareng.Utility;
 
 import java.util.Date;
 
@@ -10,21 +10,31 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 
 public class JwtUtils {
-    public static String generateToken(User user){
+    public static String generateAccessToken(User user, String subject){
         long expirationMillis = 120000; //2 menit
         Date now = new Date();
         Date exp = new Date(now.getTime() + expirationMillis);
-        System.out.println("NOW : "+now);
-        System.out.println("EXP : "+exp);
 
-        String jwt = Jwts.builder()
-                    .setSubject("user")
+        String accessJwt = Jwts.builder()
+                    .setSubject(subject)
                     .claim("username", user.getUsername())
                     .setIssuedAt(now)
                     .setExpiration(exp)
                     .signWith(JwtConstant.key)
                     .compact();       
-        return jwt;
+        return accessJwt;
+    }
+
+    public static String generateRefreshToken(User user){
+        Date now = new Date();
+
+        String refreshJwt = Jwts.builder()
+                    .setSubject("refresh token")
+                    .claim("username", user.getUsername())
+                    .setIssuedAt(now)
+                    .signWith(JwtConstant.key)
+                    .compact();       
+        return refreshJwt;
     }
 
     public static boolean validateToken(String token){

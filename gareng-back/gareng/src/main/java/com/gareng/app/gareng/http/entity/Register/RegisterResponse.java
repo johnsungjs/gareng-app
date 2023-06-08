@@ -6,9 +6,11 @@ import com.gareng.app.gareng.model.entity.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @JsonPropertyOrder({"User"})
 public class RegisterResponse {
     @JsonProperty("User")

@@ -19,3 +19,19 @@ CREATE TABLE IF NOT EXISTS [USERS]( id BIGINT primary key auto_increment, uuid V
 2023-06-06 15:13:47 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS [*][USERS]( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50)"; expected "identifier"; SQL statement:
 CREATE TABLE IF NOT EXISTS [USERS]( id BIGINT primary key auto_increment, uuid VARCHAR(40), username VARCHAR(50), [password] VARCHAR(50), [address] VARCHAR(50), gender VARCHAR(6), age INT, email VARCHAR(50) [42001-214]
+2023-06-08 14:06:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "PASSWORD CHARACTER VARYING(50)": "'$2a$10$QALY0tAoSfQOHDMhJG3oxu1wpZUJXY5osjvFXF/Qh5UnerYbe2P26' (60)"; SQL statement:
+insert into USERS (address,age,email,gender,password,username,uuid,id) values (?,?,?,?,?,?,?,default) [22001-214]
+2023-06-08 14:08:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "PASSWORD CHARACTER VARYING(50)": "'$2a$10$z7qJlZM37vIyeu/gWGY/3OYnRN/iE0H1.5d6rEEN27gEn30ZDtfAG' (60)"; SQL statement:
+insert into USERS (address,age,email,gender,password,username,uuid,id) values (?,?,?,?,?,?,?,default) [22001-214]
+2023-06-08 14:11:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-06-08 14:14:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-06-08 14:19:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-06-08 14:21:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-06-08 14:34:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]

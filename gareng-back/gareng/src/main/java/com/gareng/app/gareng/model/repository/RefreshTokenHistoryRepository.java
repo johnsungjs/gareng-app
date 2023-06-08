@@ -7,5 +7,5 @@ import com.gareng.app.gareng.model.entity.RefreshTokenHistory;
 
 @Repository
 public interface RefreshTokenHistoryRepository extends CrudRepository<RefreshTokenHistory,Integer>{
-    
+    public RefreshTokenHistory searchByToken(String token);
 }

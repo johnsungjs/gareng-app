@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 
 @Data
-@JsonPropertyOrder({"Message"})
+@JsonPropertyOrder({"ResponseMessage"})
 public class LogoutResponse {
-    @JsonProperty("Message")
-    private String message;
+    @JsonProperty("ResponseMessage")
+    private String responseMessage;
 }

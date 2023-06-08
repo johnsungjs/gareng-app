@@ -11,9 +11,15 @@ import io.jsonwebtoken.Jwts;
 
 public class JwtUtils {
     public static String generateAccessToken(User user, String subject){
+        System.out.println("generateAccessToken start");
+        System.out.println("generateAccessToken (user): "+user.toString());
+        System.out.println("generateAccessToken (subject): "+subject);
         long expirationMillis = 120000; //2 menit
+        System.out.println("generateAccessToken (expirationMillis): "+expirationMillis);
         Date now = new Date();
+        System.out.println("generateAccessToken (now): "+now);
         Date exp = new Date(now.getTime() + expirationMillis);
+        System.out.println("generateAccessToken (exp): "+exp);
 
         String accessJwt = Jwts.builder()
                     .setSubject(subject)
@@ -21,7 +27,9 @@ public class JwtUtils {
                     .setIssuedAt(now)
                     .setExpiration(exp)
                     .signWith(JwtConstant.key)
-                    .compact();       
+                    .compact();
+        System.out.println("generateAccessToken (accessJwt): "+accessJwt);
+        System.out.println("generateAccessToken end");    
         return accessJwt;
     }
 

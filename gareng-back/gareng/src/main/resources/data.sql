@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS `USERS`(
 
 CREATE TABLE IF NOT EXISTS `RefreshTokenHistory`(
     `id` BIGINT primary key auto_increment,
-    `token` VARCHAR(100)
+    `token` VARCHAR(150)
 );

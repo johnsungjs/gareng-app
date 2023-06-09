@@ -2,8 +2,6 @@ package com.gareng.app.gareng.helper;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.gareng.app.gareng.Utility.BcryptUtils;
 import com.gareng.app.gareng.Utility.JwtUtils;
 import com.gareng.app.gareng.http.entity.Login.LoginRequest;
@@ -16,11 +14,8 @@ import com.gareng.app.gareng.model.repository.RefreshTokenHistoryRepository;
 import com.gareng.app.gareng.model.repository.UserRepository;
 
 public class UserHelper {
-
-    @Autowired
-    static RefreshTokenHistoryRepository refreshTokenHistoryRepository;
-
-    public static LoginResponse login(LoginRequest loginRequest, UserRepository userRepository) throws Exception{
+    public static LoginResponse login(LoginRequest loginRequest, UserRepository userRepository
+        , RefreshTokenHistoryRepository refreshTokenHistoryRepository) throws Exception{
         System.out.println("login start");
         String accessToken="";
         String refreshToken="";
@@ -63,7 +58,8 @@ public class UserHelper {
         return registerResponse;
     }
 
-    public static String logout(String refreshToken) throws Exception{
+    public static String logout(String refreshToken
+        , RefreshTokenHistoryRepository refreshTokenHistoryRepository) throws Exception{
         String message;
         RefreshTokenHistory isTokenExist = refreshTokenHistoryRepository.searchByToken(refreshToken);
         if(!isTokenExist.equals(null)){

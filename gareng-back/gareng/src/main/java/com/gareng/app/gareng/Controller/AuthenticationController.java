@@ -17,6 +17,7 @@ import com.gareng.app.gareng.http.entity.Logout.LogoutResponse;
 import com.gareng.app.gareng.http.entity.Register.RegisterRequest;
 import com.gareng.app.gareng.http.entity.Register.RegisterResponse;
 import com.gareng.app.gareng.http.entity.ResponseHandler.ResponseHandler;
+import com.gareng.app.gareng.model.repository.RefreshTokenHistoryRepository;
 import com.gareng.app.gareng.model.repository.UserRepository;
 
 @RestController
@@ -24,6 +25,9 @@ import com.gareng.app.gareng.model.repository.UserRepository;
 public class AuthenticationController {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    RefreshTokenHistoryRepository refreshTokenHistoryRepository;
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest){
@@ -33,7 +37,7 @@ public class AuthenticationController {
         HttpStatus httpStatus;
         LoginResponse loginResponse = new LoginResponse(null,null);
         try {
-            loginResponse = UserHelper.login(loginRequest, userRepository);
+            loginResponse = UserHelper.login(loginRequest, userRepository, refreshTokenHistoryRepository);
             responseMessage = "Success";
             httpStatus = HttpStatus.OK;
             System.out.println("login success");
@@ -72,7 +76,7 @@ public class AuthenticationController {
         HttpStatus httpStatus;
         LogoutResponse logoutResponse = new LogoutResponse();
         try {
-            logoutResponse.setResponseMessage(UserHelper.logout(refreshToken));
+            logoutResponse.setResponseMessage(UserHelper.logout(refreshToken, refreshTokenHistoryRepository));
             responseMessage = "Success";
             httpStatus = HttpStatus.OK;
         } catch (Exception e) {

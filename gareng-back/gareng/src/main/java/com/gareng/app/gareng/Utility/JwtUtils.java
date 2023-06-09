@@ -21,6 +21,7 @@ public class JwtUtils {
         Date exp = new Date(now.getTime() + expirationMillis);
         System.out.println("generateAccessToken (exp): "+exp);
 
+        System.out.println("generateAccessToken (key): "+JwtConstant.key);
         String accessJwt = Jwts.builder()
                     .setSubject(subject)
                     .claim("username", user.getUsername())

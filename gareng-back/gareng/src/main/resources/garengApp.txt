@@ -77,3 +77,43 @@ Utility
 
 Constant
 1. JwtConstant
+
+****************************************************************************************
+ITEM
+getItem
+-getItemRequest
+Header
+auth accessToken
+
+Body
+getItemPagination
+
+-getItemResponse
+getItemPagination
+itemData
+
+-process
+1. validate accessToken
+2. get data request
+
+===========================================================
+HttpObject
+1. getItemRequest
+2. getItemResponse
+3. getItemPagination (pageAt, totalPage, total, sizePerPage, search)
+
+Entity
+1. item(id, uuid, title, price, imageUrl)
+
+Projection
+1. ItemProjection
+
+Repository
+1. itemRepository
+
+Controller
+1. ItemController (getItem)
+
+Utility
+1. PaginationUtils
+2. SearchUtills

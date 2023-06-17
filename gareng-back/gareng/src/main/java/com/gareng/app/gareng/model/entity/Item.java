@@ -8,16 +8,23 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name = "REFRESHTOKENHISTORY")
-public class RefreshTokenHistory {
+@Table(name = "ITEMS")
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String  token;
-    public RefreshTokenHistory(String token) {
-        this.token = token;
+    private String uuid;
+    private String title;
+    private String price;
+    private String imageUrl;
+    
+    public Item(String uuid, String title, String price, String imageUrl) {
+        this.uuid = uuid;
+        this.title = title;
+        this.price = price;
+        this.imageUrl = imageUrl;
     }
 }

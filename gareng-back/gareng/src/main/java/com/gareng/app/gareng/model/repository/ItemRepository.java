@@ -20,4 +20,12 @@ public interface ItemRepository extends CrudRepository<Item, Long>{
             "OFFSET ?2"
     )
     List<ItemProjection> getItemView(Integer sizePerPage, Integer pageAt);
+
+    @Query(
+        nativeQuery = true, 
+        value = 
+            "SELECT i.uuid, i.title, i.price, i.imageUrl "+
+            "FROM ITEMS i"
+    )
+    List<ItemProjection> getItemView();
 }

@@ -14,8 +14,13 @@ public class ItemHelper {
         GetItemResponse response = new GetItemResponse();
 
         PaginationUtils paginateUtils = new PaginationUtils(getItemRequest.getGetItemPagination());
-
-        List<ItemProjection> itemProjection = itemRepository.getItemView(paginateUtils.getLimit(),paginateUtils.getOffset());
+        
+        List<ItemProjection> itemProjection;
+        if(paginateUtils.getLimit().equals(0) && paginateUtils.getPageAt().equals(0)){
+            itemProjection = itemRepository.getItemView();
+        }else{
+            itemProjection = itemRepository.getItemView(paginateUtils.getLimit(),paginateUtils.getOffset());
+        }
         
         paginateUtils.setTotal(itemRepository.count());
         getItemRequest.getGetItemPagination().updateValue(paginateUtils);

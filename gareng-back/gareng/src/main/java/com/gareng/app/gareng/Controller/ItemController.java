@@ -31,6 +31,7 @@ public class ItemController {
             //* */
             //Validate token here
             //* */
+            //add search logic
             getItemResponse = ItemHelper.getItem(itemRepository, itemRequest);
             responseMessage = "Success";
             httpStatus = HttpStatus.OK;

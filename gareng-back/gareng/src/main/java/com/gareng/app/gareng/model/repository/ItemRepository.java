@@ -25,7 +25,27 @@ public interface ItemRepository extends CrudRepository<Item, Long>{
         nativeQuery = true, 
         value = 
             "SELECT i.uuid, i.title, i.price, i.imageUrl "+
+            "FROM ITEMS i "+
+            "WHERE i.title ILIKE %?3% "+
+            "LIMIT ?1 "+
+            "OFFSET ?2"
+    )
+    List<ItemProjection> getItemView(Integer sizePerPage, Integer pageAt, String search);
+
+    @Query(
+        nativeQuery = true, 
+        value = 
+            "SELECT i.uuid, i.title, i.price, i.imageUrl "+
             "FROM ITEMS i"
     )
     List<ItemProjection> getItemView();
+
+    @Query(
+        nativeQuery = true, 
+        value = 
+            "SELECT i.uuid, i.title, i.price, i.imageUrl "+
+            "FROM ITEMS i "+
+            "WHERE i.title ILIKE %?1%"
+    )
+    List<ItemProjection> getItemView(String search);
 }

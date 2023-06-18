@@ -1,4 +1,4 @@
-package com.gareng.app.gareng.controller;
+package com.gareng.app.gareng.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,8 @@ import com.gareng.app.gareng.helper.UserHelper;
 import com.gareng.app.gareng.http.entity.Login.LoginRequest;
 import com.gareng.app.gareng.http.entity.Login.LoginResponse;
 import com.gareng.app.gareng.http.entity.Logout.LogoutResponse;
+import com.gareng.app.gareng.http.entity.RefreshToken.RefreshTokenRequest;
+import com.gareng.app.gareng.http.entity.RefreshToken.RefreshTokenResponse;
 import com.gareng.app.gareng.http.entity.Register.RegisterRequest;
 import com.gareng.app.gareng.http.entity.Register.RegisterResponse;
 import com.gareng.app.gareng.http.entity.ResponseHandler.ResponseHandler;
@@ -84,5 +86,22 @@ public class AuthenticationController {
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return ResponseHandler.generateResponse(responseMessage, httpStatus, logoutResponse);
+    }
+
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<Object> refreshToken(@RequestHeader("Authorization") String refreshToken
+        , @RequestBody RefreshTokenRequest refreshTokenRequest){
+        String responseMessage;
+        HttpStatus httpStatus;
+        RefreshTokenResponse refreshTokenResponse = new RefreshTokenResponse();
+        try {
+            refreshTokenResponse = UserHelper.refreshToken(refreshToken, userRepository, refreshTokenRequest);
+            responseMessage = "Success";
+            httpStatus = HttpStatus.OK;
+        } catch (Exception e) {
+            responseMessage = e.getMessage();
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return ResponseHandler.generateResponse(responseMessage, httpStatus, refreshTokenResponse);
     }
 }

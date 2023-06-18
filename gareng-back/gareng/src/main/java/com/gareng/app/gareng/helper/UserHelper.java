@@ -6,6 +6,8 @@ import com.gareng.app.gareng.Utility.BcryptUtils;
 import com.gareng.app.gareng.Utility.JwtUtils;
 import com.gareng.app.gareng.http.entity.Login.LoginRequest;
 import com.gareng.app.gareng.http.entity.Login.LoginResponse;
+import com.gareng.app.gareng.http.entity.RefreshToken.RefreshTokenRequest;
+import com.gareng.app.gareng.http.entity.RefreshToken.RefreshTokenResponse;
 import com.gareng.app.gareng.http.entity.Register.RegisterRequest;
 import com.gareng.app.gareng.http.entity.Register.RegisterResponse;
 import com.gareng.app.gareng.model.entity.RefreshTokenHistory;
@@ -16,31 +18,21 @@ import com.gareng.app.gareng.model.repository.UserRepository;
 public class UserHelper {
     public static LoginResponse login(LoginRequest loginRequest, UserRepository userRepository
         , RefreshTokenHistoryRepository refreshTokenHistoryRepository) throws Exception{
-        System.out.println("login start");
         String accessToken="";
         String refreshToken="";
         User isUserExist = userRepository.findByUsername(loginRequest.getUsername());
-        System.out.println("login (isUserExist): "+isUserExist);
         if(!isUserExist.equals(null)){
-            accessToken = JwtUtils.generateAccessToken(isUserExist,"user");
-            System.out.println("login (accessToken): "+accessToken);
             refreshToken = JwtUtils.generateRefreshToken(isUserExist);
-            System.out.println("login (refreshToken): "+refreshToken);
+            accessToken = JwtUtils.generateAccessToken(isUserExist,"user",refreshToken);
             refreshTokenHistoryRepository.save(new RefreshTokenHistory(refreshToken));
-            System.out.println("login add refreshToken success to database");
         }
         LoginResponse loginResponse = new LoginResponse(accessToken, refreshToken);
-        System.out.println("login (loginResponse): "+loginResponse.toString());
-        System.out.println("login end");
         return loginResponse;
     }
 
     public static RegisterResponse addUser(RegisterRequest registerUser, UserRepository userRepository) throws Exception{
-        System.out.println("Add User start");
         UUID uuid = UUID.randomUUID();
-        System.out.println("Add User (uuid): "+uuid);
         String hashedPassword = BcryptUtils.hashPassword(registerUser.getPassword());
-        System.out.println("Add User (hashedPassword): "+hashedPassword);
         User user = new User(
             uuid.toString(),
             registerUser.getUsername(),
@@ -50,16 +42,14 @@ public class UserHelper {
             Integer.parseInt(registerUser.getAge()),
             registerUser.getEmail()
         );
-        System.out.println("Add User (user): "+user);
         userRepository.save(user);
-        System.out.println("Add User success add to database");
         RegisterResponse registerResponse = new RegisterResponse(user);
-        System.out.println("Add User end");
         return registerResponse;
     }
 
     public static String logout(String refreshToken
         , RefreshTokenHistoryRepository refreshTokenHistoryRepository) throws Exception{
+        
         String message;
         RefreshTokenHistory isTokenExist = refreshTokenHistoryRepository.searchByToken(refreshToken);
         if(!isTokenExist.equals(null)){
@@ -73,5 +63,19 @@ public class UserHelper {
             message = "logout failed, user never login";
         }
         return message;
+    }
+
+    public static RefreshTokenResponse refreshToken(String refreshToken,UserRepository userRepository
+        , RefreshTokenRequest refreshTokenRequest) throws Exception{
+        RefreshTokenResponse response = new RefreshTokenResponse();
+        String accessToken;
+        User isUserExist = userRepository.findByUsername(refreshTokenRequest.getUsername());
+        if(!isUserExist.equals(null)){
+            accessToken = JwtUtils.generateAccessToken(isUserExist, "system", refreshToken);
+        }else{
+            throw new Exception("No user in database");
+        }
+        response.setAccessToken(accessToken);
+        return response;
     }
 }

@@ -7,6 +7,7 @@ class WishlistPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("This is Wishlist Page, EDIT HERE");
+    return const Text(
+        "Wishlist Page, Nanti bakal dibuat sama aja kayak homepage minus carousel");
   }
 }

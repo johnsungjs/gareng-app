@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:gareng_front/models/cart_controller.dart';
+import 'package:gareng_front/pages/NotificationPage.dart';
 import 'package:gareng_front/widgets/CardGrid.dart';
 import 'package:gareng_front/widgets/Carousel.dart';
 import 'package:gareng_front/widgets/CustomCard.dart';
 import 'package:gareng_front/widgets/SearchBar.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(18.0),
           child: SearchBar(),
         ),
         Expanded(
@@ -28,31 +32,38 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.abc)),
-                    const Text("Location"),
-                    const Text("Notif Logo"),
+                    const Text(
+                      "Hello John!",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                        },
+                        icon: const Icon(Icons.notifications_active_outlined)),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 12,
               ),
               const Carousel(),
               const SizedBox(
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text("Popular Food"),
-                    Text("View All"),
+                    Text(
+                      "Our Menu",
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ],
                 ),
               ),
               // Text("Grids Of Menu"),
-              const Padding(padding: EdgeInsets.all(24), child: CardGrid()),
+              Padding(padding: const EdgeInsets.all(24), child: CardGrid()),
             ]),
           ),
         ),

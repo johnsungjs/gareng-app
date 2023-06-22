@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-GarengApplication<gareng>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.gareng.app.gareng.GarengApplication",
+      "projectName": "gareng",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

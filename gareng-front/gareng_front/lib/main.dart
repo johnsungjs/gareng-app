@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gareng_front/app_routes.dart';
 import 'package:gareng_front/pages/Core.dart';
 import 'package:get/get.dart';
 
@@ -13,13 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: true,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Core(
-          selectedIndex: 0,
-        ));
+      debugShowCheckedModeBanner: true,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: "/login",
+      getPages: appRoutes(),
+    );
   }
 }

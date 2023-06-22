@@ -102,3 +102,7 @@ INSERT INTO ITEMS ('id','uuid','title','price','imageUrl') VALUES('3','684f67e5-
 2023-06-17 12:33:39 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ITEM" not found; SQL statement:
 SELECT i.uuid, i.title, i.price, i.imageUrl FROM ITEM i [42102-214]
+2023-06-22 14:48:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-06-22 14:48:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]

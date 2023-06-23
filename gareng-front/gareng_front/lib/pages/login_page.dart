@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
@@ -43,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 4,
+            height: MediaQuery.of(context).size.height / 6,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -145,6 +147,82 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.white,
                 icon: Icon(
                     hidePassword ? Icons.visibility_off : Icons.visibility),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 25, top: 10),
+              child: RichText(
+                text: TextSpan(
+                  style: const TextStyle(color: Colors.grey, fontSize: 14.0),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Forget Password?',
+                      style: TextStyle(
+                          color: Colors.white,
+                          decoration: TextDecoration.underline),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          print("forgot password clicked");
+                        },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: FormHelper.submitButton(
+              "Login",
+              () {
+                print("login clicked");
+              },
+              btnColor: HexColor("#283B71"),
+              borderColor: Colors.white,
+              txtColor: Colors.white,
+              borderRadius: 10,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text(
+              "OR",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: RichText(
+              text: TextSpan(
+                style: const TextStyle(color: Colors.grey, fontSize: 14.0),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "Don't have an account? ",
+                  ),
+                  TextSpan(
+                    text: 'Sign up',
+                    style: TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration.underline),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Get.toNamed("/register");
+                      },
+                  ),
+                ],
               ),
             ),
           ),

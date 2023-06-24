@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.gareng.app.gareng.Utility.BcryptUtils;
 import com.gareng.app.gareng.Utility.JwtUtils;
+import com.gareng.app.gareng.http.entity.GetProfile.GetProfileResponse;
 import com.gareng.app.gareng.http.entity.Login.LoginRequest;
 import com.gareng.app.gareng.http.entity.Login.LoginResponse;
 import com.gareng.app.gareng.http.entity.RefreshToken.RefreshTokenRequest;
@@ -12,6 +13,7 @@ import com.gareng.app.gareng.http.entity.Register.RegisterRequest;
 import com.gareng.app.gareng.http.entity.Register.RegisterResponse;
 import com.gareng.app.gareng.model.entity.RefreshTokenHistory;
 import com.gareng.app.gareng.model.entity.User;
+import com.gareng.app.gareng.model.projection.ProfileProjection;
 import com.gareng.app.gareng.model.repository.RefreshTokenHistoryRepository;
 import com.gareng.app.gareng.model.repository.UserRepository;
 
@@ -76,6 +78,22 @@ public class UserHelper {
             throw new Exception("No user in database");
         }
         response.setAccessToken(accessToken);
+        return response;
+    }
+
+    public static GetProfileResponse getProfile(String accessToken, UserRepository userRepository) throws Exception{
+        GetProfileResponse response = new GetProfileResponse();
+        if(!JwtUtils.validateIsUserToken(accessToken)){
+            throw new Exception("Invalid Token");
+        }
+        ProfileProjection profile = userRepository.getProfileView(JwtUtils.getUsername(accessToken));
+        if(!profile.equals(null)){
+            response.setUsername(profile.getUsername());
+            response.setAddress(profile.getAddress());
+            response.setGender(profile.getGender());
+            response.setAge(profile.getAge());
+            response.setEmail(profile.getEmail());
+        }
         return response;
     }
 }

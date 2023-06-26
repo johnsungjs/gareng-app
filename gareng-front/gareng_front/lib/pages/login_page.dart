@@ -1,5 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gareng_front/config.dart';
+import 'package:gareng_front/models/login_request_model.dart';
+import 'package:gareng_front/models/token_controller.dart';
+import 'package:gareng_front/services/api_service.dart';
 import 'package:get/get.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -13,11 +17,23 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TokenController tokenController = Get.put(TokenController());
+
   bool isAPICallProcess = false;
   bool hidePassword = true;
   GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
   String? username;
   String? password;
+
+  bool validateAndSave() {
+    final form = globalFormKey.currentState;
+    if (form!.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +71,10 @@ class _LoginPageState extends State<LoginPage> {
                   Colors.white,
                 ],
               ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(100),
-                bottomRight: Radius.circular(100),
-              ),
+              // borderRadius: BorderRadius.only(
+              //   bottomLeft: Radius.circular(100),
+              //   bottomRight: Radius.circular(100),
+              // ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
             "UserName",
             (onValidateVal) {
               if (onValidateVal.isEmpty) {
-                return "Username can\'t be empty";
+                return "Username can't be empty";
               }
               return null;
             },
@@ -180,7 +196,32 @@ class _LoginPageState extends State<LoginPage> {
             child: FormHelper.submitButton(
               "Login",
               () {
-                print("login clicked");
+                if (validateAndSave()) {
+                  setState(() {
+                    isAPICallProcess = true;
+                  });
+                  LoginRequestModel model = LoginRequestModel(
+                      username: username!, password: password!);
+
+                  tokenController.login(model).then((response) {
+                    setState(() {
+                      isAPICallProcess = false;
+                    });
+
+                    if (response) {
+                      Get.toNamed('/home');
+                    } else {
+                      FormHelper.showSimpleAlertDialog(context, Config.appName,
+                          "Invalid Username or Password", "OK", () {
+                        Navigator.pop(context);
+                      });
+                    }
+                  }).catchError((err) {
+                    setState(() {
+                      isAPICallProcess = false;
+                    });
+                  });
+                }
               },
               btnColor: HexColor("#283B71"),
               borderColor: Colors.white,

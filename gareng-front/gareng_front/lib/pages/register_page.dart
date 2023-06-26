@@ -1,5 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gareng_front/config.dart';
+import 'package:gareng_front/models/register_request_model.dart';
+import 'package:gareng_front/models/token_controller.dart';
+import 'package:gareng_front/services/api_service.dart';
 import 'package:get/get.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -13,6 +16,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final TokenController tokenController = Get.put(TokenController());
+
   bool isAPICallProcess = false;
   bool hidePassword = true;
   GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
@@ -22,6 +27,16 @@ class _RegisterPageState extends State<RegisterPage> {
   String? gender;
   int? age;
   String? email;
+
+  bool validateAndSave() {
+    final form = globalFormKey.currentState;
+    if (form!.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +74,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   Colors.white,
                 ],
               ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(100),
-                bottomRight: Radius.circular(100),
-              ),
+              // borderRadius: BorderRadius.only(
+              //   bottomLeft: Radius.circular(100),
+              //   bottomRight: Radius.circular(100),
+              // ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
             "UserName",
             (onValidateVal) {
               if (onValidateVal.isEmpty) {
-                return "Username can\'t be empty";
+                return "Username can't be empty";
               }
               return null;
             },
@@ -156,6 +171,31 @@ class _RegisterPageState extends State<RegisterPage> {
             padding: const EdgeInsets.only(top: 10),
             child: FormHelper.inputFieldWidget(
               context,
+              "address",
+              "Address",
+              (onValidateVal) {
+                if (onValidateVal.isEmpty) {
+                  return "Address can't be empty";
+                }
+                return null;
+              },
+              (onSavedVal) {
+                address = onSavedVal;
+              },
+              borderFocusColor: Colors.white,
+              prefixIcon: const Icon(Icons.person_pin),
+              showPrefixIcon: true,
+              prefixIconColor: Colors.white,
+              borderColor: Colors.white,
+              textColor: Colors.white,
+              hintColor: Colors.white.withOpacity(0.7),
+              borderRadius: 10,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: FormHelper.inputFieldWidget(
+              context,
               "gender",
               "Gender",
               (onValidateVal) {
@@ -190,7 +230,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 return null;
               },
               (onSavedVal) {
-                age = onSavedVal;
+                age = int.parse(onSavedVal);
               },
               isNumeric: true,
               borderFocusColor: Colors.white,
@@ -235,7 +275,39 @@ class _RegisterPageState extends State<RegisterPage> {
             child: FormHelper.submitButton(
               "Sign Up",
               () {
-                print("sign up clicked");
+                if (validateAndSave()) {
+                  setState(() {
+                    isAPICallProcess = true;
+                  });
+
+                  RegisterRequestModel model = RegisterRequestModel(
+                      username: username!,
+                      password: password!,
+                      address: address!,
+                      gender: gender!,
+                      age: age!,
+                      email: email!);
+
+                  tokenController.register(model).then((response) {
+                    setState(() {
+                      isAPICallProcess = false;
+                    });
+
+                    if (response.data != null) {
+                      FormHelper.showSimpleAlertDialog(
+                          context, Config.appName, "Success Add User", "OK",
+                          () {
+                        // Navigator.pop(context);
+                        Get.toNamed('/login');
+                      });
+                    } else {
+                      FormHelper.showSimpleAlertDialog(
+                          context, Config.appName, response.message, "OK", () {
+                        Navigator.pop(context);
+                      });
+                    }
+                  });
+                }
               },
               btnColor: HexColor("#283B71"),
               borderColor: Colors.white,

@@ -3,6 +3,7 @@ package com.gareng.app.gareng.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,7 @@ public class AuthenticationController {
     @Autowired
     RefreshTokenHistoryRepository refreshTokenHistoryRepository;
 
+    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest){
         System.out.println("login start");
@@ -51,6 +53,7 @@ public class AuthenticationController {
         return ResponseHandler.generateResponse(responseMessage, httpStatus, loginResponse);
     }
 
+    @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<Object> register(@RequestBody RegisterRequest registerRequest){
         System.out.println("register start");
@@ -71,7 +74,8 @@ public class AuthenticationController {
         System.out.println("register end");
         return ResponseHandler.generateResponse(responseMessage, httpStatus, registerResponse);
     }
-
+    
+    @CrossOrigin
     @GetMapping("/logout")
     public ResponseEntity<Object> logout(@RequestHeader("Authorization") String refreshToken){
         String responseMessage;
@@ -88,6 +92,7 @@ public class AuthenticationController {
         return ResponseHandler.generateResponse(responseMessage, httpStatus, logoutResponse);
     }
 
+    @CrossOrigin
     @PostMapping("/refreshtoken")
     public ResponseEntity<Object> refreshToken(@RequestHeader("Authorization") String refreshToken
         , @RequestBody RefreshTokenRequest refreshTokenRequest){

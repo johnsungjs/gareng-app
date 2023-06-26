@@ -5,13 +5,31 @@ import 'package:gareng_front/models/login_request_model.dart';
 import 'package:gareng_front/models/login_response_model.dart';
 import 'package:gareng_front/models/register_request_model.dart';
 import 'package:gareng_front/models/register_response_model.dart';
-import 'package:gareng_front/services/shared_service.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class APIService {
-  static var client = http.Client();
+class TokenController extends GetxController {
+  var token = {}.obs;
 
-  static Future<bool> login(LoginRequestModel model) async {
+  RxMap loginDetails = {}.obs;
+
+  setLoginDetails(LoginResponseModel data) {
+    loginDetails.value = data.toJson();
+  }
+
+  // bool isLoggedIn(loginDetails) {
+  //   bool result = false;
+  //   if (loginDetails) {
+  //     result = true;
+  //   } else {
+  //     result = false;
+  //   }
+  //   return result;
+  // }
+
+  var client = http.Client();
+
+  Future login(LoginRequestModel model) async {
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
     };
@@ -25,16 +43,15 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-      //set cache to cache manager
-      await SharedService.setLoginDetails(loginResponseJson(response.body));
+      //save login details to state management
+      setLoginDetails(loginResponseJson(response.body));
       return true;
     } else {
       return false;
     }
   }
 
-  static Future<RegisterResponseModel> register(
-      RegisterRequestModel model) async {
+  Future<RegisterResponseModel> register(RegisterRequestModel model) async {
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
     };

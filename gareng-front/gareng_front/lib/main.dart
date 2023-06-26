@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:gareng_front/app_routes.dart';
-import 'package:gareng_front/pages/Core.dart';
+import 'package:gareng_front/pages/login_page.dart';
 import 'package:get/get.dart';
 
-void main() {
+Widget _defaultHome = const LoginPage();
+
+void main() async {
+  // bool _result = await SharedService.isLoggedIn();
+  // if (_result) {
+  //   _defaultHome = HomePage();
+  // }
+
   runApp(const MyApp());
 }
 
@@ -19,8 +26,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "/login",
-      getPages: appRoutes(),
+      initialRoute: "/",
+      getPages: appRoutes(_defaultHome),
     );
   }
 }

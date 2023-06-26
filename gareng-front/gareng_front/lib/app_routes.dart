@@ -1,10 +1,17 @@
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:gareng_front/pages/Core.dart';
 import 'package:gareng_front/pages/backupDetailItem.dart';
 import 'package:gareng_front/pages/login_page.dart';
 import 'package:gareng_front/pages/register_page.dart';
 import 'package:get/get.dart';
 
-appRoutes() => [
+appRoutes(Widget _defaultHome) => [
+      GetPage(
+        name: '/',
+        page: () => _defaultHome,
+        transition: Transition.fadeIn,
+        transitionDuration: Duration(milliseconds: 500),
+      ),
       GetPage(
         name: '/login',
         page: () => LoginPage(),

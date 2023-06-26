@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   snippet_coder_utils: ^1.0.14
   api_cache_manager: ^1.0.2
+  sqflite_common_ffi: ^2.2.5
 
 dev_dependencies:
   flutter_test:

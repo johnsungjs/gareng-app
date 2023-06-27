@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:gareng_front/app_routes.dart';
+import 'package:gareng_front/pages/Core.dart';
 import 'package:gareng_front/pages/login_page.dart';
 import 'package:get/get.dart';
 
-Widget _defaultHome = const LoginPage();
+import 'models/token_controller.dart';
+
+Widget _defaultHome = Core(selectedIndex: 0);
 
 void main() async {
-  // bool _result = await SharedService.isLoggedIn();
-  // if (_result) {
-  //   _defaultHome = HomePage();
-  // }
+  final TokenController tokenController = Get.put(TokenController());
+  bool _result = tokenController.isLoggedIn();
+  if (_result) {
+    _defaultHome = Core(selectedIndex: 0);
+  } else {
+    _defaultHome = LoginPage();
+  }
 
   runApp(const MyApp());
 }

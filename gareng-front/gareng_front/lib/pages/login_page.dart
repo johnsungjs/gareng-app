@@ -220,6 +220,10 @@ class _LoginPageState extends State<LoginPage> {
                     setState(() {
                       isAPICallProcess = false;
                     });
+                    FormHelper.showSimpleAlertDialog(context, Config.appName,
+                        "The Service has been turned off", "OK", () {
+                      Navigator.pop(context);
+                    });
                   });
                 }
               },

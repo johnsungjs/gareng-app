@@ -9,23 +9,26 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class TokenController extends GetxController {
-  var token = {}.obs;
+  RxString _token = "".obs;
 
   RxMap loginDetails = {}.obs;
 
   setLoginDetails(LoginResponseModel data) {
     loginDetails.value = data.toJson();
+    _token.value = data.data.accessToken;
   }
 
-  // bool isLoggedIn(loginDetails) {
-  //   bool result = false;
-  //   if (loginDetails) {
-  //     result = true;
-  //   } else {
-  //     result = false;
-  //   }
-  //   return result;
-  // }
+  get token => _token;
+
+  bool isLoggedIn() {
+    bool result = false;
+    if (_token.value.isEmpty) {
+      result = false;
+    } else {
+      result = true;
+    }
+    return result;
+  }
 
   var client = http.Client();
 

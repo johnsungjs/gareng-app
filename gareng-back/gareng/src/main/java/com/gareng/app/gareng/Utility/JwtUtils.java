@@ -71,4 +71,18 @@ public class JwtUtils {
             return false;
         }
     }
+
+    public static String getUsername(String token) throws Exception{
+        try {
+            Jws<Claims> result = Jwts.parserBuilder()
+            .setSigningKey(JwtConstant.key)
+            .build()
+            .parseClaimsJws(token);
+        return result.getBody().get("username", String.class);
+        } catch (Exception e) {
+            // TODO: handle exception
+            throw new Exception(e.getMessage());
+        }
+
+    }
 }

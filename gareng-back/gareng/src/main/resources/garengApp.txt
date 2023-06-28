@@ -117,3 +117,46 @@ Controller
 Utility
 1. PaginationUtils
 2. SearchUtills
+
+***************************************************************************************
+Profile
+getProfile
+-getProfileRequest
+Header
+auth accessToken
+
+Body
+username
+
+-getProfileResponse
+nama
+jenis kelamin
+usia
+alamat
+email
+
+editProfile
+-editProfileRequest
+jenis kelamin
+usia
+alamat
+email
+
+-editProfileResponse
+message
+
+===========================================================
+HttpObject
+1. getProfileRequest
+2. getProfileResponse
+3. editProfileRequest
+4. editProfileResponse
+
+Controller
+1. profileController
+
+Projection
+1. ProfileProjection
+
+Utility
+1. JwtUtils (getUsername)

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import 'models/token_controller.dart';
 
-Widget _defaultHome = Core(selectedIndex: 0);
+Widget _defaultHome = LoginPage();
 
 void main() async {
   final TokenController tokenController = Get.put(TokenController());

@@ -2,16 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/models/cart_controller.dart';
+import 'package:gareng_front/models/item_controller.dart';
 import 'package:gareng_front/pages/NotificationPage.dart';
+import 'package:gareng_front/services/api_service.dart';
 import 'package:gareng_front/widgets/CardGrid.dart';
 import 'package:gareng_front/widgets/Carousel.dart';
 import 'package:gareng_front/widgets/CustomCard.dart';
 import 'package:gareng_front/widgets/SearchBar.dart';
 import 'package:get/get.dart';
 
-class HomePage extends StatelessWidget {
+import '../models/item_request_model.dart';
+
+class HomePage extends StatefulWidget {
   HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final APIService apiService = APIService();
   final cartController = Get.put(CartController());
+  final ItemController itemController = Get.put(ItemController());
+
+  @override
+  void initState() {
+    GetItemPagination reqBody =
+        GetItemPagination(pageAt: 1, sizePerPage: 5, search: "");
+    ItemRequestModel model = ItemRequestModel(getItemPagination: reqBody);
+    apiService
+        .getAllItem(model)
+        .then((e) => {itemController.stateItemData.value = e.data.itemData});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

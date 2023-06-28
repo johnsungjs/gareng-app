@@ -38,7 +38,7 @@ class ItemResponseModel {
 
 class Data {
   final GetItemPagination getItemPagination;
-  final List<ItemDatum> itemData;
+  final List<ItemData> itemData;
 
   Data({
     required this.getItemPagination,
@@ -48,8 +48,8 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         getItemPagination:
             GetItemPagination.fromJson(json["getItemPagination"]),
-        itemData: List<ItemDatum>.from(
-            json["itemData"].map((x) => ItemDatum.fromJson(x))),
+        itemData: List<ItemData>.from(
+            json["itemData"].map((x) => ItemData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -91,20 +91,20 @@ class GetItemPagination {
       };
 }
 
-class ItemDatum {
+class ItemData {
   final String title;
   final String price;
   final String uuid;
   final String imageUrl;
 
-  ItemDatum({
+  ItemData({
     required this.title,
     required this.price,
     required this.uuid,
     required this.imageUrl,
   });
 
-  factory ItemDatum.fromJson(Map<String, dynamic> json) => ItemDatum(
+  factory ItemData.fromJson(Map<String, dynamic> json) => ItemData(
         title: json["title"],
         price: json["price"],
         uuid: json["uuid"],

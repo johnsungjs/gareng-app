@@ -14,7 +14,7 @@ public class JwtUtils {
         if(!validateToken(refreshToken)){
             throw new Exception("Refresh Token invalid, please re-login.");
         }
-        long expirationMillis = 120000; //2 menit
+        long expirationMillis = 600000; //10 menit
 
         Date now = new Date();
 

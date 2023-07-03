@@ -31,15 +31,11 @@ class ItemRequestModel {
 
 class GetItemPagination {
   final int pageAt;
-  final dynamic totalPage;
-  final dynamic total;
   final int sizePerPage;
   final String search;
 
   GetItemPagination({
     required this.pageAt,
-    required this.totalPage,
-    required this.total,
     required this.sizePerPage,
     required this.search,
   });
@@ -47,16 +43,12 @@ class GetItemPagination {
   factory GetItemPagination.fromJson(Map<String, dynamic> json) =>
       GetItemPagination(
         pageAt: json["pageAt"],
-        totalPage: json["totalPage"],
-        total: json["total"],
         sizePerPage: json["sizePerPage"],
         search: json["search"],
       );
 
   Map<String, dynamic> toJson() => {
         "pageAt": pageAt,
-        "totalPage": totalPage,
-        "total": total,
         "sizePerPage": sizePerPage,
         "search": search,
       };

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gareng_front/models/cart_controller.dart';
+import 'package:gareng_front/models/item_controller.dart';
+import 'package:gareng_front/models/item_request_model.dart';
+import 'package:gareng_front/services/api_service.dart';
 import 'package:get/get.dart';
 
 import '../models/product_model.dart';
@@ -17,22 +20,8 @@ class _SearchBarState extends State<SearchBar> {
   var searchResult = [];
 
   final CartController controller = Get.find();
-
-  // @override
-  // void initState() {
-  //   inputUser.addListener(_printLatestValue);
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   inputUser.dispose();
-  //   super.dispose();
-  // }
-
-  // void _printLatestValue() {
-  //   controller.getListSearchResult(inputUser.text);
-  // }
+  final ItemController itemController = Get.put(ItemController());
+  final APIService apiService = APIService();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +33,7 @@ class _SearchBarState extends State<SearchBar> {
         padding: const EdgeInsets.all(8.0),
         child: TextField(
           onChanged: (text) {
-            controller.getListSearchResult(text);
+            itemController.setSearchInput(text);
           },
           obscureText: false,
           decoration: InputDecoration(
@@ -52,8 +41,28 @@ class _SearchBarState extends State<SearchBar> {
             labelStyle: const TextStyle(color: Colors.grey),
             icon: IconButton(
                 onPressed: () {
-                  print(controller.filteredData);
-                  // print(controller.inputUser.text);
+                  // print(itemController.searchInput); //OK
+                  itemController.stateItemData.value = [];
+                  itemController.resetGetItemBody();
+                  GetItemPagination reqbody = GetItemPagination(
+                      pageAt: itemController.page.value,
+                      sizePerPage: 5,
+                      search: itemController.searchInput.value);
+                  ItemRequestModel model =
+                      ItemRequestModel(getItemPagination: reqbody);
+                  apiService.getAllItem(model).then((e) => {
+                        if (e.data.itemData.length == 0)
+                          {
+                            itemController.hasMore.value = false,
+                          }
+                        else
+                          {
+                            // itemController.stateItemData.value = e.data.itemData,
+                            itemController.addStateItemData(e.data.itemData),
+                            itemController.page.value++,
+                            itemController.isLoading.value = false,
+                          }
+                      });
                 },
                 icon: Icon(Icons.search)),
             border: InputBorder.none,

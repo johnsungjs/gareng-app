@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/constants/accountDummy.dart';
+import 'package:gareng_front/models/profile_controller.dart';
 import 'package:gareng_front/pages/AccountEditPage.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,7 @@ class AccountPage extends StatelessWidget {
   AccountPage({super.key});
 
   final dataUser = accountDummy;
+  final ProfileController profileController = Get.put(ProfileController());
 
   final styleLeftText =
       const TextStyle(fontSize: 18, fontWeight: FontWeight.w100);
@@ -61,15 +63,16 @@ class AccountPage extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                            flex: 1, child: Text("Nama", style: styleLeftText)),
+                            flex: 1,
+                            child: Text("user name", style: styleLeftText)),
                         Text(
                           ": ",
                           style: styleRightText,
                         ),
                         Expanded(
                             flex: 3,
-                            child:
-                                Text(dataUser["nama"], style: styleRightText)),
+                            child: Text(profileController.dataUser["username"],
+                                style: styleRightText)),
                       ],
                     ),
                   ),
@@ -86,7 +89,7 @@ class AccountPage extends StatelessWidget {
                         ),
                         Expanded(
                             flex: 3,
-                            child: Text(dataUser["jenisKlamin"],
+                            child: Text(profileController.dataUser["gender"],
                                 style: styleRightText)),
                       ],
                     ),
@@ -103,8 +106,8 @@ class AccountPage extends StatelessWidget {
                         ),
                         Expanded(
                             flex: 3,
-                            child:
-                                Text(dataUser["usia"], style: styleRightText)),
+                            child: Text(profileController.dataUser["age"],
+                                style: styleRightText)),
                       ],
                     ),
                   ),
@@ -121,7 +124,7 @@ class AccountPage extends StatelessWidget {
                         ),
                         Expanded(
                             flex: 3,
-                            child: Text(dataUser["alamat"],
+                            child: Text(profileController.dataUser["address"],
                                 style: styleRightText)),
                       ],
                     ),
@@ -139,8 +142,8 @@ class AccountPage extends StatelessWidget {
                         ),
                         Expanded(
                             flex: 3,
-                            child:
-                                Text(dataUser["email"], style: styleRightText)),
+                            child: Text(profileController.dataUser["email"],
+                                style: styleRightText)),
                       ],
                     ),
                   ),

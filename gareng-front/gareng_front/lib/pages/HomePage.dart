@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/models/item_controller.dart';
+import 'package:gareng_front/models/profile_controller.dart';
 import 'package:gareng_front/pages/NotificationPage.dart';
 import 'package:gareng_front/services/api_service.dart';
 import 'package:gareng_front/widgets/CardGrid.dart';
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   final APIService apiService = APIService();
   final cartController = Get.put(CartController());
   final ItemController itemController = Get.put(ItemController());
+  final ProfileController profilecontroller = Get.put(ProfileController());
 
   Future fetch() async {
     if (itemController.isLoading.value) return;
@@ -65,6 +67,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    apiService
+        .getProfile()
+        .then((value) => profilecontroller.setDataUser(value.data.toJson()));
 
     fetch();
 
@@ -140,10 +146,12 @@ class _HomePageState extends State<HomePage> {
                 ),
                 // Text("Grids Of Menu"),
                 Padding(padding: const EdgeInsets.all(24), child: CardGrid()),
-                Center(
-                  child: itemController.hasMore.value
-                      ? const CircularProgressIndicator()
-                      : const Text(('No More Data')),
+                Obx(
+                  () => Center(
+                    child: itemController.hasMore.value
+                        ? const CircularProgressIndicator()
+                        : const Text(('No More Data')),
+                  ),
                 ),
                 SizedBox(
                   height: 20,

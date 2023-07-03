@@ -5,6 +5,7 @@ import 'package:gareng_front/models/item_request_model.dart';
 import 'package:gareng_front/models/item_response_model.dart';
 import 'package:gareng_front/models/login_request_model.dart';
 import 'package:gareng_front/models/login_response_model.dart';
+import 'package:gareng_front/models/profile_response_model.dart';
 import 'package:gareng_front/models/register_request_model.dart';
 import 'package:gareng_front/models/register_response_model.dart';
 import 'package:gareng_front/models/token_controller.dart';
@@ -69,5 +70,21 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
     return itemResponseModelFromJson(response.body);
+  }
+
+  Future<ProfileResponseModel> getProfile() async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': tokenController.token.value
+    };
+
+    var url = Uri.http(Config.apiURL, Config.getProfile);
+
+    var response = await http.Client().get(
+      url,
+      headers: requestHeaders,
+    );
+
+    return profileResponseModelFromJson(response.body);
   }
 }

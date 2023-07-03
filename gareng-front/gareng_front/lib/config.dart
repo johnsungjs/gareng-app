@@ -4,5 +4,6 @@ class Config {
   static const String loginAPI = '/authentication/login';
   static const String registerAPI = '/authentication/register';
   static const String getItem = '/item/get';
+  static const String getProfile = '/profile/get';
   // static const String userProfileAPI = 'localhost:8080';
 }

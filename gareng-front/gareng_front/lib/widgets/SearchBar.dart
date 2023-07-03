@@ -23,6 +23,28 @@ class _SearchBarState extends State<SearchBar> {
   final ItemController itemController = Get.put(ItemController());
   final APIService apiService = APIService();
 
+  void filterData() {
+    itemController.stateItemData.value = [];
+    itemController.resetGetItemBody();
+    GetItemPagination reqbody = GetItemPagination(
+        pageAt: itemController.page.value,
+        sizePerPage: 5,
+        search: itemController.searchInput.value);
+    ItemRequestModel model = ItemRequestModel(getItemPagination: reqbody);
+    apiService.getAllItem(model).then((e) => {
+          if (e.data.itemData.length == 0)
+            {
+              itemController.hasMore.value = false,
+            }
+          else
+            {
+              itemController.addStateItemData(e.data.itemData),
+              itemController.page.value++,
+              itemController.isLoading.value = false,
+            }
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,38 +61,12 @@ class _SearchBarState extends State<SearchBar> {
           decoration: InputDecoration(
             labelText: 'Search Your Food Here',
             labelStyle: const TextStyle(color: Colors.grey),
-            icon: IconButton(
-                onPressed: () {
-                  // print(itemController.searchInput); //OK
-                  itemController.stateItemData.value = [];
-                  itemController.resetGetItemBody();
-                  GetItemPagination reqbody = GetItemPagination(
-                      pageAt: itemController.page.value,
-                      sizePerPage: 5,
-                      search: itemController.searchInput.value);
-                  ItemRequestModel model =
-                      ItemRequestModel(getItemPagination: reqbody);
-                  apiService.getAllItem(model).then((e) => {
-                        if (e.data.itemData.length == 0)
-                          {
-                            itemController.hasMore.value = false,
-                          }
-                        else
-                          {
-                            // itemController.stateItemData.value = e.data.itemData,
-                            itemController.addStateItemData(e.data.itemData),
-                            itemController.page.value++,
-                            itemController.isLoading.value = false,
-                          }
-                      });
-                },
-                icon: Icon(Icons.search)),
+            icon: IconButton(onPressed: filterData, icon: Icon(Icons.search)),
             border: InputBorder.none,
             iconColor: Colors.grey[800],
           ),
           cursorColor: Colors.grey[800],
           cursorHeight: 20,
-          // controller: controller.inputUser,
         ),
       ),
     );

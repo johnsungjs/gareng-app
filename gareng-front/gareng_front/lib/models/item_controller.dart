@@ -7,11 +7,30 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class ItemController extends GetxController {
+  RxBool hasMore = true.obs;
+  RxInt page = 1.obs;
+  RxBool isLoading = false.obs;
+
+  void resetGetItemBody() {
+    hasMore.value = true;
+    page.value = 1;
+    isLoading.value = false;
+  }
+
   RxList stateItemData = [].obs;
+  void addStateItemData(List<ItemData> listItemData) {
+    stateItemData.addAll(listItemData);
+  }
+
+  RxString searchInput = "".obs;
+  void setSearchInput(String inputUser) {
+    searchInput.value = inputUser;
+  }
 
   var _items = {}.obs;
 
   void addItem(ItemData itemData) {
+    print('${itemData} added');
     if (_items.containsKey(itemData)) {
       _items[itemData] += 1;
     } else {

@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String? username;
   String? password;
   String? address;
-  String? gender;
+  String gender = 'male';
   int? age;
   String? email;
 
@@ -192,29 +192,70 @@ class _RegisterPageState extends State<RegisterPage> {
               borderRadius: 10,
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 10),
+          //   child: FormHelper.inputFieldWidget(
+          //     context,
+          //     "gender",
+          //     "Gender",
+          //     (onValidateVal) {
+          //       if (onValidateVal.isEmpty) {
+          //         return "Gender can't be empty";
+          //       }
+          //       return null;
+          //     },
+          //     (onSavedVal) {
+          //       gender = onSavedVal;
+          //     },
+          //     borderFocusColor: Colors.white,
+          //     prefixIcon: const Icon(Icons.person_pin),
+          //     showPrefixIcon: true,
+          //     prefixIconColor: Colors.white,
+          //     borderColor: Colors.white,
+          //     textColor: Colors.white,
+          //     hintColor: Colors.white.withOpacity(0.7),
+          //     borderRadius: 10,
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
-            child: FormHelper.inputFieldWidget(
-              context,
-              "gender",
-              "Gender",
-              (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return "Gender can't be empty";
-                }
-                return null;
-              },
-              (onSavedVal) {
-                gender = onSavedVal;
-              },
-              borderFocusColor: Colors.white,
-              prefixIcon: const Icon(Icons.person_pin),
-              showPrefixIcon: true,
-              prefixIconColor: Colors.white,
-              borderColor: Colors.white,
-              textColor: Colors.white,
-              hintColor: Colors.white.withOpacity(0.7),
-              borderRadius: 10,
+            child: Column(
+              children: [
+                const Text(
+                  "Gender: ",
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+                ListTile(
+                  title: const Text('Male'),
+                  textColor: Colors.white,
+                  tileColor: Colors.red,
+                  leading: Radio<String>(
+                    value: 'male',
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value!;
+                        print(gender);
+                      });
+                    },
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Female'),
+                  textColor: Colors.white,
+                  tileColor: Colors.red,
+                  leading: Radio<String>(
+                    value: 'female',
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value!;
+                        print(gender);
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(

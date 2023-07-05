@@ -9,12 +9,13 @@ import 'package:gareng_front/models/profile_response_model.dart';
 import 'package:gareng_front/models/register_request_model.dart';
 import 'package:gareng_front/models/register_response_model.dart';
 import 'package:gareng_front/models/token_controller.dart';
+import 'package:gareng_front/services/shared_preference_service.dart';
 import 'package:gareng_front/services/shared_service.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class APIService {
-  final TokenController tokenController = Get.put(TokenController());
   static var client = http.Client();
 
   static Future<bool> login(LoginRequestModel model) async {
@@ -31,8 +32,9 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-      //set cache to cache manager
-      await SharedService.setLoginDetails(loginResponseJson(response.body));
+      //save data with share preference
+      await SharedPreferenceService.setLoginDetails(
+          loginResponseJson(response.body));
       return true;
     } else {
       return false;
@@ -57,9 +59,12 @@ class APIService {
   }
 
   Future<ItemResponseModel> getAllItem(ItemRequestModel model) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'Authorization': tokenController.token.value
+      'Authorization': token!
     };
 
     var url = Uri.http(Config.apiURL, Config.getItem);
@@ -69,13 +74,35 @@ class APIService {
       headers: requestHeaders,
       body: jsonEncode(model.toJson()),
     );
+
+    if (response.statusCode == 500) {
+      print('token expired with statuscode: ${response.statusCode}');
+      String? refreshToken = prefs.getString('refreshToken');
+
+      Map<String, String> requestHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': refreshToken!
+      };
+
+      var url = Uri.http(Config.apiURL, Config.getItem);
+
+      response = await http.Client().post(
+        url,
+        headers: requestHeaders,
+        body: jsonEncode(model.toJson()),
+      );
+      print('hasil result status tokenrefresh: ${response.statusCode}');
+    }
     return itemResponseModelFromJson(response.body);
   }
 
   Future<ProfileResponseModel> getProfile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'Authorization': tokenController.token.value
+      'Authorization': token!,
     };
 
     var url = Uri.http(Config.apiURL, Config.getProfile);

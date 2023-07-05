@@ -34,10 +34,10 @@ class _HomePageState extends State<HomePage> {
 
   Future fetch() async {
     if (itemController.isLoading.value) return;
-    print('page state: ${itemController.page.value}');
+    // print('page state: ${itemController.page.value}');
     GetItemPagination reqBody = GetItemPagination(
         pageAt: itemController.page.value,
-        sizePerPage: 5,
+        sizePerPage: 6,
         search: itemController.searchInput.value);
     ItemRequestModel model = ItemRequestModel(getItemPagination: reqBody);
     apiService.getAllItem(model).then((e) => {

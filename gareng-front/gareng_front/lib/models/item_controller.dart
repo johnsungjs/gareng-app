@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:gareng_front/config.dart';
 import 'package:gareng_front/models/item_request_model.dart';
 import 'package:gareng_front/models/item_response_model.dart';
@@ -30,7 +31,9 @@ class ItemController extends GetxController {
   var _items = {}.obs;
 
   void addItem(ItemData itemData) {
-    print('${itemData} added');
+    if (kDebugMode) {
+      print('${itemData.title} added');
+    }
     if (_items.containsKey(itemData)) {
       _items[itemData] += 1;
     } else {
@@ -44,7 +47,7 @@ class ItemController extends GetxController {
     }
   }
 
-  void removeProduct(ItemData itemData) {
+  void removeItem(ItemData itemData) {
     if (_items.containsKey(itemData) && _items[itemData] == 1) {
       _items.removeWhere((key, value) => key == itemData);
     } else {
@@ -70,7 +73,7 @@ class ItemController extends GetxController {
 
   get total => getTotalItem();
 
-  int getProductQuantity(ItemData itemData) {
+  int getItemQuantity(ItemData itemData) {
     if (_items.containsKey(itemData)) {
       return _items[itemData];
     } else {

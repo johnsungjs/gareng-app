@@ -2,19 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/models/cart_controller.dart';
+import 'package:gareng_front/models/item_controller.dart';
 import 'package:gareng_front/models/product_model.dart';
 import 'package:gareng_front/pages/Core.dart';
 import 'package:get/get.dart';
 
-class DetailItem extends StatelessWidget {
-  Product item;
-  DetailItem({super.key, required this.item});
+import '../models/item_response_model.dart';
 
-  final CartController controller = Get.find();
+class DetailItem extends StatelessWidget {
+  // Product item;
+  ItemData itemData;
+  DetailItem({super.key, required this.itemData});
+
+  // final CartController controller = Get.find();
+  final ItemController itemController = Get.put(ItemController());
 
   @override
   Widget build(BuildContext context) {
-    var productQuantity = controller.getProductQuantity(item);
+    // var productQuantity = controller.getProductQuantity(item);
+    int itemQuantity = itemController.getItemQuantity(itemData);
 
     return Scaffold(
       appBar: AppBar(
@@ -47,14 +53,14 @@ class DetailItem extends StatelessWidget {
         () => SingleChildScrollView(
           child: Column(
             children: [
-              Image.network(item.images),
+              Image.network(itemData.imageUrl),
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      item.title,
+                      itemData.title,
                       style: const TextStyle(fontSize: 24),
                     ),
                     const Icon(Icons.star),
@@ -67,31 +73,33 @@ class DetailItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      item.price,
+                      itemData.price,
                       style: const TextStyle(fontSize: 18),
                     ),
                     Row(
                       children: [
                         IconButton(
                             onPressed: () {
-                              if (productQuantity > 0) {
-                                controller.removeProduct(item);
-                                productQuantity =
-                                    controller.getProductQuantity(item);
+                              if (itemQuantity > 0) {
+                                itemController.removeItem(itemData);
+                                // itemQuantity =
+                                // itemController.getItemQuantity(itemData);
                               } else {
                                 null;
                               }
                             },
                             icon: const Icon(Icons.remove)),
                         Text(
-                          productQuantity.toString(),
+                          //here is problem
+                          // "$itemQuantity",
+                          "${itemController.getItemQuantity(itemData)}",
                           style: const TextStyle(fontSize: 18),
                         ),
                         IconButton(
                             onPressed: () {
-                              controller.addProduct(item);
-                              productQuantity =
-                                  controller.getProductQuantity(item);
+                              itemController.addItem(itemData);
+                              // itemQuantity =
+                              //     itemController.getItemQuantity(itemData);
                             },
                             icon: const Icon(Icons.add)),
                       ],
@@ -107,7 +115,7 @@ class DetailItem extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "Rp.${controller.total}",
+                          "Rp.${itemController.total}",
                           style: TextStyle(fontSize: 28),
                         ),
                         const Text(

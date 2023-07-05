@@ -10,15 +10,18 @@ import 'package:http/http.dart' as http;
 
 class TokenController extends GetxController {
   RxString _token = "".obs;
+  RxString _refreshToken = "".obs;
 
   RxMap loginDetails = {}.obs;
 
   setLoginDetails(LoginResponseModel data) {
     loginDetails.value = data.toJson();
     _token.value = data.data.accessToken;
+    _refreshToken.value = data.data.refreshToken;
   }
 
   get token => _token;
+  get refreshToken => _refreshToken;
 
   bool isLoggedIn() {
     bool result = false;

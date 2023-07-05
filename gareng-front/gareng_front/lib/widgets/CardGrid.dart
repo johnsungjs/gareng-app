@@ -31,10 +31,12 @@ class CardGrid extends StatelessWidget {
         itemBuilder: (_, index) {
           return GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetailItem(
-                        item: Product.products[index],
-                      )));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => DetailItem(
+              //           item: Product.products[index],
+              //         )));
+              Get.to(() =>
+                  DetailItem(itemData: itemController.stateItemData[index]));
             },
             child: Container(
               decoration: BoxDecoration(

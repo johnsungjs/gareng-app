@@ -4,8 +4,12 @@ import 'package:gareng_front/models/product_model.dart';
 import 'package:get/get.dart';
 import 'package:gareng_front/widgets/CardTotal.dart';
 
+import '../models/item_controller.dart';
+import '../models/item_response_model.dart';
+
 class CartPage extends StatelessWidget {
   final CartController controller = Get.find();
+  final ItemController itemController = Get.put(ItemController());
 
   CartPage({super.key});
 
@@ -29,15 +33,16 @@ class CartPage extends StatelessWidget {
                     height: 30,
                   ),
                   SizedBox(
-                    height: 600,
+                    // height: 600,
+                    height: 400,
                     child: ListView.builder(
-                        itemCount: controller.products.length,
+                        itemCount: itemController.items.length,
                         itemBuilder: (_, index) {
                           return CartProductCard(
-                            controller: controller,
-                            product: controller.products.keys.toList()[index],
+                            itemController: itemController,
+                            itemData: itemController.items.keys.toList()[index],
                             quantity:
-                                controller.products.values.toList()[index],
+                                itemController.items.values.toList()[index],
                             index: index,
                           );
                         }),
@@ -54,15 +59,15 @@ class CartPage extends StatelessWidget {
 }
 
 class CartProductCard extends StatelessWidget {
-  final CartController controller;
-  final Product product;
+  final ItemController itemController;
+  final ItemData itemData;
   final int quantity;
   final int index;
 
   const CartProductCard(
       {super.key,
-      required this.controller,
-      required this.product,
+      required this.itemController,
+      required this.itemData,
       required this.quantity,
       required this.index});
 
@@ -75,23 +80,23 @@ class CartProductCard extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 40,
-            backgroundImage: NetworkImage(product.images),
+            backgroundImage: NetworkImage(itemData.imageUrl),
           ),
           SizedBox(
             width: 20,
           ),
           Expanded(
-            child: Text(product.title),
+            child: Text(itemData.title),
           ),
           IconButton(
               onPressed: () {
-                controller.removeProduct(product);
+                itemController.removeItem(itemData);
               },
               icon: Icon(Icons.remove_circle)),
-          Text("$quantity"),
+          SizedBox(width: 20, child: Center(child: Text("$quantity"))),
           IconButton(
               onPressed: () {
-                controller.addProduct(product);
+                itemController.addItem(itemData);
               },
               icon: Icon(Icons.add_circle)),
         ],

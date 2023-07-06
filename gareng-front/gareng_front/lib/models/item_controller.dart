@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
 import 'package:gareng_front/models/item_request_model.dart';
 import 'package:gareng_front/models/item_response_model.dart';
@@ -19,6 +20,7 @@ class ItemController extends GetxController {
   }
 
   RxList stateItemData = [].obs;
+
   void addStateItemData(List<ItemData> listItemData) {
     stateItemData.addAll(listItemData);
   }

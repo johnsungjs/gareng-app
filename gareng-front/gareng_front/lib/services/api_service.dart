@@ -6,6 +6,7 @@ import 'package:gareng_front/models/item_response_model.dart';
 import 'package:gareng_front/models/login_request_model.dart';
 import 'package:gareng_front/models/login_response_model.dart';
 import 'package:gareng_front/models/profile_response_model.dart';
+import 'package:gareng_front/models/refresh_token_response_model.dart';
 import 'package:gareng_front/models/register_request_model.dart';
 import 'package:gareng_front/models/register_response_model.dart';
 import 'package:gareng_front/models/token_controller.dart';
@@ -69,11 +70,15 @@ class APIService {
 
     var url = Uri.http(Config.apiURL, Config.getItem);
 
-    var response = await http.Client().post(
+    var response = await http.Client()
+        .post(
       url,
       headers: requestHeaders,
       body: jsonEncode(model.toJson()),
-    );
+    )
+        .catchError((err) {
+      print('coba catch error ${err}');
+    });
 
     if (response.statusCode == 500) {
       print('token expired with statuscode: ${response.statusCode}');
@@ -113,5 +118,24 @@ class APIService {
     );
 
     return profileResponseModelFromJson(response.body);
+  }
+
+  Future<RefreshTokenResponseModel> refreshToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': token!,
+    };
+
+    var url = Uri.http(Config.apiURL, Config.getProfile);
+
+    var response = await http.Client().get(
+      url,
+      headers: requestHeaders,
+    );
+
+    return refreshTokenResponseModelFromJson(response.body);
   }
 }

@@ -7,17 +7,9 @@ import 'package:get/get.dart';
 
 import '../models/product_model.dart';
 
-class SearchBar extends StatefulWidget {
+class SearchBar extends StatelessWidget {
   SearchBar({super.key});
-
-  @override
-  State<SearchBar> createState() => _SearchBarState();
-}
-
-class _SearchBarState extends State<SearchBar> {
   TextEditingController inputUser = TextEditingController();
-
-  var searchResult = [];
 
   final CartController controller = Get.find();
   final ItemController itemController = Get.put(ItemController());
@@ -28,7 +20,7 @@ class _SearchBarState extends State<SearchBar> {
     itemController.resetGetItemBody();
     GetItemPagination reqbody = GetItemPagination(
         pageAt: itemController.page.value,
-        sizePerPage: 5,
+        sizePerPage: 6,
         search: itemController.searchInput.value);
     ItemRequestModel model = ItemRequestModel(getItemPagination: reqbody);
     apiService.getAllItem(model).then((e) => {
@@ -61,7 +53,8 @@ class _SearchBarState extends State<SearchBar> {
           decoration: InputDecoration(
             labelText: 'Search Your Food Here',
             labelStyle: const TextStyle(color: Colors.grey),
-            icon: IconButton(onPressed: filterData, icon: Icon(Icons.search)),
+            icon: IconButton(
+                onPressed: filterData, icon: const Icon(Icons.search)),
             border: InputBorder.none,
             iconColor: Colors.grey[800],
           ),

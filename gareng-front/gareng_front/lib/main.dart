@@ -13,11 +13,11 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
   if (token != null) {
-    debugPrint('token ada isi: ${token}');
+    // debugPrint('token ada isi: $token');
     _defaultHome = Core(selectedIndex: 0);
   } else {
-    debugPrint('token null: ${token}');
-    _defaultHome = LoginPage();
+    // debugPrint('token null: $token');
+    _defaultHome = const LoginPage();
   }
 
   runApp(const MyApp());

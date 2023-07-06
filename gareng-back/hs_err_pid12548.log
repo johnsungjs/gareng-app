@@ -1,0 +1,799 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 2097152 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:44), pid=12548, tid=19800
+#
+# JRE version: OpenJDK Runtime Environment Temurin-17.0.7+7 (17.0.7+7) (build 17.0.7+7)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-17.0.7+7 (17.0.7+7, mixed mode, emulated-client, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m -Dsts.lsp.client=vscode -Dsts.log.file=/dev/null -XX:TieredStopAtLevel=1 -Xlog:jni+resolve=off -Dspring.config.location=file:c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\classes\application.properties org.springframework.ide.vscode.boot.app.BootLanguageServerBootApp
+
+Host: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, 8 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.2364)
+Time: Thu Jul  6 14:55:34 2023 SE Asia Standard Time elapsed time: 4106.038173 seconds (0d 1h 8m 26s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000018600964b90):  VMThread "VM Thread" [stack: 0x00000014a0c00000,0x00000014a0d00000] [id=19800]
+
+Stack: [0x00000014a0c00000,0x00000014a0d00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x67754a]
+V  [jvm.dll+0x834304]
+V  [jvm.dll+0x835aae]
+V  [jvm.dll+0x836113]
+V  [jvm.dll+0x24696f]
+V  [jvm.dll+0xa681f]
+V  [jvm.dll+0x2f7481]
+V  [jvm.dll+0x2f30f0]
+V  [jvm.dll+0x2db6c7]
+V  [jvm.dll+0x31e777]
+V  [jvm.dll+0x83a5bb]
+V  [jvm.dll+0x83b2f4]
+V  [jvm.dll+0x83b80c]
+V  [jvm.dll+0x83bbe4]
+V  [jvm.dll+0x83bcb0]
+V  [jvm.dll+0x7e4e7a]
+V  [jvm.dll+0x676395]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17614]
+C  [ntdll.dll+0x526a1]
+
+VM_Operation (0x00000014a25fec00): G1CollectFull, mode: safepoint, requested by thread 0x00000186063f3ef0
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00000186067c3430, length=22, elements={
+0x00000186009699c0, 0x000001860096a570, 0x00000186009a5a30, 0x00000186009a65e0,
+0x00000186009a90a0, 0x00000186009ac980, 0x00000186009ad240, 0x00000186009adb40,
+0x0000018600bbe820, 0x0000018600bc3140, 0x0000018606351090, 0x0000018606175920,
+0x00000186063f3ef0, 0x00000186063f2cc0, 0x0000018675a5dd40, 0x000001860645ce30,
+0x000001860648d010, 0x000001860649a930, 0x00000186065ef140, 0x00000186065f17c0,
+0x00000186065f5ff0, 0x00000186065f12f0
+}
+
+Java Threads: ( => current thread )
+  0x00000186009699c0 JavaThread "Reference Handler" daemon [_thread_blocked, id=20800, stack(0x00000014a0d00000,0x00000014a0e00000)]
+  0x000001860096a570 JavaThread "Finalizer" daemon [_thread_blocked, id=23244, stack(0x00000014a0e00000,0x00000014a0f00000)]
+  0x00000186009a5a30 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=22464, stack(0x00000014a0f00000,0x00000014a1000000)]
+  0x00000186009a65e0 JavaThread "Attach Listener" daemon [_thread_blocked, id=21136, stack(0x00000014a1000000,0x00000014a1100000)]
+  0x00000186009a90a0 JavaThread "Service Thread" daemon [_thread_blocked, id=22064, stack(0x00000014a1100000,0x00000014a1200000)]
+  0x00000186009ac980 JavaThread "Monitor Deflation Thread" daemon [_thread_blocked, id=25336, stack(0x00000014a1200000,0x00000014a1300000)]
+  0x00000186009ad240 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=18772, stack(0x00000014a1300000,0x00000014a1400000)]
+  0x00000186009adb40 JavaThread "Sweeper thread" daemon [_thread_blocked, id=2480, stack(0x00000014a1400000,0x00000014a1500000)]
+  0x0000018600bbe820 JavaThread "Notification Thread" daemon [_thread_blocked, id=17968, stack(0x00000014a1600000,0x00000014a1700000)]
+  0x0000018600bc3140 JavaThread "Common-Cleaner" daemon [_thread_blocked, id=14748, stack(0x00000014a1800000,0x00000014a1900000)]
+  0x0000018606351090 JavaThread "boundedElastic-evictor-1" daemon [_thread_blocked, id=2184, stack(0x00000014a2000000,0x00000014a2100000)]
+  0x0000018606175920 JavaThread "boundedElastic-evictor-2" daemon [_thread_blocked, id=19768, stack(0x00000014a2400000,0x00000014a2500000)]
+  0x00000186063f3ef0 JavaThread "pool-10-thread-1" [_thread_blocked, id=988, stack(0x00000014a2500000,0x00000014a2600000)]
+  0x00000186063f2cc0 JavaThread "LanguageServerApp-lifecycle" [_thread_blocked, id=17144, stack(0x00000014a2600000,0x00000014a2700000)]
+  0x0000018675a5dd40 JavaThread "DestroyJavaVM" [_thread_blocked, id=16796, stack(0x00000014a0600000,0x00000014a0700000)]
+  0x000001860645ce30 JavaThread "pool-11-thread-1" [_thread_in_native, id=23216, stack(0x00000014a2700000,0x00000014a2800000)]
+  0x000001860648d010 JavaThread "Simple-Language-Server main thread" daemon [_thread_blocked, id=24800, stack(0x00000014a2800000,0x00000014a2900000)]
+  0x000001860649a930 JavaThread "pool-6-thread-1" [_thread_blocked, id=1352, stack(0x00000014a2c00000,0x00000014a2d00000)]
+  0x00000186065ef140 JavaThread "parallel-1" daemon [_thread_blocked, id=19728, stack(0x00000014a3c00000,0x00000014a3d00000)]
+  0x00000186065f17c0 JavaThread "pool-4-thread-1" [_thread_blocked, id=23488, stack(0x00000014a4100000,0x00000014a4200000)]
+  0x00000186065f5ff0 JavaThread "parallel-2" daemon [_thread_blocked, id=23784, stack(0x00000014a4200000,0x00000014a4300000)]
+  0x00000186065f12f0 JavaThread "parallel-3" daemon [_thread_blocked, id=25792, stack(0x00000014a2e00000,0x00000014a2f00000)]
+
+Other Threads:
+=>0x0000018600964b90 VMThread "VM Thread" [stack: 0x00000014a0c00000,0x00000014a0d00000] [id=19800]
+  0x0000018600bbecf0 WatcherThread [stack: 0x00000014a1700000,0x00000014a1800000] [id=15548]
+  0x0000018675a9d180 GCTaskThread "GC Thread#0" [stack: 0x00000014a0700000,0x00000014a0800000] [id=8244]
+  0x00000186057fdca0 GCTaskThread "GC Thread#1" [stack: 0x00000014a1900000,0x00000014a1a00000] [id=11416]
+  0x00000186057fdf50 GCTaskThread "GC Thread#2" [stack: 0x00000014a1a00000,0x00000014a1b00000] [id=16612]
+  0x00000186057fe200 GCTaskThread "GC Thread#3" [stack: 0x00000014a1b00000,0x00000014a1c00000] [id=8768]
+  0x00000186057fe4b0 GCTaskThread "GC Thread#4" [stack: 0x00000014a1c00000,0x00000014a1d00000] [id=5848]
+  0x00000186057fe760 GCTaskThread "GC Thread#5" [stack: 0x00000014a1d00000,0x00000014a1e00000] [id=21324]
+  0x0000018605ba4220 GCTaskThread "GC Thread#6" [stack: 0x00000014a1e00000,0x00000014a1f00000] [id=652]
+  0x0000018605ba44d0 GCTaskThread "GC Thread#7" [stack: 0x00000014a1f00000,0x00000014a2000000] [id=280]
+  0x0000018675aa5ed0 ConcurrentGCThread "G1 Main Marker" [stack: 0x00000014a0800000,0x00000014a0900000] [id=22920]
+  0x0000018675aa68e0 ConcurrentGCThread "G1 Conc#0" [stack: 0x00000014a0900000,0x00000014a0a00000] [id=13720]
+  0x0000018605d37840 ConcurrentGCThread "G1 Conc#1" [stack: 0x00000014a2300000,0x00000014a2400000] [id=9864]
+  0x00000186007d2150 ConcurrentGCThread "G1 Refine#0" [stack: 0x00000014a0a00000,0x00000014a0b00000] [id=24920]
+  0x00000186065b1580 ConcurrentGCThread "G1 Refine#1" [stack: 0x00000014a4300000,0x00000014a4400000] [id=25120]
+  0x000001860529a0f0 ConcurrentGCThread "G1 Refine#2" [stack: 0x00000014a4500000,0x00000014a4600000] [id=26496]
+  0x00000186065ac440 ConcurrentGCThread "G1 Refine#3" [stack: 0x00000014a4700000,0x00000014a4800000] [id=3428]
+  0x000001860a909f70 ConcurrentGCThread "G1 Refine#4" [stack: 0x00000014a4900000,0x00000014a4a00000] [id=1888]
+  0x00000186007d2a80 ConcurrentGCThread "G1 Service" [stack: 0x00000014a0b00000,0x00000014a0c00000] [id=19668]
+
+Threads with active compile tasks:
+
+VM state: at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000186736ee640] Threads_lock - owner thread: 0x0000018600964b90
+[0x00000186737ad2c0] Heap_lock - owner thread: 0x00000186063f3ef0
+
+Heap address: 0x00000000c0000000, size: 1024 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) not mapped
+Compressed class space mapped at: 0x0000000100000000-0x0000000140000000, reserved size: 1073741824
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3, Narrow klass range: 0x140000000
+
+GC Precious Log:
+ CPUs: 8 total, 8 available
+ Memory: 16118M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (32-bit)
+ Heap Region Size: 1M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 252M
+ Heap Max Capacity: 1G
+ Pre-touch: Disabled
+ Parallel Workers: 8
+ Concurrent Workers: 2
+ Concurrent Refinement Workers: 8
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, OA=open archive, CA=closed archive, TAMS=top-at-mark-start (previous, next)
+|   0|0x00000000c0000000, 0x00000000c0100000, 0x00000000c0100000|100%|HS|  |TAMS 0x00000000c0100000, 0x00000000c0000000| Untracked 
+|   1|0x00000000c0100000, 0x00000000c0200000, 0x00000000c0200000|100%| O|  |TAMS 0x00000000c0200000, 0x00000000c0100000| Untracked 
+|   2|0x00000000c0200000, 0x00000000c02ffff8, 0x00000000c0300000| 99%| O|  |TAMS 0x00000000c02ffff8, 0x00000000c0200000| Untracked 
+|   3|0x00000000c0300000, 0x00000000c0400000, 0x00000000c0400000|100%| O|  |TAMS 0x00000000c0400000, 0x00000000c0300000| Untracked 
+|   4|0x00000000c0400000, 0x00000000c04fffa0, 0x00000000c0500000| 99%| O|  |TAMS 0x00000000c04fffa0, 0x00000000c0400000| Untracked 
+|   5|0x00000000c0500000, 0x00000000c05fa598, 0x00000000c0600000| 97%| O|  |TAMS 0x00000000c05fa598, 0x00000000c0500000| Untracked 
+|   6|0x00000000c0600000, 0x00000000c0700000, 0x00000000c0700000|100%| O|  |TAMS 0x00000000c0700000, 0x00000000c0600000| Untracked 
+|   7|0x00000000c0700000, 0x00000000c07fffb8, 0x00000000c0800000| 99%| O|  |TAMS 0x00000000c07fffb8, 0x00000000c0700000| Untracked 
+|   8|0x00000000c0800000, 0x00000000c0900000, 0x00000000c0900000|100%| O|  |TAMS 0x00000000c0900000, 0x00000000c0800000| Untracked 
+|   9|0x00000000c0900000, 0x00000000c0a00000, 0x00000000c0a00000|100%| O|  |TAMS 0x00000000c0a00000, 0x00000000c0900000| Untracked 
+|  10|0x00000000c0a00000, 0x00000000c0afffd0, 0x00000000c0b00000| 99%| O|  |TAMS 0x00000000c0afffd0, 0x00000000c0a00000| Untracked 
+|  11|0x00000000c0b00000, 0x00000000c0bffff8, 0x00000000c0c00000| 99%| O|  |TAMS 0x00000000c0bffff8, 0x00000000c0b00000| Untracked 
+|  12|0x00000000c0c00000, 0x00000000c0cfffd8, 0x00000000c0d00000| 99%| O|  |TAMS 0x00000000c0cfffd8, 0x00000000c0c00000| Untracked 
+|  13|0x00000000c0d00000, 0x00000000c0dfffa0, 0x00000000c0e00000| 99%| O|  |TAMS 0x00000000c0dfffa0, 0x00000000c0d00000| Untracked 
+|  14|0x00000000c0e00000, 0x00000000c0efffd8, 0x00000000c0f00000| 99%| O|  |TAMS 0x00000000c0efffd8, 0x00000000c0e00000| Untracked 
+|  15|0x00000000c0f00000, 0x00000000c0ffffe0, 0x00000000c1000000| 99%| O|  |TAMS 0x00000000c0ffffe0, 0x00000000c0f00000| Untracked 
+|  16|0x00000000c1000000, 0x00000000c10fffe8, 0x00000000c1100000| 99%| O|  |TAMS 0x00000000c10fffe8, 0x00000000c1000000| Untracked 
+|  17|0x00000000c1100000, 0x00000000c11ffff0, 0x00000000c1200000| 99%| O|  |TAMS 0x00000000c11ffff0, 0x00000000c1100000| Untracked 
+|  18|0x00000000c1200000, 0x00000000c12fffa0, 0x00000000c1300000| 99%| O|  |TAMS 0x00000000c12fffa0, 0x00000000c1200000| Untracked 
+|  19|0x00000000c1300000, 0x00000000c13ffff8, 0x00000000c1400000| 99%| O|  |TAMS 0x00000000c13ffff8, 0x00000000c1300000| Untracked 
+|  20|0x00000000c1400000, 0x00000000c14ffff0, 0x00000000c1500000| 99%| O|  |TAMS 0x00000000c14ffff0, 0x00000000c1400000| Untracked 
+|  21|0x00000000c1500000, 0x00000000c15f8168, 0x00000000c1600000| 96%| O|  |TAMS 0x00000000c15f8168, 0x00000000c1500000| Untracked 
+|  22|0x00000000c1600000, 0x00000000c1700000, 0x00000000c1700000|100%| O|  |TAMS 0x00000000c1700000, 0x00000000c1600000| Untracked 
+|  23|0x00000000c1700000, 0x00000000c1800000, 0x00000000c1800000|100%| O|  |TAMS 0x00000000c1800000, 0x00000000c1700000| Untracked 
+|  24|0x00000000c1800000, 0x00000000c18ffff8, 0x00000000c1900000| 99%| O|  |TAMS 0x00000000c18ffff8, 0x00000000c1800000| Untracked 
+|  25|0x00000000c1900000, 0x00000000c19fffe8, 0x00000000c1a00000| 99%| O|  |TAMS 0x00000000c19fffe8, 0x00000000c1900000| Untracked 
+|  26|0x00000000c1a00000, 0x00000000c1afff98, 0x00000000c1b00000| 99%| O|  |TAMS 0x00000000c1afff98, 0x00000000c1a00000| Untracked 
+|  27|0x00000000c1b00000, 0x00000000c1c00000, 0x00000000c1c00000|100%| O|  |TAMS 0x00000000c1c00000, 0x00000000c1b00000| Untracked 
+|  28|0x00000000c1c00000, 0x00000000c1cffff0, 0x00000000c1d00000| 99%| O|  |TAMS 0x00000000c1cffff0, 0x00000000c1c00000| Untracked 
+|  29|0x00000000c1d00000, 0x00000000c1e00000, 0x00000000c1e00000|100%| O|  |TAMS 0x00000000c1e00000, 0x00000000c1d00000| Untracked 
+|  30|0x00000000c1e00000, 0x00000000c1effff0, 0x00000000c1f00000| 99%| O|  |TAMS 0x00000000c1effff0, 0x00000000c1e00000| Untracked 
+|  31|0x00000000c1f00000, 0x00000000c1ffffa0, 0x00000000c2000000| 99%| O|  |TAMS 0x00000000c1ffffa0, 0x00000000c1f00000| Untracked 
+|  32|0x00000000c2000000, 0x00000000c20fffe8, 0x00000000c2100000| 99%| O|  |TAMS 0x00000000c20fffe8, 0x00000000c2000000| Untracked 
+|  33|0x00000000c2100000, 0x00000000c2200000, 0x00000000c2200000|100%| O|  |TAMS 0x00000000c2200000, 0x00000000c2100000| Untracked 
+|  34|0x00000000c2200000, 0x00000000c22f59b0, 0x00000000c2300000| 95%| O|  |TAMS 0x00000000c22f59b0, 0x00000000c2200000| Untracked 
+|  35|0x00000000c2300000, 0x00000000c23fff78, 0x00000000c2400000| 99%| O|  |TAMS 0x00000000c23fff78, 0x00000000c2300000| Untracked 
+|  36|0x00000000c2400000, 0x00000000c2500000, 0x00000000c2500000|100%| O|  |TAMS 0x00000000c2500000, 0x00000000c2400000| Untracked 
+|  37|0x00000000c2500000, 0x00000000c2562f20, 0x00000000c2600000| 38%| O|  |TAMS 0x00000000c2500000, 0x00000000c2500000| Untracked 
+|  38|0x00000000c2600000, 0x00000000c2684e38, 0x00000000c2700000| 51%| O|  |TAMS 0x00000000c2600000, 0x00000000c2600000| Untracked 
+|  39|0x00000000c2700000, 0x00000000c2700000, 0x00000000c2800000|  0%| F|  |TAMS 0x00000000c2700000, 0x00000000c2700000| Untracked 
+|  40|0x00000000c2800000, 0x00000000c28ffff0, 0x00000000c2900000| 99%| O|  |TAMS 0x00000000c28ffff0, 0x00000000c2800000| Untracked 
+|  41|0x00000000c2900000, 0x00000000c2900000, 0x00000000c2a00000|  0%| F|  |TAMS 0x00000000c2900000, 0x00000000c2900000| Untracked 
+|  42|0x00000000c2a00000, 0x00000000c2a00000, 0x00000000c2b00000|  0%| F|  |TAMS 0x00000000c2a00000, 0x00000000c2a00000| Untracked 
+|  43|0x00000000c2b00000, 0x00000000c2b00000, 0x00000000c2c00000|  0%| F|  |TAMS 0x00000000c2b00000, 0x00000000c2b00000| Untracked 
+|  44|0x00000000c2c00000, 0x00000000c2c00000, 0x00000000c2d00000|  0%| F|  |TAMS 0x00000000c2c00000, 0x00000000c2c00000| Untracked 
+|  45|0x00000000c2d00000, 0x00000000c2d00000, 0x00000000c2e00000|  0%| F|  |TAMS 0x00000000c2d00000, 0x00000000c2d00000| Untracked 
+|  46|0x00000000c2e00000, 0x00000000c2e00000, 0x00000000c2f00000|  0%| F|  |TAMS 0x00000000c2e00000, 0x00000000c2e00000| Untracked 
+|  47|0x00000000c2f00000, 0x00000000c2f00000, 0x00000000c3000000|  0%| F|  |TAMS 0x00000000c2f00000, 0x00000000c2f00000| Untracked 
+|  48|0x00000000c3000000, 0x00000000c3000000, 0x00000000c3100000|  0%| F|  |TAMS 0x00000000c3000000, 0x00000000c3000000| Untracked 
+|  49|0x00000000c3100000, 0x00000000c3100000, 0x00000000c3200000|  0%| F|  |TAMS 0x00000000c3100000, 0x00000000c3100000| Untracked 
+|  50|0x00000000c3200000, 0x00000000c3200000, 0x00000000c3300000|  0%| F|  |TAMS 0x00000000c3200000, 0x00000000c3200000| Untracked 
+|  51|0x00000000c3300000, 0x00000000c3300000, 0x00000000c3400000|  0%| F|  |TAMS 0x00000000c3300000, 0x00000000c3300000| Untracked 
+|  52|0x00000000c3400000, 0x00000000c3400000, 0x00000000c3500000|  0%| F|  |TAMS 0x00000000c3400000, 0x00000000c3400000| Untracked 
+|  53|0x00000000c3500000, 0x00000000c3500000, 0x00000000c3600000|  0%| F|  |TAMS 0x00000000c3500000, 0x00000000c3500000| Untracked 
+|  54|0x00000000c3600000, 0x00000000c3600000, 0x00000000c3700000|  0%| F|  |TAMS 0x00000000c3600000, 0x00000000c3600000| Untracked 
+|  55|0x00000000c3700000, 0x00000000c3700000, 0x00000000c3800000|  0%| F|  |TAMS 0x00000000c3700000, 0x00000000c3700000| Untracked 
+|  56|0x00000000c3800000, 0x00000000c3800000, 0x00000000c3900000|  0%| F|  |TAMS 0x00000000c3800000, 0x00000000c3800000| Untracked 
+|  57|0x00000000c3900000, 0x00000000c3900000, 0x00000000c3a00000|  0%| F|  |TAMS 0x00000000c3900000, 0x00000000c3900000| Untracked 
+|  58|0x00000000c3a00000, 0x00000000c3a00000, 0x00000000c3b00000|  0%| F|  |TAMS 0x00000000c3a00000, 0x00000000c3a00000| Untracked 
+|  59|0x00000000c3b00000, 0x00000000c3b00000, 0x00000000c3c00000|  0%| F|  |TAMS 0x00000000c3b00000, 0x00000000c3b00000| Untracked 
+|  60|0x00000000c3c00000, 0x00000000c3c00000, 0x00000000c3d00000|  0%| F|  |TAMS 0x00000000c3c00000, 0x00000000c3c00000| Untracked 
+|  61|0x00000000c3d00000, 0x00000000c3d00000, 0x00000000c3e00000|  0%| F|  |TAMS 0x00000000c3d00000, 0x00000000c3d00000| Untracked 
+|  62|0x00000000c3e00000, 0x00000000c3e00000, 0x00000000c3f00000|  0%| F|  |TAMS 0x00000000c3e00000, 0x00000000c3e00000| Untracked 
+|  63|0x00000000c3f00000, 0x00000000c3f00000, 0x00000000c4000000|  0%| F|  |TAMS 0x00000000c3f00000, 0x00000000c3f00000| Untracked 
+|  64|0x00000000c4000000, 0x00000000c4000000, 0x00000000c4100000|  0%| F|  |TAMS 0x00000000c4000000, 0x00000000c4000000| Untracked 
+|  65|0x00000000c4100000, 0x00000000c4100000, 0x00000000c4200000|  0%| F|  |TAMS 0x00000000c4100000, 0x00000000c4100000| Untracked 
+|  66|0x00000000c4200000, 0x00000000c4200000, 0x00000000c4300000|  0%| F|  |TAMS 0x00000000c4200000, 0x00000000c4200000| Untracked 
+|  67|0x00000000c4300000, 0x00000000c4300000, 0x00000000c4400000|  0%| F|  |TAMS 0x00000000c4300000, 0x00000000c4300000| Untracked 
+|  68|0x00000000c4400000, 0x00000000c4400000, 0x00000000c4500000|  0%| F|  |TAMS 0x00000000c4400000, 0x00000000c4400000| Untracked 
+|  69|0x00000000c4500000, 0x00000000c4500000, 0x00000000c4600000|  0%| F|  |TAMS 0x00000000c4500000, 0x00000000c4500000| Untracked 
+|  70|0x00000000c4600000, 0x00000000c4600000, 0x00000000c4700000|  0%| F|  |TAMS 0x00000000c4600000, 0x00000000c4600000| Untracked 
+|  71|0x00000000c4700000, 0x00000000c4700000, 0x00000000c4800000|  0%| F|  |TAMS 0x00000000c4700000, 0x00000000c4700000| Untracked 
+|  72|0x00000000c4800000, 0x00000000c4800000, 0x00000000c4900000|  0%| F|  |TAMS 0x00000000c4800000, 0x00000000c4800000| Untracked 
+|  73|0x00000000c4900000, 0x00000000c4900000, 0x00000000c4a00000|  0%| F|  |TAMS 0x00000000c4900000, 0x00000000c4900000| Untracked 
+|  74|0x00000000c4a00000, 0x00000000c4a00000, 0x00000000c4b00000|  0%| F|  |TAMS 0x00000000c4a00000, 0x00000000c4a00000| Untracked 
+|  75|0x00000000c4b00000, 0x00000000c4b00000, 0x00000000c4c00000|  0%| F|  |TAMS 0x00000000c4b00000, 0x00000000c4b00000| Untracked 
+|  76|0x00000000c4c00000, 0x00000000c4c00000, 0x00000000c4d00000|  0%| F|  |TAMS 0x00000000c4c00000, 0x00000000c4c00000| Untracked 
+|  77|0x00000000c4d00000, 0x00000000c4d00000, 0x00000000c4e00000|  0%| F|  |TAMS 0x00000000c4d00000, 0x00000000c4d00000| Untracked 
+|  78|0x00000000c4e00000, 0x00000000c4e00000, 0x00000000c4f00000|  0%| F|  |TAMS 0x00000000c4e00000, 0x00000000c4e00000| Untracked 
+|  79|0x00000000c4f00000, 0x00000000c4f00000, 0x00000000c5000000|  0%| F|  |TAMS 0x00000000c4f00000, 0x00000000c4f00000| Untracked 
+|  80|0x00000000c5000000, 0x00000000c5000000, 0x00000000c5100000|  0%| F|  |TAMS 0x00000000c5000000, 0x00000000c5000000| Untracked 
+|  81|0x00000000c5100000, 0x00000000c5100000, 0x00000000c5200000|  0%| F|  |TAMS 0x00000000c5100000, 0x00000000c5100000| Untracked 
+|  82|0x00000000c5200000, 0x00000000c5200000, 0x00000000c5300000|  0%| F|  |TAMS 0x00000000c5200000, 0x00000000c5200000| Untracked 
+|  83|0x00000000c5300000, 0x00000000c5300000, 0x00000000c5400000|  0%| F|  |TAMS 0x00000000c5300000, 0x00000000c5300000| Untracked 
+|  84|0x00000000c5400000, 0x00000000c5400000, 0x00000000c5500000|  0%| F|  |TAMS 0x00000000c5400000, 0x00000000c5400000| Untracked 
+|  85|0x00000000c5500000, 0x00000000c5500000, 0x00000000c5600000|  0%| F|  |TAMS 0x00000000c5500000, 0x00000000c5500000| Untracked 
+|  86|0x00000000c5600000, 0x00000000c5600000, 0x00000000c5700000|  0%| F|  |TAMS 0x00000000c5600000, 0x00000000c5600000| Untracked 
+|  87|0x00000000c5700000, 0x00000000c5700000, 0x00000000c5800000|  0%| F|  |TAMS 0x00000000c5700000, 0x00000000c5700000| Untracked 
+|  88|0x00000000c5800000, 0x00000000c5800000, 0x00000000c5900000|  0%| F|  |TAMS 0x00000000c5800000, 0x00000000c5800000| Untracked 
+|  89|0x00000000c5900000, 0x00000000c5900000, 0x00000000c5a00000|  0%| F|  |TAMS 0x00000000c5900000, 0x00000000c5900000| Untracked 
+|  90|0x00000000c5a00000, 0x00000000c5a00000, 0x00000000c5b00000|  0%| F|  |TAMS 0x00000000c5a00000, 0x00000000c5a00000| Untracked 
+|  91|0x00000000c5b00000, 0x00000000c5b00000, 0x00000000c5c00000|  0%| F|  |TAMS 0x00000000c5b00000, 0x00000000c5b00000| Untracked 
+|  92|0x00000000c5c00000, 0x00000000c5c00000, 0x00000000c5d00000|  0%| F|  |TAMS 0x00000000c5c00000, 0x00000000c5c00000| Untracked 
+|  93|0x00000000c5d00000, 0x00000000c5d00000, 0x00000000c5e00000|  0%| F|  |TAMS 0x00000000c5d00000, 0x00000000c5d00000| Untracked 
+|  94|0x00000000c5e00000, 0x00000000c5e00000, 0x00000000c5f00000|  0%| F|  |TAMS 0x00000000c5e00000, 0x00000000c5e00000| Untracked 
+|  95|0x00000000c5f00000, 0x00000000c5f00000, 0x00000000c6000000|  0%| F|  |TAMS 0x00000000c5f00000, 0x00000000c5f00000| Untracked 
+|  96|0x00000000c6000000, 0x00000000c6000000, 0x00000000c6100000|  0%| F|  |TAMS 0x00000000c6000000, 0x00000000c6000000| Untracked 
+|  97|0x00000000c6100000, 0x00000000c6100000, 0x00000000c6200000|  0%| F|  |TAMS 0x00000000c6100000, 0x00000000c6100000| Untracked 
+|  98|0x00000000c6200000, 0x00000000c6200000, 0x00000000c6300000|  0%| F|  |TAMS 0x00000000c6200000, 0x00000000c6200000| Untracked 
+|  99|0x00000000c6300000, 0x00000000c6300000, 0x00000000c6400000|  0%| F|  |TAMS 0x00000000c6300000, 0x00000000c6300000| Untracked 
+| 100|0x00000000c6400000, 0x00000000c6400000, 0x00000000c6500000|  0%| F|  |TAMS 0x00000000c6400000, 0x00000000c6400000| Untracked 
+| 101|0x00000000c6500000, 0x00000000c6500000, 0x00000000c6600000|  0%| F|  |TAMS 0x00000000c6500000, 0x00000000c6500000| Untracked 
+| 102|0x00000000c6600000, 0x00000000c6600000, 0x00000000c6700000|  0%| F|  |TAMS 0x00000000c6600000, 0x00000000c6600000| Untracked 
+| 103|0x00000000c6700000, 0x00000000c6700000, 0x00000000c6800000|  0%| F|  |TAMS 0x00000000c6700000, 0x00000000c6700000| Untracked 
+| 104|0x00000000c6800000, 0x00000000c6800000, 0x00000000c6900000|  0%| F|  |TAMS 0x00000000c6800000, 0x00000000c6800000| Untracked 
+| 105|0x00000000c6900000, 0x00000000c6900000, 0x00000000c6a00000|  0%| F|  |TAMS 0x00000000c6900000, 0x00000000c6900000| Untracked 
+| 106|0x00000000c6a00000, 0x00000000c6a00000, 0x00000000c6b00000|  0%| F|  |TAMS 0x00000000c6a00000, 0x00000000c6a00000| Untracked 
+| 107|0x00000000c6b00000, 0x00000000c6b00000, 0x00000000c6c00000|  0%| F|  |TAMS 0x00000000c6b00000, 0x00000000c6b00000| Untracked 
+| 108|0x00000000c6c00000, 0x00000000c6c00000, 0x00000000c6d00000|  0%| F|  |TAMS 0x00000000c6c00000, 0x00000000c6c00000| Untracked 
+| 109|0x00000000c6d00000, 0x00000000c6d00000, 0x00000000c6e00000|  0%| F|  |TAMS 0x00000000c6d00000, 0x00000000c6d00000| Untracked 
+| 110|0x00000000c6e00000, 0x00000000c6e00000, 0x00000000c6f00000|  0%| F|  |TAMS 0x00000000c6e00000, 0x00000000c6e00000| Untracked 
+| 111|0x00000000c6f00000, 0x00000000c6f00000, 0x00000000c7000000|  0%| F|  |TAMS 0x00000000c6f00000, 0x00000000c6f00000| Untracked 
+| 112|0x00000000c7000000, 0x00000000c7000000, 0x00000000c7100000|  0%| F|  |TAMS 0x00000000c7000000, 0x00000000c7000000| Untracked 
+| 113|0x00000000c7100000, 0x00000000c7100000, 0x00000000c7200000|  0%| F|  |TAMS 0x00000000c7100000, 0x00000000c7100000| Untracked 
+| 114|0x00000000c7200000, 0x00000000c7200000, 0x00000000c7300000|  0%| F|  |TAMS 0x00000000c7200000, 0x00000000c7200000| Untracked 
+| 115|0x00000000c7300000, 0x00000000c7300000, 0x00000000c7400000|  0%| F|  |TAMS 0x00000000c7300000, 0x00000000c7300000| Untracked 
+| 116|0x00000000c7400000, 0x00000000c7400000, 0x00000000c7500000|  0%| F|  |TAMS 0x00000000c7400000, 0x00000000c7400000| Untracked 
+| 117|0x00000000c7500000, 0x00000000c7500000, 0x00000000c7600000|  0%| F|  |TAMS 0x00000000c7500000, 0x00000000c7500000| Untracked 
+| 118|0x00000000c7600000, 0x00000000c7600000, 0x00000000c7700000|  0%| F|  |TAMS 0x00000000c7600000, 0x00000000c7600000| Untracked 
+| 119|0x00000000c7700000, 0x00000000c7700000, 0x00000000c7800000|  0%| F|  |TAMS 0x00000000c7700000, 0x00000000c7700000| Untracked 
+| 120|0x00000000c7800000, 0x00000000c7800000, 0x00000000c7900000|  0%| F|  |TAMS 0x00000000c7800000, 0x00000000c7800000| Untracked 
+| 121|0x00000000c7900000, 0x00000000c7900000, 0x00000000c7a00000|  0%| F|  |TAMS 0x00000000c7900000, 0x00000000c7900000| Untracked 
+| 122|0x00000000c7a00000, 0x00000000c7a00000, 0x00000000c7b00000|  0%| F|  |TAMS 0x00000000c7a00000, 0x00000000c7a00000| Untracked 
+| 123|0x00000000c7b00000, 0x00000000c7b00000, 0x00000000c7c00000|  0%| F|  |TAMS 0x00000000c7b00000, 0x00000000c7b00000| Untracked 
+| 124|0x00000000c7c00000, 0x00000000c7c00000, 0x00000000c7d00000|  0%| F|  |TAMS 0x00000000c7c00000, 0x00000000c7c00000| Untracked 
+| 125|0x00000000c7d00000, 0x00000000c7d00000, 0x00000000c7e00000|  0%| F|  |TAMS 0x00000000c7d00000, 0x00000000c7d00000| Untracked 
+| 126|0x00000000c7e00000, 0x00000000c7e00000, 0x00000000c7f00000|  0%| F|  |TAMS 0x00000000c7e00000, 0x00000000c7e00000| Untracked 
+| 127|0x00000000c7f00000, 0x00000000c7f00000, 0x00000000c8000000|  0%| F|  |TAMS 0x00000000c7f00000, 0x00000000c7f00000| Untracked 
+| 128|0x00000000c8000000, 0x00000000c8000000, 0x00000000c8100000|  0%| F|  |TAMS 0x00000000c8000000, 0x00000000c8000000| Untracked 
+| 129|0x00000000c8100000, 0x00000000c8100000, 0x00000000c8200000|  0%| F|  |TAMS 0x00000000c8100000, 0x00000000c8100000| Untracked 
+| 130|0x00000000c8200000, 0x00000000c8200000, 0x00000000c8300000|  0%| F|  |TAMS 0x00000000c8200000, 0x00000000c8200000| Untracked 
+| 131|0x00000000c8300000, 0x00000000c8300000, 0x00000000c8400000|  0%| F|  |TAMS 0x00000000c8300000, 0x00000000c8300000| Untracked 
+| 132|0x00000000c8400000, 0x00000000c8400000, 0x00000000c8500000|  0%| F|  |TAMS 0x00000000c8400000, 0x00000000c8400000| Untracked 
+| 133|0x00000000c8500000, 0x00000000c8547270, 0x00000000c8600000| 27%| E|  |TAMS 0x00000000c8500000, 0x00000000c8500000| Complete 
+
+Card table byte_map: [0x000001867b9f0000,0x000001867bbf0000] _byte_map_base: 0x000001867b3f0000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x0000018675a9d5a0, (CMBitMap*) 0x0000018675a9d5e0
+ Prev Bits: [0x000001867bdf0000, 0x000001867cdf0000)
+ Next Bits: [0x000001867cdf0000, 0x000001867ddf0000)
+
+Polling page: 0x0000018673930000
+
+Metaspace:
+
+Usage:
+  Non-class:     61.82 MB used.
+      Class:      9.73 MB used.
+       Both:     71.55 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,      62.25 MB ( 97%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,      10.06 MB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,      72.31 MB (  7%) committed. 
+
+Chunk freelists:
+   Non-Class:  1.69 MB
+       Class:  6.02 MB
+        Both:  7.71 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 120.56 MB
+CDS: off
+MetaspaceReclaimPolicy: balanced
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - new_chunks_are_fully_committed: 0.
+ - uncommit_free_chunks: 1.
+ - use_allocation_guard: 0.
+ - handle_deallocations: 1.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 6.
+num_arena_births: 686.
+num_arena_deaths: 224.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 1157.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 277.
+num_chunks_taken_from_freelist: 3086.
+num_chunk_merges: 97.
+num_chunk_splits: 2203.
+num_chunks_enlarged: 1677.
+num_inconsistent_stats: 0.
+
+CodeCache: size=49152Kb used=18721Kb max_used=20194Kb free=30430Kb
+ bounds [0x00000186786e0000, 0x0000018679aa0000, 0x000001867b6e0000]
+ total_blobs=11187 nmethods=10509 adapters=605
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 2685.766 Thread 0x00000186009ad240 10676       1       java.lang.invoke.LambdaForm$DMH/0x0000000100a17000::newInvokeSpecial (23 bytes)
+Event: 2685.767 Thread 0x00000186009ad240 nmethod 10676 0x0000018678857290 code [0x0000018678857440, 0x00000186788575c8]
+Event: 2685.767 Thread 0x00000186009ad240 10677       1       java.lang.ProcessImpl$$Lambda$1289/0x00000001006e2948::<init> (10 bytes)
+Event: 2685.767 Thread 0x00000186009ad240 nmethod 10677 0x0000018678856f90 code [0x0000018678857120, 0x00000186788571f8]
+Event: 2685.767 Thread 0x00000186009ad240 10679       1       java.lang.ProcessHandleImpl::getInternal (13 bytes)
+Event: 2685.767 Thread 0x00000186009ad240 nmethod 10679 0x0000018678856c10 code [0x0000018678856da0, 0x0000018678856f08]
+Event: 2685.767 Thread 0x00000186009ad240 10680       1       java.lang.ProcessImpl$2::<init> (20 bytes)
+Event: 2685.767 Thread 0x00000186009ad240 nmethod 10680 0x0000018678856890 code [0x0000018678856a20, 0x0000018678856b98]
+Event: 2685.767 Thread 0x00000186009ad240 10681       1       java.lang.ProcessImpl$2::run (5 bytes)
+Event: 2685.767 Thread 0x00000186009ad240 nmethod 10681 0x0000018678856590 code [0x0000018678856720, 0x0000018678856808]
+Event: 2685.767 Thread 0x00000186009ad240 10682       1       java.lang.ProcessImpl$2::run (242 bytes)
+Event: 2685.767 Thread 0x00000186009ad240 nmethod 10682 0x0000018678854f10 code [0x00000186788551c0, 0x0000018678855f58]
+Event: 2685.965 Thread 0x00000186009ad240 10683   !   1       java.io.FilterOutputStream::close (183 bytes)
+Event: 2685.998 Thread 0x00000186009ad240 nmethod 10683 0x0000018678853d90 code [0x0000018678853fa0, 0x0000018678854478]
+Event: 2685.998 Thread 0x00000186009ad240 10685       1       java.lang.ProcessImpl$$Lambda$1289/0x00000001006e2948::run (8 bytes)
+Event: 2685.998 Thread 0x00000186009ad240 nmethod 10685 0x0000018678853a90 code [0x0000018678853c20, 0x0000018678853d08]
+Event: 2685.998 Thread 0x00000186009ad240 10686       1       java.lang.ProcessImpl::lambda$new$0 (6 bytes)
+Event: 2685.998 Thread 0x00000186009ad240 nmethod 10686 0x0000018678853790 code [0x0000018678853920, 0x00000186788539e8]
+Event: 4002.718 Thread 0x00000186009ad240 10688       1       java.lang.ProcessImpl::waitFor (136 bytes)
+Event: 4002.719 Thread 0x00000186009ad240 nmethod 10688 0x0000018678852b10 code [0x0000018678852d20, 0x0000018678853138]
+
+GC Heap History (20 events):
+Event: 4002.912 GC heap before
+{Heap before GC invocations=457 (full 383):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4002.938 GC heap after
+{Heap after GC invocations=458 (full 384):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4013.186 GC heap before
+{Heap before GC invocations=458 (full 384):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4013.217 GC heap after
+{Heap after GC invocations=459 (full 385):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4023.456 GC heap before
+{Heap before GC invocations=459 (full 385):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4023.479 GC heap after
+{Heap after GC invocations=460 (full 386):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4033.718 GC heap before
+{Heap before GC invocations=460 (full 386):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4033.745 GC heap after
+{Heap after GC invocations=461 (full 387):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4043.977 GC heap before
+{Heap before GC invocations=461 (full 387):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4044.003 GC heap after
+{Heap after GC invocations=462 (full 388):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4054.236 GC heap before
+{Heap before GC invocations=462 (full 388):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4054.262 GC heap after
+{Heap after GC invocations=463 (full 389):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4064.521 GC heap before
+{Heap before GC invocations=463 (full 389):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4064.547 GC heap after
+{Heap after GC invocations=464 (full 390):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4074.789 GC heap before
+{Heap before GC invocations=464 (full 390):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4074.817 GC heap after
+{Heap after GC invocations=465 (full 391):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4085.064 GC heap before
+{Heap before GC invocations=465 (full 391):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4085.093 GC heap after
+{Heap after GC invocations=466 (full 392):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4095.326 GC heap before
+{Heap before GC invocations=466 (full 392):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+Event: 4095.352 GC heap after
+{Heap after GC invocations=467 (full 393):
+ garbage-first heap   total 137216K, used 39742K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 73268K, committed 74048K, reserved 1114112K
+  class space    used 9963K, committed 10304K, reserved 1048576K
+}
+
+Dll operation events (10 events):
+Event: 0.023 Loaded shared library c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\java.dll
+Event: 1.075 Loaded shared library C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\net.dll
+Event: 1.083 Loaded shared library C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\nio.dll
+Event: 1.549 Loaded shared library C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\zip.dll
+Event: 4.526 Loaded shared library C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\jimage.dll
+Event: 9.542 Loaded shared library C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\management.dll
+Event: 9.547 Loaded shared library C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\management_ext.dll
+Event: 10.873 Loaded shared library C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\sunmscapi.dll
+Event: 18.414 Loaded shared library c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\verify.dll
+Event: 21.993 Loaded shared library C:\Users\23020224\AppData\Local\Temp\snappy-1.1.8-202f82c1-de28-4656-83cf-bec3ceda5e30-snappyjava.dll
+
+Deoptimization events (20 events):
+Event: 19.049 Thread 0x000001860649d480 DEOPT PACKING pc=0x0000018678c58ef3 sp=0x00000014a2dfcf70
+Event: 19.049 Thread 0x000001860649d480 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2dfc490 mode 3
+Event: 19.213 Thread 0x000001860649d480 DEOPT PACKING pc=0x00000186796e13f4 sp=0x00000014a2dfdd10
+Event: 19.213 Thread 0x000001860649d480 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2dfd240 mode 0
+Event: 19.213 Thread 0x000001860649d480 DEOPT PACKING pc=0x000001867973889c sp=0x00000014a2dfdf40
+Event: 19.213 Thread 0x000001860649d480 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2dfd448 mode 0
+Event: 19.213 Thread 0x000001860649d480 DEOPT PACKING pc=0x0000018679672374 sp=0x00000014a2dfe030
+Event: 19.213 Thread 0x000001860649d480 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2dfd528 mode 0
+Event: 19.213 Thread 0x000001860649d480 DEOPT PACKING pc=0x0000018679642d74 sp=0x00000014a2dfe100
+Event: 19.213 Thread 0x000001860649d480 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2dfd5d8 mode 0
+Event: 19.213 Thread 0x000001860649d480 DEOPT PACKING pc=0x0000018679639824 sp=0x00000014a2dfe1b0
+Event: 19.213 Thread 0x000001860649d480 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2dfd730 mode 0
+Event: 19.214 Thread 0x000001860649d480 DEOPT PACKING pc=0x00000186796fd0ac sp=0x00000014a2dfe4d0
+Event: 19.214 Thread 0x000001860649d480 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2dfd960 mode 0
+Event: 21.846 Thread 0x00000186065f1c90 DEOPT PACKING pc=0x00000186798e3e8c sp=0x00000014a2ffdc90
+Event: 21.846 Thread 0x00000186065f1c90 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2ffd1d8 mode 0
+Event: 21.848 Thread 0x00000186065f1c90 DEOPT PACKING pc=0x00000186798e3eec sp=0x00000014a2ffdfc0
+Event: 21.848 Thread 0x00000186065f1c90 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2ffd510 mode 0
+Event: 21.848 Thread 0x00000186065f1c90 DEOPT PACKING pc=0x00000186798e3eec sp=0x00000014a2ffe250
+Event: 21.848 Thread 0x00000186065f1c90 DEOPT UNPACKING pc=0x000001867873ace3 sp=0x00000014a2ffd7a0 mode 0
+
+Classes unloaded (20 events):
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x0000000100399400 'java/lang/invoke/LambdaForm$MH+0x0000000100399400'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x0000000100399000 'java/lang/invoke/LambdaForm$MH+0x0000000100399000'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000d1c00 'java/lang/invoke/LambdaForm$MH+0x00000001000d1c00'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000d1800 'java/lang/invoke/LambdaForm$MH+0x00000001000d1800'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000d1400 'java/lang/invoke/LambdaForm$MH+0x00000001000d1400'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000d1000 'java/lang/invoke/LambdaForm$MH+0x00000001000d1000'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000d0c00 'java/lang/invoke/LambdaForm$MH+0x00000001000d0c00'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000d0800 'java/lang/invoke/LambdaForm$MH+0x00000001000d0800'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000d0400 'java/lang/invoke/LambdaForm$MH+0x00000001000d0400'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000d0000 'java/lang/invoke/LambdaForm$MH+0x00000001000d0000'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000cb800 'java/lang/invoke/LambdaForm$MH+0x00000001000cb800'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000cb400 'java/lang/invoke/LambdaForm$MH+0x00000001000cb400'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000cb000 'java/lang/invoke/LambdaForm$MH+0x00000001000cb000'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000cac00 'java/lang/invoke/LambdaForm$MH+0x00000001000cac00'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000ca800 'java/lang/invoke/LambdaForm$MH+0x00000001000ca800'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000ca400 'java/lang/invoke/LambdaForm$MH+0x00000001000ca400'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000c9c00 'java/lang/invoke/LambdaForm$MH+0x00000001000c9c00'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000c9400 'java/lang/invoke/LambdaForm$MH+0x00000001000c9400'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000c8c00 'java/lang/invoke/LambdaForm$MH+0x00000001000c8c00'
+Event: 142.543 Thread 0x0000018600964b90 Unloading class 0x00000001000c8400 'java/lang/invoke/LambdaForm$MH+0x00000001000c8400'
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 22.637 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8d97388}> (0x00000000f8d97388) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.637 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8d97768}> (0x00000000f8d97768) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.638 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8dc8038}> (0x00000000f8dc8038) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.638 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8dc83e0}> (0x00000000f8dc83e0) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.638 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8dc9380}> (0x00000000f8dc9380) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.638 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8dc9740}> (0x00000000f8dc9740) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.638 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8deaab8}> (0x00000000f8deaab8) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.638 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8deae58}> (0x00000000f8deae58) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.638 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8debde0}> (0x00000000f8debde0) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.638 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8dec1a0}> (0x00000000f8dec1a0) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.639 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8c23138}> (0x00000000f8c23138) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.639 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8c234f8}> (0x00000000f8c234f8) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.639 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8c24a00}> (0x00000000f8c24a00) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.639 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8c24de0}> (0x00000000f8c24de0) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.640 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8c4d330}> (0x00000000f8c4d330) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.640 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8c4d6e8}> (0x00000000f8c4d6e8) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.640 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8c4ebe0}> (0x00000000f8c4ebe0) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 22.640 Thread 0x00000186065f1c90 Exception <a 'sun/nio/fs/WindowsException'{0x00000000f8c4efb8}> (0x00000000f8c4efb8) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 516]
+Event: 59.627 Thread 0x00000186063f3ef0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000f8a82c60}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, long)'> (0x00000000f8a82c60) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 759]
+Event: 59.627 Thread 0x00000186063f3ef0 Exception <a 'java/lang/NoSuchMethodError'{0x00000000f8a88010}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, long)'> (0x00000000f8a88010) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 759]
+
+VM Operations (20 events):
+Event: 4002.939 Executing VM operation: G1CollectFull done
+Event: 4013.186 Executing VM operation: G1CollectFull
+Event: 4013.217 Executing VM operation: G1CollectFull done
+Event: 4023.456 Executing VM operation: G1CollectFull
+Event: 4023.479 Executing VM operation: G1CollectFull done
+Event: 4033.717 Executing VM operation: G1CollectFull
+Event: 4033.745 Executing VM operation: G1CollectFull done
+Event: 4043.977 Executing VM operation: G1CollectFull
+Event: 4044.004 Executing VM operation: G1CollectFull done
+Event: 4054.236 Executing VM operation: G1CollectFull
+Event: 4054.262 Executing VM operation: G1CollectFull done
+Event: 4064.521 Executing VM operation: G1CollectFull
+Event: 4064.547 Executing VM operation: G1CollectFull done
+Event: 4074.789 Executing VM operation: G1CollectFull
+Event: 4074.817 Executing VM operation: G1CollectFull done
+Event: 4085.064 Executing VM operation: G1CollectFull
+Event: 4085.093 Executing VM operation: G1CollectFull done
+Event: 4095.326 Executing VM operation: G1CollectFull
+Event: 4095.352 Executing VM operation: G1CollectFull done
+Event: 4106.034 Executing VM operation: G1CollectFull
+
+Events (20 events):
+Event: 39.475 Thread 0x00000186065f1c90 Thread exited: 0x00000186065f1c90
+Event: 59.580 loading class java/lang/ProcessBuilder
+Event: 59.582 loading class java/lang/ProcessBuilder done
+Event: 59.582 loading class java/lang/ProcessImpl
+Event: 59.583 loading class java/lang/ProcessImpl done
+Event: 59.627 loading class java/lang/ProcessImpl$2
+Event: 59.628 loading class java/lang/ProcessImpl$2 done
+Event: 59.628 loading class java/lang/Process$PipeInputStream
+Event: 59.628 loading class java/lang/Process$PipeInputStream done
+Event: 59.629 loading class jdk/internal/event/ProcessStartEvent
+Event: 59.629 loading class jdk/internal/event/ProcessStartEvent done
+Event: 70.066 Thread 0x000001860649de20 Thread exited: 0x000001860649de20
+Event: 70.145 Thread 0x00000186065f2160 Thread exited: 0x00000186065f2160
+Event: 70.253 Thread 0x00000186065f47e0 Thread exited: 0x00000186065f47e0
+Event: 70.269 Thread 0x00000186065ef610 Thread exited: 0x00000186065ef610
+Event: 73.239 Thread 0x000001860649a410 Thread exited: 0x000001860649a410
+Event: 73.239 Thread 0x00000186064986b0 Thread exited: 0x00000186064986b0
+Event: 79.482 Thread 0x000001860649d480 Thread exited: 0x000001860649d480
+Event: 139.491 Thread 0x00000186065f0e20 Thread exited: 0x00000186065f0e20
+Event: 199.499 Thread 0x00000186065f0950 Thread exited: 0x00000186065f0950
+
+
+Dynamic libraries:
+0x00007ff6a1fe0000 - 0x00007ff6a1fee000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\java.exe
+0x00007ffea60b0000 - 0x00007ffea62a8000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffea5a60000 - 0x00007ffea5b1f000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffea3ce0000 - 0x00007ffea3fb2000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffe5b9b0000 - 0x00007ffe5b9c7000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\jli.dll
+0x00007ffea44e0000 - 0x00007ffea4681000 	C:\Windows\System32\USER32.dll
+0x00007ffea3cb0000 - 0x00007ffea3cd2000 	C:\Windows\System32\win32u.dll
+0x00007ffea44b0000 - 0x00007ffea44db000 	C:\Windows\System32\GDI32.dll
+0x00007ffea37a0000 - 0x00007ffea38af000 	C:\Windows\System32\gdi32full.dll
+0x00007ffea3bc0000 - 0x00007ffea3c5d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffe5b850000 - 0x00007ffe5b869000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\VCRUNTIME140.dll
+0x00007ffe916d0000 - 0x00007ffe9196a000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007ffea46a0000 - 0x00007ffea473e000 	C:\Windows\System32\msvcrt.dll
+0x00007ffea3960000 - 0x00007ffea3a60000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffea5bc0000 - 0x00007ffea5bf2000 	C:\Windows\System32\IMM32.DLL
+0x0000018673950000 - 0x0000018673964000 	C:\Windows\System32\umppc16812.dll
+0x00007ffe90700000 - 0x00007ffe9070c000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\vcruntime140_1.dll
+0x00007ffe3e4b0000 - 0x00007ffe3e541000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\msvcp140.dll
+0x00007ffe3bbe0000 - 0x00007ffe3c828000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\server\jvm.dll
+0x00007ffea59a0000 - 0x00007ffea5a4e000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffea5b20000 - 0x00007ffea5bbc000 	C:\Windows\System32\sechost.dll
+0x00007ffea5cb0000 - 0x00007ffea5dd5000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffe9d070000 - 0x00007ffe9d079000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffea54c0000 - 0x00007ffea552b000 	C:\Windows\System32\WS2_32.dll
+0x00007ffe956a0000 - 0x00007ffe956c7000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffe99f50000 - 0x00007ffe99f5a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffea1f80000 - 0x00007ffea1f92000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffe8c570000 - 0x00007ffe8c57a000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\jimage.dll
+0x00007ffea1c50000 - 0x00007ffea1e34000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffe8ab10000 - 0x00007ffe8ab45000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffea4030000 - 0x00007ffea40b2000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffe458d0000 - 0x00007ffe458f5000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\java.dll
+0x00007ffe58e70000 - 0x00007ffe58e88000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\zip.dll
+0x00007ffea4c40000 - 0x00007ffea5384000 	C:\Windows\System32\SHELL32.dll
+0x00007ffea11d0000 - 0x00007ffea1962000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007ffea4150000 - 0x00007ffea44a5000 	C:\Windows\System32\combase.dll
+0x00007ffea3080000 - 0x00007ffea30b0000 	C:\Windows\SYSTEM32\Wldp.dll
+0x00007ffea4740000 - 0x00007ffea47ed000 	C:\Windows\System32\SHCORE.dll
+0x00007ffea5390000 - 0x00007ffea53e5000 	C:\Windows\System32\shlwapi.dll
+0x00007ffea36b0000 - 0x00007ffea36cf000 	C:\Windows\SYSTEM32\profapi.dll
+0x00007ffe536b0000 - 0x00007ffe536c9000 	C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\net.dll
+0x00007ffe9c000000 - 0x00007ffe9c10c000 	C:\Windows\SYSTEM32\WINHTTP.dll
+0x00007ffea2e60000 - 0x00007ffea2eca000 	C:\Windows\system32\mswsock.dll
+0x00007ffe4f890000 - 0x00007ffe4f8a5000 	C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\nio.dll
+0x00007ffea3130000 - 0x00007ffea3148000 	C:\Windows\SYSTEM32\CRYPTSP.dll
+0x00007ffea2720000 - 0x00007ffea2754000 	C:\Windows\system32\rsaenh.dll
+0x00007ffea3770000 - 0x00007ffea3797000 	C:\Windows\System32\bcrypt.dll
+0x00007ffea3670000 - 0x00007ffea369e000 	C:\Windows\SYSTEM32\USERENV.dll
+0x00007ffea2ff0000 - 0x00007ffea2ffc000 	C:\Windows\SYSTEM32\CRYPTBASE.dll
+0x00007ffea2b60000 - 0x00007ffea2b9b000 	C:\Windows\SYSTEM32\IPHLPAPI.DLL
+0x00007ffea4690000 - 0x00007ffea4698000 	C:\Windows\System32\NSI.dll
+0x00007ffe9b2f0000 - 0x00007ffe9b307000 	C:\Windows\SYSTEM32\dhcpcsvc6.DLL
+0x00007ffe9b2d0000 - 0x00007ffe9b2ed000 	C:\Windows\SYSTEM32\dhcpcsvc.DLL
+0x00007ffea2ba0000 - 0x00007ffea2c6a000 	C:\Windows\SYSTEM32\DNSAPI.dll
+0x00007ffe9d8b0000 - 0x00007ffe9d8b9000 	C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\management.dll
+0x00007ffe9d8a0000 - 0x00007ffe9d8ab000 	C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\management_ext.dll
+0x00007ffea47f0000 - 0x00007ffea47f8000 	C:\Windows\System32\PSAPI.DLL
+0x00007ffe6b3b0000 - 0x00007ffe6b3be000 	C:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\sunmscapi.dll
+0x00007ffea3a60000 - 0x00007ffea3bb6000 	C:\Windows\System32\CRYPT32.dll
+0x00007ffea3240000 - 0x00007ffea3267000 	C:\Windows\SYSTEM32\ncrypt.dll
+0x00007ffea3200000 - 0x00007ffea323b000 	C:\Windows\SYSTEM32\NTASN1.dll
+0x00007ffe99f60000 - 0x00007ffe99f6a000 	C:\Windows\System32\rasadhlp.dll
+0x00007ffe9b670000 - 0x00007ffe9b6f0000 	C:\Windows\System32\fwpuclnt.dll
+0x00007ffe88770000 - 0x00007ffe88780000 	c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\verify.dll
+0x0000000000600000 - 0x00000000006c7000 	C:\Users\23020224\AppData\Local\Temp\snappy-1.1.8-202f82c1-de28-4656-83cf-bec3ceda5e30-snappyjava.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e;c:\Users\23020224\.vscode\extensions\redhat.java-1.20.0-win32-x64\jre\17.0.7-win32-x86_64\bin\server;C:\Users\23020224\AppData\Local\Temp
+
+VM Arguments:
+jvm_args: -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m -Dsts.lsp.client=vscode -Dsts.log.file=/dev/null -XX:TieredStopAtLevel=1 -Xlog:jni+resolve=off -Dspring.config.location=file:c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\classes\application.properties 
+java_command: org.springframework.ide.vscode.boot.app.BootLanguageServerBootApp
+java_class_path (initial): c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\classes;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\annotations-24.0.1.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\antlr-runtime-3.5.3.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\antlr4-4.11.1.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\antlr4-runtime-4.11.1.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\aopalliance-1.0.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\asm-9.5.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\asm-analysis-9.5.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\asm-tree-9.5.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\asm-util-9.5.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\auto-common-1.2.1.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\auto-value-annotations-1.9.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\caffeine-3.1.2.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\checker-qual-3.12.0.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\classgraph-4.8.149.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-1.47.0\language-server\BOOT-INF\lib\commons-codec-1.15.jar;c:\Users\23020224\.vscode\extensions\vmware.vscode-spring-boot-
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+     bool HeapDumpOnOutOfMemoryError               = true                                   {manageable} {command line}
+   size_t InitialHeapSize                          = 264241152                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+   size_t MaxNewSize                               = 643825664                                 {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 0                                      {pd product} {ergonomic}
+     bool ProfileInterpreter                       = false                                  {pd product} {command line}
+    uintx ProfiledCodeHeapSize                     = 0                                      {pd product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1073741824                             {manageable} {ergonomic}
+     intx TieredStopAtLevel                        = 1                                         {product} {command line}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning,jni+resolve=off uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-19\
+PATH=C:\Windows\system32;C:\Program Files\Java\jdk-19\\bin;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\IBM\Client Access\Emulator;C:\Program Files (x86)\IBM\Client Access\Shared;C:\Program Files (x86)\IBM\Client Access\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;D:\Git\Git\cmd;C:\Program Files\Calibre2\;C:\Program Files\Java\jdk-18.0.2.1\bin;D:\Maven\apache-maven-3.8.6\bin;C:\Program Files\PuTTY\;C:\Program Files\Java\jdk-19.0.2\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Cloudflare\Cloudflare WARP\;D:\Apps\nvm\nvm;C:\Program Files\nodejs;C:\Users\23020224\AppData\Local\Microsoft\WindowsApps;D:\Apps\Visual Studio Code\Microsoft VS Code\bin;C:\Users\23020224\AppData\Local\GitHubDesktop\bin;D:\Apps\nvm\nvm;C:\Program Files\nodejs;D:\flutter\flutter\bin;
+USERNAME=23020224
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+TMP=C:\Users\23020224\AppData\Local\Temp
+TEMP=C:\Users\23020224\AppData\Local\Temp
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.2364)
+OS uptime: 12 days 23:03 hours
+Hyper-V role detected
+
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 140 stepping 1 microcode 0xa4, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, avx512f, avx512dq, avx512cd, avx512bw, avx512vl, sha, fma, vzeroupper, avx512_vpopcntdq, avx512_vpclmulqdq, avx512_vaes, avx512_vnni, clflush, clflushopt, clwb, avx512_vbmi2, avx512_vbmi, hv
+
+Memory: 4k page, system-wide physical 16118M (4082M free)
+TotalPageFile size 18166M (AvailPageFile size 5M)
+current process WorkingSet (physical memory assigned to process): 170M, peak: 1186M
+current process commit charge ("private bytes"): 340M, peak: 1170M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.7+7) for windows-amd64 JRE (17.0.7+7), built on Apr 18 2023 22:10:42 by "temurin" with MS VC++ 16.7 (VS2019)
+
+END.

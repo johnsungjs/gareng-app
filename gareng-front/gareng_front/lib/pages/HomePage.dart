@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         search: itemController.searchInput.value);
     ItemRequestModel model = ItemRequestModel(getItemPagination: reqBody);
     apiService.getAllItem(model).then((e) => {
-          if (e.data.itemData.length == 0)
+          if (e.data.itemData.isEmpty)
             {
               itemController.hasMore.value = false,
             }
@@ -56,10 +56,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future refresh() async {
+    itemController.setSearchInput('');
     itemController.isLoading.value = false;
     itemController.hasMore.value = true;
     itemController.page.value = 1;
-    itemController.stateItemData.value.clear();
+    itemController.stateItemData.value = [];
 
     fetch();
   }
@@ -77,9 +78,11 @@ class _HomePageState extends State<HomePage> {
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
-        //fetch
-        print('fetch more');
-        fetch();
+        if (itemController.hasMore.value) {
+          //fetch
+          print('fetch more');
+          fetch();
+        }
       }
     });
   }

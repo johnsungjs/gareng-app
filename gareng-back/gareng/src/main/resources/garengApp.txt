@@ -159,4 +159,45 @@ Projection
 1. ProfileProjection
 
 Utility
-1. JwtUtils (getUsername)
+1. JwtUtils (getUsername, getUuid)
+
+***************************************************************************************
+Whishtlist
+addWhishlist
+-addWhishlistRequest
+header 
+access token
+body
+itemName
+
+addWhishlistResponse
+message
+
+getWhishList
+-getWhishListRequest -> pakai getItemRequest
+
+-getWhishListResponse -> pakai getItemResponse
+
+deleteWhishList
+-deleteWhishListRequest
+header
+access token
+body
+itemUuid
+
+
+-deleteWhishListResponse
+message
+
+===========================================================
+HttpObject
+1. addWhishlistRequest
+2. addWhishlistResponse
+3. deleteWhishListRequest
+4. deleteWhishListResponse
+
+Entity
+1. Whishtlist(id, userUuid, ItemUuid)
+
+Controller
+1. whishListController

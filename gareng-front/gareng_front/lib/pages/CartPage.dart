@@ -34,7 +34,7 @@ class CartPage extends StatelessWidget {
                   ),
                   SizedBox(
                     // height: 600,
-                    height: 400,
+                    height: 500,
                     child: ListView.builder(
                         itemCount: itemController.items.length,
                         itemBuilder: (_, index) {

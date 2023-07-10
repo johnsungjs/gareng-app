@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/models/item_controller.dart';
 import 'package:gareng_front/models/profile_controller.dart';
@@ -8,8 +6,7 @@ import 'package:gareng_front/pages/NotificationPage.dart';
 import 'package:gareng_front/services/api_service.dart';
 import 'package:gareng_front/widgets/CardGrid.dart';
 import 'package:gareng_front/widgets/Carousel.dart';
-import 'package:gareng_front/widgets/CustomCard.dart';
-import 'package:gareng_front/widgets/SearchBar.dart';
+import 'package:gareng_front/widgets/SearchWidget.dart';
 import 'package:get/get.dart';
 
 import '../models/item_request_model.dart';
@@ -69,9 +66,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    apiService
-        .getProfile()
-        .then((value) => profilecontroller.setDataUser(value.data.toJson()));
+    apiService.getProfile();
 
     fetch();
 
@@ -80,7 +75,7 @@ class _HomePageState extends State<HomePage> {
           scrollController.offset) {
         if (itemController.hasMore.value) {
           //fetch
-          print('fetch more');
+          debugPrint('fetch more');
           fetch();
         }
       }
@@ -100,9 +95,12 @@ class _HomePageState extends State<HomePage> {
       onRefresh: refresh,
       child: Column(
         children: [
+          SizedBox(
+            height: 40,
+          ),
           Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: SearchBar(),
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: SearchWidget(),
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -116,8 +114,8 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Hello John!",
+                      Text(
+                        "Hello ${profilecontroller.dataUser["username"]}!",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w700),
                       ),

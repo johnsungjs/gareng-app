@@ -1,17 +1,18 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
 import 'package:gareng_front/models/item_request_model.dart';
 import 'package:gareng_front/models/item_response_model.dart';
 import 'package:gareng_front/models/login_request_model.dart';
 import 'package:gareng_front/models/login_response_model.dart';
+import 'package:gareng_front/models/profile_controller.dart';
 import 'package:gareng_front/models/profile_response_model.dart';
+import 'package:gareng_front/models/refresh_token_request_model.dart';
 import 'package:gareng_front/models/refresh_token_response_model.dart';
 import 'package:gareng_front/models/register_request_model.dart';
 import 'package:gareng_front/models/register_response_model.dart';
-import 'package:gareng_front/models/token_controller.dart';
 import 'package:gareng_front/services/shared_preference_service.dart';
-import 'package:gareng_front/services/shared_service.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,6 +26,7 @@ class APIService {
     };
 
     var url = Uri.http(Config.apiURL, Config.loginAPI);
+    // var url = Uri.parse(Config.apiURL + Config.loginAPI);
 
     var response = await client.post(
       url,
@@ -61,28 +63,24 @@ class APIService {
 
   Future<ItemResponseModel> getAllItem(ItemRequestModel model) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
+    // String? token = prefs.getString('token');
+    String? refreshToken = prefs.getString('refreshToken');
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'Authorization': token!
+      'Authorization': refreshToken!
     };
 
     var url = Uri.http(Config.apiURL, Config.getItem);
 
-    var response = await http.Client()
-        .post(
+    var response = await http.Client().post(
       url,
       headers: requestHeaders,
       body: jsonEncode(model.toJson()),
-    )
-        .catchError((err) {
-      print('coba catch error ${err}');
-    });
+    );
 
     if (response.statusCode == 500) {
       print('token expired with statuscode: ${response.statusCode}');
-      String? refreshToken = prefs.getString('refreshToken');
 
       Map<String, String> requestHeaders = {
         'Content-Type': 'application/json',
@@ -101,9 +99,12 @@ class APIService {
     return itemResponseModelFromJson(response.body);
   }
 
-  Future<ProfileResponseModel> getProfile() async {
+  void getProfile() async {
+    final ProfileController profilecontroller = Get.put(ProfileController());
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
+    // endpoint ini gabisa pake refreshToken
+    String? refreshToken = prefs.getString('refreshToken');
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
@@ -117,25 +118,47 @@ class APIService {
       headers: requestHeaders,
     );
 
-    return profileResponseModelFromJson(response.body);
+    if (response.statusCode == 500) {
+      debugPrint('masuk if statuscode 500');
+      callRefreshToken();
+      response = await http.Client().get(
+        url,
+        headers: requestHeaders,
+      );
+    }
+
+    // return profileResponseModelFromJson(response.body);
+    var value = profileResponseModelFromJson(response.body);
+    profilecontroller.setDataUser(value.data.toJson());
   }
 
-  Future<RefreshTokenResponseModel> refreshToken() async {
+  void callRefreshToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
+    // String? token = prefs.getString('token');
+    String? refreshToken = prefs.getString('refreshToken');
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'Authorization': token!,
+      'Authorization': refreshToken!,
     };
 
     var url = Uri.http(Config.apiURL, Config.getProfile);
 
-    var response = await http.Client().get(
-      url,
-      headers: requestHeaders,
+    //siapin body buat request
+    final ProfileController profilecontroller = Get.put(ProfileController());
+    RefreshTokenRequestModel model = RefreshTokenRequestModel(
+      // username: profilecontroller.dataUser["username"],
+      username: "john",
     );
 
-    return refreshTokenResponseModelFromJson(response.body);
+    var response = await http.Client()
+        .post(url, headers: requestHeaders, body: jsonEncode(model.toJson()));
+
+    debugPrint('responsebody: ${response.body}');
+
+    var resNewToken = refreshTokenResponseModelFromJson(response.body);
+
+    debugPrint('response new token: ${resNewToken.data.accessToken}');
+    await prefs.setString('token', resNewToken.data.accessToken);
   }
 }

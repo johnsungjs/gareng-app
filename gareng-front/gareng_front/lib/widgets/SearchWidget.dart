@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 
 import '../models/product_model.dart';
 
-class SearchBar extends StatelessWidget {
-  SearchBar({super.key});
-  TextEditingController inputUser = TextEditingController();
+class SearchWidget extends StatelessWidget {
+  SearchWidget({super.key});
+  final TextEditingController inputUser = TextEditingController();
 
   final CartController controller = Get.find();
   final ItemController itemController = Get.put(ItemController());
@@ -49,6 +49,7 @@ class SearchBar extends StatelessWidget {
           onChanged: (text) {
             itemController.setSearchInput(text);
           },
+          onSubmitted: (value) => filterData(),
           obscureText: false,
           decoration: InputDecoration(
             labelText: 'Search Your Food Here',

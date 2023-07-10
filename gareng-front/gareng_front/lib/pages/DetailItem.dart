@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:gareng_front/constants/FormatCurrency.dart';
 import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/models/item_controller.dart';
 import 'package:gareng_front/models/product_model.dart';
@@ -73,7 +74,9 @@ class DetailItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      itemData.price,
+                      //FormatCurrency.indo.format(int.parse(itemController.stateItemData.value[index].price)),
+                      // "Rp.${itemController.total}",
+                      FormatCurrency.indo.format(int.parse(itemData.price)),
                       style: const TextStyle(fontSize: 18),
                     ),
                     Row(
@@ -90,8 +93,6 @@ class DetailItem extends StatelessWidget {
                             },
                             icon: const Icon(Icons.remove)),
                         Text(
-                          //here is problem
-                          // "$itemQuantity",
                           "${itemController.getItemQuantity(itemData)}",
                           style: const TextStyle(fontSize: 18),
                         ),
@@ -115,7 +116,8 @@ class DetailItem extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "Rp.${itemController.total}",
+                          FormatCurrency.indo
+                              .format(int.parse(itemController.total)),
                           style: TextStyle(fontSize: 28),
                         ),
                         const Text(

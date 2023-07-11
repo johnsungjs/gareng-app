@@ -151,8 +151,12 @@ class APIService {
       username: "john",
     );
 
-    var response = await http.Client()
-        .post(url, headers: requestHeaders, body: jsonEncode(model.toJson()));
+    var response = await http.Client().post(
+      url,
+      headers: requestHeaders,
+      // body: jsonEncode(model.toJson()),
+      body: {"username": "john"},
+    );
 
     debugPrint('responsebody: ${response.body}');
 

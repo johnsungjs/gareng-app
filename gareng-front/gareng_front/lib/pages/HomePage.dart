@@ -20,9 +20,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final scrollController = ScrollController();
-  // bool hasMore = true;
-  // int page = 1;
-  // bool isLoading = false;
 
   final APIService apiService = APIService();
   final cartController = Get.put(CartController());
@@ -31,7 +28,6 @@ class _HomePageState extends State<HomePage> {
 
   Future fetch() async {
     if (itemController.isLoading.value) return;
-    // print('page state: ${itemController.page.value}');
     GetItemPagination reqBody = GetItemPagination(
         pageAt: itemController.page.value,
         sizePerPage: 6,
@@ -44,7 +40,6 @@ class _HomePageState extends State<HomePage> {
             }
           else
             {
-              // itemController.stateItemData.value = e.data.itemData,
               itemController.addStateItemData(e.data.itemData),
               itemController.page.value++,
               itemController.isLoading.value = false,
@@ -133,11 +128,11 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         "Our Menu",
                         style: TextStyle(fontSize: 20),
@@ -145,8 +140,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                // Text("Grids Of Menu"),
-                Padding(padding: const EdgeInsets.all(24), child: CardGrid()),
+                Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Obx(() => CardGrid())),
                 Obx(
                   () => Center(
                     child: itemController.hasMore.value
@@ -154,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                         : const Text(('No More Data')),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 )
               ]),

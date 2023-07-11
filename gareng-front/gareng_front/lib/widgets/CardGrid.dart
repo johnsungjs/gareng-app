@@ -5,15 +5,9 @@ import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/models/item_controller.dart';
 import 'package:gareng_front/pages/DetailItem.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class CardGrid extends StatelessWidget {
   CardGrid({super.key});
-  // final currencyFormatter = NumberFormat.currency(locale: 'ID', symbol: "Rp");
-
-  final cartController = Get.put(CartController());
-
-  final CartController controller = Get.find();
 
   final ItemController itemController = Get.put(ItemController());
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/constants/itemsDummy.dart';
 
 class TransactionPage extends StatelessWidget {
@@ -7,136 +9,315 @@ class TransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.arrow_back),
-              color: Colors.black,
-            ),
-            Text(
-              "Checkout",
-              style: TextStyle(color: Colors.grey[900]),
-            ),
-            const SizedBox(
-              width: 50,
-            ),
-          ],
-        ),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Row(
-              children: [
-                Text("Ships to: "),
-                Text("Harapan Indah, Bekasi"),
-              ],
-            ),
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: SafeArea(
+          child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.arrow_back),
+                color: Colors.black,
+              ),
+              Text(
+                "Checkout",
+                style: TextStyle(color: Colors.grey[900]),
+              ),
+              const SizedBox(
+                width: 50,
+              ),
+            ],
           ),
-          // Expanded(
-          //     child: SingleChildScrollView(
-          //   child: SizedBox(
-          //     height: 500,
-          //     child: ListView.builder(
-          //         itemCount: dataDummy.length,
-          //         itemBuilder: (_, index) {
-          //           return Padding(
-          //             padding: EdgeInsets.symmetric(
-          //               horizontal: 24,
-          //               vertical: 10,
-          //             ),
-          //             child: Text("${dataDummy[index]["title"]}"),
-          //           );
-          //         }),
-          //   ),
-          // )),
-          Container(
-            padding: EdgeInsets.all(12),
-            width: MediaQuery.of(context).size.width * 0.9,
-            decoration: BoxDecoration(border: Border.all()),
-            child: Row(
-              children: [
-                Text("gambar"),
-                Column(
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
                   children: [
-                    Text("Nasi Goreng Kambing"),
-                    Text('Quantity: '),
-                    Text("Rp30.000"),
+                    Icon(Icons.location_on),
+                    Text("Ships to: "),
+                    Text(
+                      "Harapan Indah, Bekasi",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              CheckoutCart(),
+              CheckoutCart(),
+              CheckoutCart(),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 50,
+                decoration: BoxDecoration(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.card_giftcard),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        onChanged: (text) {},
+                        onSubmitted: (value) => {},
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          hintText: 'Promo Code',
+                          labelStyle: const TextStyle(color: Colors.grey),
+                          border: InputBorder.none,
+                          iconColor: Colors.grey[800],
+                        ),
+                        cursorColor: Colors.grey[800],
+                      ),
+                    ),
+                    TextButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8))),
+                            backgroundColor:
+                                MaterialStatePropertyAll(customBlack)),
+                        onPressed: () {},
+                        child: Text(
+                          'apply',
+                          style: TextStyle(color: Colors.white),
+                        ))
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Subtotal'),
+                    Text('Rp150000'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Delivery fee'),
+                    Text('Rp200000'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Discount Voucher'),
+                    Text(
+                      '-Rp50.000',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total',
+                      style: TextStyle(
+                          color: customBlack, fontWeight: FontWeight.bold),
+                    ),
+                    Text('Rp300000',
+                        style: TextStyle(
+                            color: customBlack, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: TextButton(
+                    style: ButtonStyle(
+                      side: MaterialStatePropertyAll(BorderSide(
+                          color: customBlack,
+                          width: 1.0,
+                          style: BorderStyle.solid)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18))),
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SizedBox(
+                              height: 250,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    PaymentMethods(),
+                                    PaymentMethods(),
+                                    PaymentMethods(),
+                                    PaymentMethods(),
+                                    PaymentMethods(),
+                                    PaymentMethods(),
+                                    PaymentMethods(),
+                                    PaymentMethods(),
+                                    PaymentMethods(),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          "Choose Payment Method",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        Icon(
+                          Icons.arrow_drop_up,
+                          color: Colors.black,
+                        )
+                      ],
+                    )),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: TextButton(
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18))),
+                        backgroundColor: MaterialStatePropertyAll(customBlack)),
+                    onPressed: () {},
+                    child: Text(
+                      "Pay",
+                      style: TextStyle(color: Colors.white),
+                    )),
+              )
+            ],
           ),
-          Text('use voucher'),
-          Container(
-            decoration: BoxDecoration(border: Border.all()),
-            child: Text('BELANJA MANTAP'),
+        ),
+      )),
+    );
+  }
+}
+
+class CheckoutCart extends StatelessWidget {
+  const CheckoutCart({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final dataDummy = itemsDummy;
+    return Container(
+      padding: EdgeInsets.all(12),
+      width: MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  dataDummy[0]["images"],
+                  width: 100.0,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Nasi Goreng Kambing"),
+                    Text(
+                      "Rp30.000",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('subtotal'),
-                Text('Rp150000'),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('delivery voucher'),
-                Text('Rp200000'),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('discount voucher'),
-                Text('-Rp50.000'),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('total'),
-                Text('Rp300000'),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: TextButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.yellow)),
-                onPressed: () {},
-                child: Text("Pay")),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Order Quantity:',
+                style:
+                    TextStyle(color: customBlack, fontWeight: FontWeight.w400),
+              ),
+              Row(
+                children: [
+                  Icon(Icons.remove_circle_outline),
+                  SizedBox(width: 20, child: Center(child: Text('10'))),
+                  Icon(Icons.add_circle),
+                ],
+              ),
+            ],
           )
         ],
       ),
-    ));
+    );
+  }
+}
+
+class PaymentMethods extends StatelessWidget {
+  const PaymentMethods({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.9,
+      child: TextButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text(
+          "Cash",
+          style: TextStyle(color: customBlack),
+        ),
+        style: ButtonStyle(
+          side: MaterialStatePropertyAll(BorderSide(
+              color: customBlack, width: 1.0, style: BorderStyle.solid)),
+          shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
+        ),
+      ),
+    );
   }
 }

@@ -52,7 +52,7 @@ class SearchWidget extends StatelessWidget {
           onSubmitted: (value) => filterData(),
           obscureText: false,
           decoration: InputDecoration(
-            labelText: 'Search Your Food Here',
+            hintText: 'Search Your Food Here',
             labelStyle: const TextStyle(color: Colors.grey),
             icon: IconButton(
                 onPressed: filterData, icon: const Icon(Icons.search)),

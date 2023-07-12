@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
-import 'package:gareng_front/constants/textStyle.dart';
+import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/models/register_request_model.dart';
 import 'package:gareng_front/models/token_controller.dart';
 import 'package:gareng_front/services/api_service.dart';

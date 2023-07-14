@@ -23,6 +23,7 @@ public class JwtUtils {
         String accessJwt = Jwts.builder()
                     .setSubject(subject)
                     .claim("username", user.getUsername())
+                    .claim("uuid",user.getUuid())
                     .setIssuedAt(now)
                     .setExpiration(exp)
                     .signWith(JwtConstant.key)
@@ -37,6 +38,7 @@ public class JwtUtils {
         String refreshJwt = Jwts.builder()
                     .setSubject("refresh token")
                     .claim("username", user.getUsername())
+                    .claim("uuid",user.getUuid())
                     .setIssuedAt(now)
                     .signWith(JwtConstant.key)
                     .compact();       
@@ -83,6 +85,18 @@ public class JwtUtils {
             // TODO: handle exception
             throw new Exception(e.getMessage());
         }
+    }
 
+    public static String getUuid(String token) throws Exception{
+        try {
+            Jws<Claims> result = Jwts.parserBuilder()
+            .setSigningKey(JwtConstant.key)
+            .build()
+            .parseClaimsJws(token);
+        return result.getBody().get("uuid", String.class);
+        } catch (Exception e) {
+            // TODO: handle exception
+            throw new Exception(e.getMessage());
+        }
     }
 }

@@ -18,4 +18,5 @@ public interface UserRepository extends CrudRepository<User,Integer>{
             "WHERE u.username = ?1"
     )
     ProfileProjection getProfileView(String username);
+    public User findByUuid(String uuid);
 }

@@ -69,6 +69,13 @@
 			<artifactId>jbcrypt</artifactId>
 			<version>0.4</version>
 		</dependency>
+		<dependency>
+			<groupId>FormValidation</groupId>
+			<artifactId>FormValidation</artifactId>
+			<scope>system</scope>
+			<version>1.0</version>
+			<systemPath>${project.basedir}/libs/FormValidation.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<build>

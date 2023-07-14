@@ -65,6 +65,7 @@ class APIService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // String? token = prefs.getString('token');
     String? refreshToken = prefs.getString('refreshToken');
+    debugPrint('refreshToken: $refreshToken');
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
@@ -80,7 +81,7 @@ class APIService {
     );
 
     if (response.statusCode == 500) {
-      print('token expired with statuscode: ${response.statusCode}');
+      debugPrint('token expired with statuscode: ${response.statusCode}');
 
       Map<String, String> requestHeaders = {
         'Content-Type': 'application/json',
@@ -94,7 +95,7 @@ class APIService {
         headers: requestHeaders,
         body: jsonEncode(model.toJson()),
       );
-      print('hasil result status tokenrefresh: ${response.statusCode}');
+      debugPrint('hasil result status tokenrefresh: ${response.statusCode}');
     }
     return itemResponseModelFromJson(response.body);
   }
@@ -104,7 +105,7 @@ class APIService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     // endpoint ini gabisa pake refreshToken
-    String? refreshToken = prefs.getString('refreshToken');
+    // String? refreshToken = prefs.getString('refreshToken');
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
@@ -118,18 +119,33 @@ class APIService {
       headers: requestHeaders,
     );
 
-    if (response.statusCode == 500) {
+    if (response.statusCode == 200) {
+      var value = profileResponseModelFromJson(response.body);
+      profilecontroller.setDataUser(value.data.toJson());
+    } else if (response.statusCode == 500) {
       debugPrint('masuk if statuscode 500');
       callRefreshToken();
-      response = await http.Client().get(
+      var responseRefresh = await http.Client().get(
         url,
         headers: requestHeaders,
       );
+      var value = profileResponseModelFromJson(responseRefresh.body);
+      profilecontroller.setDataUser(value.data.toJson());
+    } else {
+      debugPrint('status code getprofile bkn 200 ataupun 500');
     }
 
-    // return profileResponseModelFromJson(response.body);
-    var value = profileResponseModelFromJson(response.body);
-    profilecontroller.setDataUser(value.data.toJson());
+    // if (response.statusCode == 500) {
+    //   debugPrint('masuk if statuscode 500');
+    //   callRefreshToken();
+    //   response = await http.Client().get(
+    //     url,
+    //     headers: requestHeaders,
+    //   );
+    // }
+
+    // var value = profileResponseModelFromJson(response.body);
+    // profilecontroller.setDataUser(value.data.toJson());
   }
 
   void callRefreshToken() async {
@@ -155,10 +171,10 @@ class APIService {
       url,
       headers: requestHeaders,
       // body: jsonEncode(model.toJson()),
-      body: {"username": "john"},
+      body: {"username": "j"},
     );
 
-    debugPrint('responsebody: ${response.body}');
+    debugPrint('refreshtoken responsebody: ${response.body}');
 
     var resNewToken = refreshTokenResponseModelFromJson(response.body);
 

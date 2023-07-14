@@ -140,9 +140,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Obx(() => CardGrid())),
+                Padding(padding: const EdgeInsets.all(24), child: CardGrid()),
                 Obx(
                   () => Center(
                     child: itemController.hasMore.value

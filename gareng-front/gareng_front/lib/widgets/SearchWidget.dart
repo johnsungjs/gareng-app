@@ -49,13 +49,18 @@ class SearchWidget extends StatelessWidget {
           onChanged: (text) {
             itemController.setSearchInput(text);
           },
-          onSubmitted: (value) => filterData(),
+          onSubmitted: (value) =>
+              {filterData(), FocusManager.instance.primaryFocus?.unfocus()},
           obscureText: false,
           decoration: InputDecoration(
             hintText: 'Search Your Food Here',
             labelStyle: const TextStyle(color: Colors.grey),
             icon: IconButton(
-                onPressed: filterData, icon: const Icon(Icons.search)),
+                onPressed: () {
+                  filterData();
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
+                icon: const Icon(Icons.search)),
             border: InputBorder.none,
             iconColor: Colors.grey[800],
           ),

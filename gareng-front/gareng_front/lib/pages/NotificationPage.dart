@@ -15,40 +15,42 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.arrow_back),
-              color: Colors.black,
-            ),
-            Text(
-              "Notifications",
-              style: TextStyle(color: Colors.grey[900]),
-            ),
-            SizedBox(
-              width: 30,
-            )
-          ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.arrow_back),
+                color: Colors.black,
+              ),
+              Text(
+                "Notifications",
+                style: TextStyle(color: Colors.grey[900]),
+              ),
+              SizedBox(
+                width: 30,
+              )
+            ],
+          ),
         ),
+        body: ListView.builder(
+            itemCount: notifDummy.length,
+            itemBuilder: (_, index) {
+              return NotifContainer(
+                title: notifDummy.elementAt(index)["title"],
+                content: notifDummy.elementAt(index)["content"],
+                time: notifDummy.elementAt(index)["time"],
+              );
+            }),
       ),
-      body: ListView.builder(
-          itemCount: notifDummy.length,
-          itemBuilder: (_, index) {
-            return NotifContainer(
-              title: notifDummy.elementAt(index)["title"],
-              content: notifDummy.elementAt(index)["content"],
-              time: notifDummy.elementAt(index)["time"],
-            );
-          }),
     );
   }
 }

@@ -7,5 +7,6 @@ class Config {
   static const String getItem = '/item/get';
   static const String getProfile = '/profile/get';
   static const String refreshToken = '/authentication/refreshtoken';
+  static const String editProfile = '/profile/update';
   // static const String userProfileAPI = 'localhost:8080';
 }

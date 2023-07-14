@@ -17,122 +17,124 @@ class DetailItem extends StatelessWidget {
   Widget build(BuildContext context) {
     int itemQuantity = itemController.getItemQuantity(itemData);
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.arrow_back),
-              color: Colors.black,
-            ),
-            Text(
-              "Detail",
-              style: TextStyle(color: Colors.grey[900]),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.favorite),
-              color: Colors.black,
-            ),
-          ],
-        ),
-      ),
-      body: Obx(
-        () => SingleChildScrollView(
-          child: Column(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.network(itemData.imageUrl),
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      itemData.title,
-                      style: const TextStyle(fontSize: 24),
-                    ),
-                    const Icon(Icons.star),
-                  ],
-                ),
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.arrow_back),
+                color: Colors.black,
               ),
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      FormatCurrency.indo.format(int.parse(itemData.price)),
-                      style: const TextStyle(fontSize: 18),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              if (itemQuantity > 0) {
-                                itemController.removeItem(itemData);
-                              } else {
-                                null;
-                              }
-                            },
-                            icon: const Icon(Icons.remove)),
-                        Text(
-                          "${itemController.getItemQuantity(itemData)}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              itemController.addItem(itemData);
-                            },
-                            icon: const Icon(Icons.add)),
-                      ],
-                    )
-                  ],
-                ),
+              Text(
+                "Detail",
+                style: TextStyle(color: Colors.grey[900]),
               ),
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          FormatCurrency.indo
-                              .format(int.parse(itemController.total)),
-                          style: TextStyle(fontSize: 28),
-                        ),
-                        const Text(
-                          "Total Price",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ],
-                    ),
-                    FilledButton(
-                        style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
-                              const EdgeInsets.all(22),
-                            ),
-                            backgroundColor:
-                                const MaterialStatePropertyAll(Colors.black)),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
-                        ))
-                  ],
-                ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.favorite),
+                color: Colors.black,
               ),
             ],
+          ),
+        ),
+        body: Obx(
+          () => SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.network(itemData.imageUrl),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        itemData.title,
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                      const Icon(Icons.star),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        FormatCurrency.indo.format(int.parse(itemData.price)),
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                if (itemQuantity > 0) {
+                                  itemController.removeItem(itemData);
+                                } else {
+                                  null;
+                                }
+                              },
+                              icon: const Icon(Icons.remove)),
+                          Text(
+                            "${itemController.getItemQuantity(itemData)}",
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                itemController.addItem(itemData);
+                              },
+                              icon: const Icon(Icons.add)),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            FormatCurrency.indo
+                                .format(int.parse(itemController.total)),
+                            style: TextStyle(fontSize: 28),
+                          ),
+                          const Text(
+                            "Total Price",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
+                      ),
+                      FilledButton(
+                          style: ButtonStyle(
+                              padding: MaterialStateProperty.all(
+                                const EdgeInsets.all(22),
+                              ),
+                              backgroundColor:
+                                  const MaterialStatePropertyAll(Colors.black)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
+                            "Add to Cart",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600),
+                          ))
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

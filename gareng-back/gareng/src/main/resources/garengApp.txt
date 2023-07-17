@@ -168,7 +168,7 @@ addWhishlist
 header 
 access token
 body
-itemName
+itemUUID
 
 addWhishlistResponse
 message
@@ -201,3 +201,9 @@ Entity
 
 Controller
 1. whishListController
+
+Helper
+1. WishlistHelper
+
+Repository
+1. WishlistRepository

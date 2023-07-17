@@ -82,7 +82,6 @@ public class JwtUtils {
             .parseClaimsJws(token);
         return result.getBody().get("username", String.class);
         } catch (Exception e) {
-            // TODO: handle exception
             throw new Exception(e.getMessage());
         }
     }
@@ -95,7 +94,6 @@ public class JwtUtils {
             .parseClaimsJws(token);
         return result.getBody().get("uuid", String.class);
         } catch (Exception e) {
-            // TODO: handle exception
             throw new Exception(e.getMessage());
         }
     }

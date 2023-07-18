@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS `USERS`;
 DROP TABLE IF EXISTS `RefreshTokenHistory`;
 DROP TABLE IF EXISTS `ITEMS`;
+DROP TABLE IF EXISTS `WISHLIST`;
+DROP TABLE IF EXISTS `WISHTLIST`;
 
 CREATE TABLE IF NOT EXISTS `USERS`(
     `id` BIGINT primary key auto_increment,
@@ -13,9 +15,12 @@ CREATE TABLE IF NOT EXISTS `USERS`(
     `email` VARCHAR(50)
 );
 
+INSERT INTO USERS (`id`,`uuid`,`username`,`password`,`address`,`gender`,`age`,`email`)
+VALUES('1','88fc35f8-c8c4-47f4-b134-00b3754142ca','MasGareng','123','boulevard hijau harapan indah','male','69','gareng@gmail.com');
+
 CREATE TABLE IF NOT EXISTS `RefreshTokenHistory`(
     `id` BIGINT primary key auto_increment,
-    `token` VARCHAR(210)
+    `token` VARCHAR(220)
 );
 
 CREATE TABLE IF NOT EXISTS `ITEMS`(
@@ -63,3 +68,9 @@ INSERT INTO ITEMS (`id`,`uuid`,`title`,`price`,`imageUrl`)
 VALUES('18','62b98c51-5faa-49bb-9d48-e9c493ead45d','Bihun Goreng Kucing','21000','http://placekitten.com/300/300');
 INSERT INTO ITEMS (`id`,`uuid`,`title`,`price`,`imageUrl`)
 VALUES('19','0b5858e3-1018-4f7b-86a6-e7764ea9029f','Bihun Goreng Babi','50000','http://placekitten.com/300/300');
+
+CREATE TABLE IF NOT EXISTS `Wishlist`(
+    `id` BIGINT primary key auto_increment,
+    `useruuid` VARCHAR(40),
+    `itemuuid` VARCHAR(40)
+);

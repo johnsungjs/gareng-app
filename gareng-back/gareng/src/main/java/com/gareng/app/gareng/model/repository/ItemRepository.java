@@ -48,4 +48,24 @@ public interface ItemRepository extends CrudRepository<Item, Long>{
             "WHERE i.title ILIKE %?1%"
     )
     List<ItemProjection> getItemView(String search);
+
+    @Query(
+        nativeQuery = true,
+        value = "SELECT\n" + 
+                "CASE\n" + 
+                "WHEN EXISTS(SELECT * FROM ITEMS WHERE UUID = ?1)\n" +
+                "THEN TRUE\n" +
+                "ELSE FALSE\n" +
+                "END AS RESULT"
+    )
+    boolean checkItemExist(String itemUUID);
+
+    @Query(
+        nativeQuery = true, 
+        value = 
+            "SELECT i.title "+
+            "FROM ITEMS i "+
+            "WHERE i.uuid = ?1"
+    )
+    String getItemName(String itemUuid);
 }

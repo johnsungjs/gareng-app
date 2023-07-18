@@ -1,0 +1,48 @@
+2023-07-14 14:50:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 14:50:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 14:50:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 14:53:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:18:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:32:10 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:39:29 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(6)": "'malessss' (8)"; SQL statement:
+update USERS set address=?,age=?,email=?,gender=?,password=?,username=?,uuid=? where id=? [22001-214]
+2023-07-14 15:39:52 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:42:41 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:44:29 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(6)": "'priaaaaaa' (9)"; SQL statement:
+update USERS set address=?,age=?,email=?,gender=?,password=?,username=?,uuid=? where id=? [22001-214]
+2023-07-14 15:44:43 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:44:51 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(6)": "'priaaaaaa' (9)"; SQL statement:
+update USERS set address=?,age=?,email=?,gender=?,password=?,username=?,uuid=? where id=? [22001-214]
+2023-07-14 15:45:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:45:27 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(6)": "'priadddd' (8)"; SQL statement:
+update USERS set address=?,age=?,email=?,gender=?,password=?,username=?,uuid=? where id=? [22001-214]
+2023-07-14 15:45:46 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:45:52 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(6)": "'priaaaa' (7)"; SQL statement:
+update USERS set address=?,age=?,email=?,gender=?,password=?,username=?,uuid=? where id=? [22001-214]
+2023-07-14 15:47:46 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 15:48:00 jdbc[17]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(6)": "'prinita' (7)"; SQL statement:
+update USERS set address=?,age=?,email=?,gender=?,password=?,username=?,uuid=? where id=? [22001-214]
+2023-07-14 15:48:35 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 16:06:28 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-14 16:12:02 jdbc[24]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]

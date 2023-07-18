@@ -35,7 +35,7 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
 
-    debugPrint('response edit profile: ${response.body}');
+    debugPrint('response login: ${response.body}');
 
     if (response.statusCode == 200) {
       //save data with share preference
@@ -44,6 +44,30 @@ class APIService {
       return true;
     } else {
       return false;
+    }
+  }
+
+  void logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? refreshToken = prefs.getString('refreshToken');
+
+    Map<String, String> requestHeaders = {'Authorization': refreshToken!};
+
+    var url = Uri.http(Config.apiURL, Config.logoutAPI);
+
+    var response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+    debugPrint('response logout: ${response.body}');
+
+    if (response.statusCode == 200) {
+      Get.toNamed('/login');
+    } else if (response.statusCode == 500) {
+      debugPrint('masuk statuscode 500, callrefreshToken()');
+      callRefreshToken();
+      debugPrint('recalling logout()');
+      logout();
     }
   }
 
@@ -60,7 +84,7 @@ class APIService {
       headers: requestHeaders,
       body: jsonEncode(model.toJson()),
     );
-    debugPrint('response edit profile: ${response.body}');
+    debugPrint('response register: ${response.body}');
 
     return registerResponseModel(response.body);
   }
@@ -84,7 +108,7 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
 
-    debugPrint('response edit profile: ${response.body}');
+    debugPrint('response getAllItem: ${response.body}');
 
     if (response.statusCode == 500) {
       debugPrint('token expired with statuscode: ${response.statusCode}');
@@ -125,7 +149,7 @@ class APIService {
       headers: requestHeaders,
     );
 
-    debugPrint('response edit profile: ${response.body}');
+    debugPrint('response getProfile: ${response.body}');
 
     if (response.statusCode == 200) {
       var value = profileResponseModelFromJson(response.body);
@@ -166,23 +190,19 @@ class APIService {
       'Authorization': refreshToken!,
     };
 
-    var url = Uri.http(Config.apiURL, Config.getProfile);
+    var url = Uri.http(Config.apiURL, Config.refreshToken);
 
     //siapin body buat request
-    final ProfileController profilecontroller = Get.put(ProfileController());
-    RefreshTokenRequestModel model = RefreshTokenRequestModel(
-      // username: profilecontroller.dataUser["username"],
-      username: "john",
-    );
+    final ProfileController profileController = Get.put(ProfileController());
+
+    String username = profileController.dataUser["username"];
 
     var response = await http.Client().post(
       url,
       headers: requestHeaders,
       // body: jsonEncode(model.toJson()),
-      body: {"username": "j"},
+      body: jsonEncode({"username": username}),
     );
-
-    debugPrint('response edit profile: ${response.body}');
 
     debugPrint('refreshtoken responsebody: ${response.body}');
 
@@ -209,7 +229,7 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
 
-    debugPrint('response edit profile: ${response.body}');
+    debugPrint('response editProfile: ${response.body}');
 
     if (response.statusCode == 200) {
       //change local storage, sumber data dari get profile

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/constants/accountDummy.dart';
+import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/models/profile_controller.dart';
 import 'package:gareng_front/pages/AccountEditPage.dart';
+import 'package:gareng_front/services/api_service.dart';
 import 'package:get/get.dart';
 
 class AccountPage extends StatelessWidget {
@@ -151,6 +153,31 @@ class AccountPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 300,
+                          child: TextButton(
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8))),
+                                backgroundColor:
+                                    MaterialStatePropertyAll(customBlack)),
+                            onPressed: () {
+                              APIService apiService = APIService();
+                              apiService.logout();
+                            },
+                            child: Text(
+                              'Logout',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),

@@ -1,11 +1,13 @@
 class Config {
   static const String appName = 'Gareng App';
   // static const String apiURL = 'localhost:8080';
-  static const String apiURL = '172.29.124.137:8080';
+  static const String apiURL = '172.29.124.194:8080';
   static const String loginAPI = '/authentication/login';
+  static const String logoutAPI = '/authentication/logout';
   static const String registerAPI = '/authentication/register';
   static const String getItem = '/item/get';
   static const String getProfile = '/profile/get';
   static const String refreshToken = '/authentication/refreshtoken';
+  static const String editProfile = '/profile/update';
   // static const String userProfileAPI = 'localhost:8080';
 }

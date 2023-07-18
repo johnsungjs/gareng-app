@@ -10,17 +10,17 @@ import 'models/token_controller.dart';
 Widget _defaultHome = const LoginPage();
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? token = prefs.getString('token');
-  if (token != null) {
-    debugPrint('token ada isi: $token');
-    _defaultHome = Core(selectedIndex: 0);
-  } else {
-    debugPrint('token null: $token');
-    _defaultHome = const LoginPage();
-  }
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
+  // String? token = prefs.getString('token');
+  // if (token != null) {
+  //   debugPrint('token ada isi: $token');
+  //   _defaultHome = Core(selectedIndex: 0);
+  // } else {
+  //   debugPrint('token null: $token');
+  //   _defaultHome = const LoginPage();
+  // }
 
   runApp(const MyApp());
 }

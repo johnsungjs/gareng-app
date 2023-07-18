@@ -7,6 +7,7 @@ import 'package:gareng_front/models/item_response_model.dart';
 import 'package:gareng_front/models/login_request_model.dart';
 import 'package:gareng_front/models/login_response_model.dart';
 import 'package:gareng_front/models/profile_controller.dart';
+import 'package:gareng_front/models/profile_edit_request.dart';
 import 'package:gareng_front/models/profile_response_model.dart';
 import 'package:gareng_front/models/refresh_token_request_model.dart';
 import 'package:gareng_front/models/refresh_token_response_model.dart';
@@ -34,6 +35,8 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
 
+    debugPrint('response login: ${response.body}');
+
     if (response.statusCode == 200) {
       //save data with share preference
       await SharedPreferenceService.setLoginDetails(
@@ -41,6 +44,30 @@ class APIService {
       return true;
     } else {
       return false;
+    }
+  }
+
+  void logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? refreshToken = prefs.getString('refreshToken');
+
+    Map<String, String> requestHeaders = {'Authorization': refreshToken!};
+
+    var url = Uri.http(Config.apiURL, Config.logoutAPI);
+
+    var response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+    debugPrint('response logout: ${response.body}');
+
+    if (response.statusCode == 200) {
+      Get.toNamed('/login');
+    } else if (response.statusCode == 500) {
+      debugPrint('masuk statuscode 500, callrefreshToken()');
+      callRefreshToken();
+      debugPrint('recalling logout()');
+      logout();
     }
   }
 
@@ -57,6 +84,7 @@ class APIService {
       headers: requestHeaders,
       body: jsonEncode(model.toJson()),
     );
+    debugPrint('response register: ${response.body}');
 
     return registerResponseModel(response.body);
   }
@@ -80,6 +108,8 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
 
+    debugPrint('response getAllItem: ${response.body}');
+
     if (response.statusCode == 500) {
       debugPrint('token expired with statuscode: ${response.statusCode}');
 
@@ -95,7 +125,7 @@ class APIService {
         headers: requestHeaders,
         body: jsonEncode(model.toJson()),
       );
-      debugPrint('hasil result status tokenrefresh: ${response.statusCode}');
+      debugPrint('hasil result status tokenrefresh: ${response.body}');
     }
     return itemResponseModelFromJson(response.body);
   }
@@ -118,6 +148,8 @@ class APIService {
       url,
       headers: requestHeaders,
     );
+
+    debugPrint('response getProfile: ${response.body}');
 
     if (response.statusCode == 200) {
       var value = profileResponseModelFromJson(response.body);
@@ -158,20 +190,18 @@ class APIService {
       'Authorization': refreshToken!,
     };
 
-    var url = Uri.http(Config.apiURL, Config.getProfile);
+    var url = Uri.http(Config.apiURL, Config.refreshToken);
 
     //siapin body buat request
-    final ProfileController profilecontroller = Get.put(ProfileController());
-    RefreshTokenRequestModel model = RefreshTokenRequestModel(
-      // username: profilecontroller.dataUser["username"],
-      username: "john",
-    );
+    final ProfileController profileController = Get.put(ProfileController());
+
+    String username = profileController.dataUser["username"];
 
     var response = await http.Client().post(
       url,
       headers: requestHeaders,
       // body: jsonEncode(model.toJson()),
-      body: {"username": "j"},
+      body: jsonEncode({"username": username}),
     );
 
     debugPrint('refreshtoken responsebody: ${response.body}');
@@ -180,5 +210,38 @@ class APIService {
 
     debugPrint('response new token: ${resNewToken.data.accessToken}');
     await prefs.setString('token', resNewToken.data.accessToken);
+  }
+
+  void editProfile(ProfileEditRequest model) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': token!,
+    };
+
+    var url = Uri.http(Config.apiURL, Config.editProfile);
+
+    var response = await http.Client().put(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(model.toJson()),
+    );
+
+    debugPrint('response editProfile: ${response.body}');
+
+    if (response.statusCode == 200) {
+      //change local storage, sumber data dari get profile
+      getProfile();
+    } else if (response.statusCode == 500) {
+      //debugPrint response
+      debugPrint('masuk if statuscode 500');
+      callRefreshToken();
+      SharedPreferences newprefs = await SharedPreferences.getInstance();
+      String? newToken = newprefs.getString('token');
+      debugPrint('new token $newToken');
+      // editProfile(model);
+    }
   }
 }

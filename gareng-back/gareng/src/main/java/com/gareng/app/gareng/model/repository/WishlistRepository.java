@@ -8,7 +8,7 @@ import com.gareng.app.gareng.model.entity.Wishlist;
 
 @Repository
 public interface WishlistRepository extends CrudRepository<Wishlist ,Integer>{
-        @Query(
+    @Query(
         nativeQuery = true,
         value = "SELECT\n" + 
                 "CASE\n" + 

@@ -51,6 +51,56 @@ public interface ItemRepository extends CrudRepository<Item, Long>{
 
     @Query(
         nativeQuery = true,
+        value =
+            "SELECT P.uuid, P.title, P.price, P.imageUrl "+
+            "FROM( "+
+                "SELECT uuid, TITLE, price, imageUrl "+
+                "FROM WISHLIST W JOIN ITEMS I ON W.ITEMUUID = I.UUID "+
+                "WHERE W.USERUUID = ?1)P "+
+            "WHERE LOWER(P.TITLE) LIKE %?2%"
+    )
+    List<ItemProjection> getItemViewWishlist(String userUUID, String search);
+
+    @Query(
+        nativeQuery = true,
+        value =
+            "SELECT P.uuid, P.title, P.price, P.imageUrl "+
+            "FROM( "+
+                "SELECT uuid, TITLE, price, imageUrl "+
+                "FROM WISHLIST W JOIN ITEMS I ON W.ITEMUUID = I.UUID "+
+                "WHERE W.USERUUID = ?1)P "
+    )
+    List<ItemProjection> getItemViewWishlist(String userUUID);
+
+    @Query(
+        nativeQuery = true, 
+        value = 
+            "SELECT P.uuid, P.title, P.price, P.imageUrl "+
+            "FROM( "+
+                "SELECT uuid, TITLE, price, imageUrl "+
+                "FROM WISHLIST W JOIN ITEMS I ON W.ITEMUUID = I.UUID "+
+                "WHERE W.USERUUID = ?1)P "+
+            "WHERE LOWER(P.TITLE) LIKE %?4% "+
+            "LIMIT ?2 "+
+            "OFFSET ?3"
+    )
+    List<ItemProjection> getItemViewWishlist(String userUUID, Integer sizePerPage, Integer pageAt, String search);
+
+    @Query(
+        nativeQuery = true, 
+        value = 
+            "SELECT P.uuid, P.title, P.price, P.imageUrl "+
+            "FROM( "+
+                "SELECT uuid, TITLE, price, imageUrl "+
+                "FROM WISHLIST W JOIN ITEMS I ON W.ITEMUUID = I.UUID "+
+                "WHERE W.USERUUID = ?1)P "+
+            "LIMIT ?2 "+
+            "OFFSET ?3"
+    )
+    List<ItemProjection> getItemViewWishlist(String userUUID, Integer sizePerPage, Integer pageAt);
+
+    @Query(
+        nativeQuery = true,
         value = "SELECT\n" + 
                 "CASE\n" + 
                 "WHEN EXISTS(SELECT * FROM ITEMS WHERE UUID = ?1)\n" +

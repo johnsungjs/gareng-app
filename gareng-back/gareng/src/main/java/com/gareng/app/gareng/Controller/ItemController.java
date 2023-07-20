@@ -30,7 +30,7 @@ public class ItemController {
         HttpStatus httpStatus;
         GetItemResponse getItemResponse = new GetItemResponse();
         try {
-            getItemResponse = ItemHelper.getItem(itemRepository, itemRequest, accessToken);
+            getItemResponse = ItemHelper.getItem(itemRepository, itemRequest, accessToken,false);
             responseMessage = "Success";
             httpStatus = HttpStatus.OK;
         } catch (Exception e) {

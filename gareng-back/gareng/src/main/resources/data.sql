@@ -2,7 +2,6 @@ DROP TABLE IF EXISTS `USERS`;
 DROP TABLE IF EXISTS `RefreshTokenHistory`;
 DROP TABLE IF EXISTS `ITEMS`;
 DROP TABLE IF EXISTS `WISHLIST`;
-DROP TABLE IF EXISTS `WISHTLIST`;
 
 CREATE TABLE IF NOT EXISTS `USERS`(
     `id` BIGINT primary key auto_increment,
@@ -74,3 +73,14 @@ CREATE TABLE IF NOT EXISTS `Wishlist`(
     `useruuid` VARCHAR(40),
     `itemuuid` VARCHAR(40)
 );
+
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('1','88fc35f8-c8c4-47f4-b134-00b3754142ca','5d1bdeaa-246e-439d-ac13-7ef5bc72203e');
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('2','88fc35f8-c8c4-47f4-b134-00b3754142ca','0b5858e3-1018-4f7b-86a6-e7764ea9029f');
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('3','88fc35f8-c8c4-47f4-b134-00b3754142ca','59f75496-d1ae-47b7-8a4e-22cfc2caafac');
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('4','88fc35f8-c8c4-47f4-b134-00b3754142ca','584a354c-67e4-4a49-8b58-cba95b8749a1');
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('5','88fc35f8-c8c4-47f4-b134-00b3754142ca','f3853ce1-678d-4ea6-b0ce-2b6e2b17f0a1');

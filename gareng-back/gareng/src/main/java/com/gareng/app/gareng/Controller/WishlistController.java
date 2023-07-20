@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gareng.app.gareng.helper.ItemHelper;
 import com.gareng.app.gareng.helper.WishlistHelper;
 import com.gareng.app.gareng.http.entity.AddWishlist.AddWishlistRequest;
 import com.gareng.app.gareng.http.entity.AddWishlist.AddWishlistResponse;
@@ -55,7 +56,7 @@ public class WishlistController {
         HttpStatus httpStatus;
         GetItemResponse getWishlistResponse = new GetItemResponse();
         try {
-            // getWishlistResponse = call helper
+            getWishlistResponse = ItemHelper.getItem(itemRepository, getWishlistRequest, accessToken,true);
             responseMessage = "Success";
             httpStatus = HttpStatus.OK;
         } catch (Exception e) {

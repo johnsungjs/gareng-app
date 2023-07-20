@@ -360,3 +360,5 @@ WHERE P.TITLE LIKE "%es%" [42122-214]
 	at java.base/java.lang.Thread.run(Unknown Source)
 2023-07-20 13:02:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-07-20 13:51:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]

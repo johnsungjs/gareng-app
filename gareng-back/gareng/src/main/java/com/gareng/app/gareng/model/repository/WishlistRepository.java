@@ -18,4 +18,13 @@ public interface WishlistRepository extends CrudRepository<Wishlist ,Integer>{
                 "END AS RESULT"
     )
     public boolean isMyWishlistExist(String itemUuid, String userUuid);
+
+    @Query(
+        nativeQuery = true,
+        value = "SELECT * " +
+                "FROM " +
+                "WISHLIST " +
+                "WHERE ITEMUUID = ?1 AND USERUUID = ?2 "
+    )
+    public Wishlist getOneWishlist(String itemUuid, String userUuid);
 }

@@ -68,12 +68,13 @@ public class WishlistController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<Object> deleteWishlist(@RequestHeader("Authorization") String accessToken
-        , @RequestBody DeleteWishlistRequest getWishlistRequest){
+        , @RequestBody DeleteWishlistRequest deleteWishlistRequest){
         String responseMessage;
         HttpStatus httpStatus;
         DeleteWishlistResponse deleteWishlistResponse = new DeleteWishlistResponse();
         try {
-            // getWishlistResponse = call helper
+            deleteWishlistResponse = WishlistHelper.deleteWishlist(wishlistRepository, itemRepository
+            , accessToken, deleteWishlistRequest);
             responseMessage = "Success";
             httpStatus = HttpStatus.OK;
         } catch (Exception e) {

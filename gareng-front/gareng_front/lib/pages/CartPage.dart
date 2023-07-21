@@ -40,10 +40,19 @@ class CartPage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: NetworkImage(
-                                      itemController.items[index]["imageUrl"]),
+                                // CircleAvatar(
+                                //   radius: 40,
+                                //   backgroundImage: NetworkImage(
+                                //       itemController.items[index]["imageUrl"]),
+                                // ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  child: Image.network(
+                                    itemController.items[index]["imageUrl"],
+                                    width: 75,
+                                    height: 75,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 20,

@@ -84,10 +84,15 @@ class CardGrid extends StatelessWidget {
                                     onPressed: () {
                                       itemController.addItem(itemController
                                           .stateItemData.value[index]);
+                                      itemController.stateItemData.refresh();
                                     },
                                     icon: const Icon(CupertinoIcons.cart)),
-                                Text(
-                                    '${itemController.getItemQuantity(itemController.stateItemData[index])}'),
+                                Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: Text(
+                                      '${itemController.getItemQuantity(itemController.stateItemData[index])}'),
+                                ),
                               ],
                             )
                           ],

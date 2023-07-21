@@ -112,6 +112,11 @@ class ItemController extends GetxController {
 
   get total => getTotalItem();
 
+  int countGrandTotal(int deliveryFee, int discount) {
+    int subtotal = int.parse(getTotalItem());
+    return subtotal + deliveryFee - discount;
+  }
+
   int getItemQuantity(ItemData itemData) {
     final dataExist =
         _items.firstWhereOrNull((e) => e["uuid"] == itemData.uuid);

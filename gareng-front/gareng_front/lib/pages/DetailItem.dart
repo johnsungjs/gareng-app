@@ -49,7 +49,10 @@ class DetailItem extends StatelessWidget {
           () => SingleChildScrollView(
             child: Column(
               children: [
-                Image.network(itemData.imageUrl),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(36.0),
+                  child: Image.network(itemData.imageUrl),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Row(

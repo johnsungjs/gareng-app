@@ -90,20 +90,14 @@ class _HomePageState extends State<HomePage> {
       onRefresh: refresh,
       child: Column(
         children: [
-          SizedBox(
-            height: 40,
-          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18),
             child: SearchWidget(),
           ),
           Expanded(
             child: SingleChildScrollView(
               controller: scrollController,
               child: Column(children: [
-                const SizedBox(
-                  height: 12,
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Row(

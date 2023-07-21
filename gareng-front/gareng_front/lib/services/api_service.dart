@@ -157,12 +157,7 @@ class APIService {
     } else if (response.statusCode == 500) {
       debugPrint('masuk if statuscode 500');
       callRefreshToken();
-      var responseRefresh = await http.Client().get(
-        url,
-        headers: requestHeaders,
-      );
-      var value = profileResponseModelFromJson(responseRefresh.body);
-      profilecontroller.setDataUser(value.data.toJson());
+      getProfile();
     } else {
       debugPrint('status code getprofile bkn 200 ataupun 500');
     }

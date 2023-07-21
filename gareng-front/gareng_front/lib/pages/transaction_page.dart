@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gareng_front/constants/FormatCurrency.dart';
 import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/constants/itemsDummy.dart';
+import 'package:get/get.dart';
+
+import '../models/item_controller.dart';
+import '../widgets/checkout_cart.dart';
+import '../widgets/payment_methods.dart';
 
 class TransactionPage extends StatelessWidget {
   TransactionPage({super.key});
   final dataDummy = itemsDummy;
+  final ItemController itemController = Get.put(ItemController());
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +53,7 @@ class TransactionPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.location_on),
                     Text("Ships to: "),
@@ -56,8 +64,6 @@ class TransactionPage extends StatelessWidget {
                   ],
                 ),
               ),
-              CheckoutCart(),
-              CheckoutCart(),
               CheckoutCart(),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12),
@@ -103,14 +109,17 @@ class TransactionPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Subtotal'),
-                    Text('Rp150000'),
-                  ],
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Subtotal'),
+                      Text(FormatCurrency.indo
+                          .format(int.parse(itemController.total))),
+                    ],
+                  ),
                 ),
               ),
               Padding(
@@ -119,7 +128,7 @@ class TransactionPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Delivery fee'),
-                    Text('Rp200000'),
+                    Text(FormatCurrency.indo.format(10000)),
                   ],
                 ),
               ),
@@ -128,9 +137,9 @@ class TransactionPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Discount Voucher'),
+                    Text('Discount'),
                     Text(
-                      '-Rp50.000',
+                      '-${FormatCurrency.indo.format(0)}',
                       style: TextStyle(color: Colors.red),
                     ),
                   ],
@@ -149,9 +158,10 @@ class TransactionPage extends StatelessWidget {
                       style: TextStyle(
                           color: customBlack, fontWeight: FontWeight.bold),
                     ),
-                    Text('Rp300000',
+                    Obx(() => Text(
+                        '${FormatCurrency.indo.format(itemController.countGrandTotal(10000, 0))}',
                         style: TextStyle(
-                            color: customBlack, fontWeight: FontWeight.bold)),
+                            color: customBlack, fontWeight: FontWeight.bold))),
                   ],
                 ),
               ),
@@ -230,94 +240,6 @@ class TransactionPage extends StatelessWidget {
           ),
         ),
       )),
-    );
-  }
-}
-
-class CheckoutCart extends StatelessWidget {
-  const CheckoutCart({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final dataDummy = itemsDummy;
-    return Container(
-      padding: EdgeInsets.all(12),
-      width: MediaQuery.of(context).size.width * 0.9,
-      decoration: BoxDecoration(),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  dataDummy[0]["images"],
-                  width: 100.0,
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Nasi Goreng Kambing"),
-                    Text(
-                      "Rp30.000",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Order Quantity:',
-                style:
-                    TextStyle(color: customBlack, fontWeight: FontWeight.w400),
-              ),
-              Row(
-                children: [
-                  Icon(Icons.remove_circle_outline),
-                  SizedBox(width: 20, child: Center(child: Text('10'))),
-                  Icon(Icons.add_circle),
-                ],
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class PaymentMethods extends StatelessWidget {
-  const PaymentMethods({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: TextButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: Text(
-          "Cash",
-          style: TextStyle(color: customBlack),
-        ),
-        style: ButtonStyle(
-          side: MaterialStatePropertyAll(BorderSide(
-              color: customBlack, width: 1.0, style: BorderStyle.solid)),
-          shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
-        ),
-      ),
     );
   }
 }

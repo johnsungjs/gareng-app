@@ -39,7 +39,9 @@ class CardTotal extends StatelessWidget {
                   ),
                   backgroundColor:
                       const MaterialStatePropertyAll(Colors.black)),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed('/transaction');
+              },
               child: const Text(
                 "Place Order",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

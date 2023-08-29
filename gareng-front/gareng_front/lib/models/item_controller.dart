@@ -1,13 +1,9 @@
-import 'dart:collection';
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gareng_front/config.dart';
-import 'package:gareng_front/models/item_request_model.dart';
+
 import 'package:gareng_front/models/item_response_model.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+
 
 class ItemController extends GetxController {
   RxBool hasMore = true.obs;

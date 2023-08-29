@@ -9,7 +9,6 @@ import 'package:gareng_front/models/login_response_model.dart';
 import 'package:gareng_front/models/profile_controller.dart';
 import 'package:gareng_front/models/profile_edit_request.dart';
 import 'package:gareng_front/models/profile_response_model.dart';
-import 'package:gareng_front/models/refresh_token_request_model.dart';
 import 'package:gareng_front/models/refresh_token_response_model.dart';
 import 'package:gareng_front/models/register_request_model.dart';
 import 'package:gareng_front/models/register_response_model.dart';
@@ -17,6 +16,8 @@ import 'package:gareng_front/services/shared_preference_service.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/get_wishlist_response.dart';
 
 class APIService {
   static var client = http.Client();
@@ -156,23 +157,12 @@ class APIService {
       profilecontroller.setDataUser(value.data.toJson());
     } else if (response.statusCode == 500) {
       debugPrint('masuk if statuscode 500');
-      callRefreshToken();
-      getProfile();
+      // callRefreshToken();
+      // getProfile();
+      Get.toNamed('/login');
     } else {
       debugPrint('status code getprofile bkn 200 ataupun 500');
     }
-
-    // if (response.statusCode == 500) {
-    //   debugPrint('masuk if statuscode 500');
-    //   callRefreshToken();
-    //   response = await http.Client().get(
-    //     url,
-    //     headers: requestHeaders,
-    //   );
-    // }
-
-    // var value = profileResponseModelFromJson(response.body);
-    // profilecontroller.setDataUser(value.data.toJson());
   }
 
   void callRefreshToken() async {
@@ -230,13 +220,49 @@ class APIService {
       //change local storage, sumber data dari get profile
       getProfile();
     } else if (response.statusCode == 500) {
-      //debugPrint response
-      debugPrint('masuk if statuscode 500');
+      //khusus profile kalau 500 login ulang
       callRefreshToken();
-      SharedPreferences newprefs = await SharedPreferences.getInstance();
-      String? newToken = newprefs.getString('token');
-      debugPrint('new token $newToken');
-      // editProfile(model);
+      editProfile(model);
+    }
+  }
+
+  Future<GetWishlistResponse> getAllWishlist(Map reqBody) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    debugPrint('refreshToken: $token');
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': token!
+    };
+
+    var url = Uri.http(Config.apiURL, Config.getWishlist);
+
+    var response = await http.Client().post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(reqBody),
+    );
+
+    debugPrint('response getAllItem: ${response.body}');
+
+    if (response.statusCode == 200) {
+      return getWishlistResponseFromJson(response.body);
+    } else if (response.statusCode == 500) {
+      callRefreshToken();
+      getAllWishlist(reqBody);
+      return getWishlistResponseFromJson({
+        "data": {"getItemPagination": null, "itemData": null},
+        "message": "Invalid Token",
+        "status": 500
+      }.toString());
+    } else {
+      debugPrint('masuk else');
+      return getWishlistResponseFromJson({
+        "data": {"getItemPagination": null, "itemData": null},
+        "message": "Invalid Token",
+        "status": 500
+      }.toString());
     }
   }
 }

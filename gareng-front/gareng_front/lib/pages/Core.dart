@@ -28,7 +28,7 @@ class _CoreState extends State<Core> {
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     CartPage(),
-    const WishlistPage(),
+    WishlistPage(),
     AccountPage(),
   ];
 

@@ -1,4 +1,4 @@
-package com.gareng.app.gareng.Utility;
+package com.gareng.app.gareng.utility;
 
 import Utils.Validation;
 

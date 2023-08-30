@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS `USERS`;
 DROP TABLE IF EXISTS `RefreshTokenHistory`;
 DROP TABLE IF EXISTS `ITEMS`;
 DROP TABLE IF EXISTS `WISHLIST`;
+DROP TABLE IF EXISTS `TransactionHeader`;
+DROP TABLE IF EXISTS `TransactionDetail`;
 
 CREATE TABLE IF NOT EXISTS `USERS`(
     `id` BIGINT primary key auto_increment,
@@ -84,3 +86,20 @@ INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
 VALUES('4','88fc35f8-c8c4-47f4-b134-00b3754142ca','584a354c-67e4-4a49-8b58-cba95b8749a1');
 INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
 VALUES('5','88fc35f8-c8c4-47f4-b134-00b3754142ca','f3853ce1-678d-4ea6-b0ce-2b6e2b17f0a1');
+
+CREATE TABLE IF NOT EXISTS `TransactionHeader`(
+    `id` bigint primary key auto_increment,
+    `transactionDate` datetime,
+    `payment` int,
+    `paymentmethodid` BIGINT NOT NULL REFERENCES PAYMENTMETHOD(id),
+    `UUID` VARCHAR(40)
+);
+
+CREATE TABLE IF NOT EXISTS `TransactionDetail`(
+    `id` bigint primary key auto_increment,
+    `transactionHeaderId` bigint not null,
+    `itemId` bigint not null,
+    `amount` int,
+    foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`),
+    foreign key(`itemId`) references `items`(`id`)
+);

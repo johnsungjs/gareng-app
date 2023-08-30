@@ -4,40 +4,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gareng.app.gareng.helper.ItemHelper;
-import com.gareng.app.gareng.http.entity.GetItem.GetItemRequest;
-import com.gareng.app.gareng.http.entity.GetItem.GetItemResponse;
+import com.gareng.app.gareng.helper.TransactionHelper;
 import com.gareng.app.gareng.http.entity.ResponseHandler.ResponseHandler;
-import com.gareng.app.gareng.model.repository.ItemRepository;
+import com.gareng.app.gareng.http.entity.getTransaction.GetTransactionResponse;
+import com.gareng.app.gareng.model.repository.TransactionRepository;
 
 @RestController
-@RequestMapping("/item")
-public class ItemController {
+@RequestMapping("/transaction")
+public class TransactionController {
     @Autowired
-    ItemRepository itemRepository;
-
+    TransactionRepository transactionRepository;
+    
     @CrossOrigin
-    @PostMapping("/get")
-    public ResponseEntity<Object> getItem(@RequestHeader("Authorization") String accessToken
-        , @RequestBody GetItemRequest itemRequest){
+    @GetMapping("/get")
+    public ResponseEntity<Object> getTransaction(@RequestHeader("Authorization") String accessToken
+    , String startDate, String endDate){
         String responseMessage;
         HttpStatus httpStatus;
-        GetItemResponse getItemResponse = new GetItemResponse();
+        GetTransactionResponse getProfileResponse = new GetTransactionResponse();
         try {
-            getItemResponse = ItemHelper.getItem(itemRepository, itemRequest, accessToken,false);
+            getProfileResponse = TransactionHelper.getTransaction(accessToken, transactionRepository);
             responseMessage = "Success";
             httpStatus = HttpStatus.OK;
         } catch (Exception e) {
             responseMessage = e.getMessage();
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-
-        return ResponseHandler.generateResponse(responseMessage, httpStatus, getItemResponse);
+        return ResponseHandler.generateResponse(responseMessage, httpStatus, getProfileResponse);
     }
 }

@@ -20,6 +20,7 @@ public class Item {
     private String title;
     private String price;
     private String imageUrl;
+    private Integer amount;
     
     public Item(String uuid, String title, String price, String imageUrl) {
         this.uuid = uuid;

@@ -18,6 +18,14 @@ public class TransactionHeader {
     private Integer id;
     private String transactionDate;
     private Integer payment;
-    private String paymentmethodid;
+    private String paymentmethod;
     private String UUID;
+    private String userUUID;
+
+    public TransactionHeader(String transactionDate, Integer payment, String paymentmethod, String uUID) {
+        this.transactionDate = transactionDate;
+        this.payment = payment;
+        this.paymentmethod = paymentmethod;
+        UUID = uUID;
+    }
 }

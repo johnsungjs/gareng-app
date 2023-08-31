@@ -1,9 +1,9 @@
+DROP TABLE IF EXISTS `TransactionDetail`;
 DROP TABLE IF EXISTS `USERS`;
 DROP TABLE IF EXISTS `RefreshTokenHistory`;
 DROP TABLE IF EXISTS `ITEMS`;
 DROP TABLE IF EXISTS `WISHLIST`;
 DROP TABLE IF EXISTS `TransactionHeader`;
-DROP TABLE IF EXISTS `TransactionDetail`;
 
 CREATE TABLE IF NOT EXISTS `USERS`(
     `id` BIGINT primary key auto_increment,
@@ -91,9 +91,13 @@ CREATE TABLE IF NOT EXISTS `TransactionHeader`(
     `id` bigint primary key auto_increment,
     `transactionDate` datetime,
     `payment` int,
-    `paymentmethodid` BIGINT NOT NULL REFERENCES PAYMENTMETHOD(id),
-    `UUID` VARCHAR(40)
+    `paymentmethod` VARCHAR(10),
+    `UUID` VARCHAR(40),
+    `useruuid` VARCHAR(40)
 );
+
+INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`,`useruuid`)
+VALUES('1','2023-08-31','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci','88fc35f8-c8c4-47f4-b134-00b3754142ca');
 
 CREATE TABLE IF NOT EXISTS `TransactionDetail`(
     `id` bigint primary key auto_increment,
@@ -103,3 +107,10 @@ CREATE TABLE IF NOT EXISTS `TransactionDetail`(
     foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`),
     foreign key(`itemId`) references `items`(`id`)
 );
+
+INSERT INTO TRANSACTIONDETAIL(`id`,`transactionHeaderId`,`itemId`,`amount`)
+VALUES('1','1','1','1');
+INSERT INTO TRANSACTIONDETAIL(`id`,`transactionHeaderId`,`itemId`,`amount`)
+VALUES('2','1','2','1');
+INSERT INTO TRANSACTIONDETAIL(`id`,`transactionHeaderId`,`itemId`,`amount`)
+VALUES('3','1','3','1');

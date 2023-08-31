@@ -68,3 +68,116 @@ org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-21
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
 2023-07-18 13:59:11 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-08-31 09:33:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','31-08-2023','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') [*]CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) )"; SQL statement:
+INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','31-08-2023','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) ) [42000-214]
+2023-08-31 09:36:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','31-08-2023',50000,'cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') [*]CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) )"; SQL statement:
+INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','31-08-2023',50000,'cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) ) [42000-214]
+2023-08-31 09:40:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Cannot parse "TIMESTAMP" constant "31-08-2023"; SQL statement:
+INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','31-08-2023','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:88)
+	at org.h2.value.Value.convertToTimestamp(Value.java:1980)
+	at org.h2.value.Value.convertTo(Value.java:1153)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261)
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:254)
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:54)
+	at org.springframework.boot.jdbc.init.DataSourceScriptDatabaseInitializer.runScripts(DataSourceScriptDatabaseInitializer.java:87)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.runScripts(AbstractScriptDatabaseInitializer.java:146)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applyScripts(AbstractScriptDatabaseInitializer.java:108)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applyDataScripts(AbstractScriptDatabaseInitializer.java:102)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.initializeDatabase(AbstractScriptDatabaseInitializer.java:77)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.afterPropertiesSet(AbstractScriptDatabaseInitializer.java:66)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:941)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294)
+	at com.gareng.app.gareng.GarengApplication.main(GarengApplication.java:10)
+Caused by: java.lang.IllegalArgumentException: 31-8-2023
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:194)
+	at org.h2.util.DateTimeUtils.parseTimestamp(DateTimeUtils.java:338)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:86)
+	... 43 more
+2023-08-31 09:42:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','2023-08-31','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') [*]CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) )"; SQL statement:
+INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','2023-08-31','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) ) [42000-214]
+2023-08-31 09:47:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','2023-08-31','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') [*]CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) )"; SQL statement:
+INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','2023-08-31','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) ) [42000-214]
+2023-08-31 09:49:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','2023-08-31','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') [*]CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) )"; SQL statement:
+INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`) VALUES('1','2023-08-31','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci') CREATE TABLE IF NOT EXISTS `TransactionDetail`( `id` bigint primary key auto_increment, `transactionHeaderId` bigint not null, `itemId` bigint not null, `amount` int, foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`), foreign key(`itemId`) references `items`(`id`) ) [42000-214]
+2023-08-31 09:50:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Cannot drop "ITEMS" because "CONSTRAINT_AF6" depends on it; SQL statement:
+DROP TABLE IF EXISTS `ITEMS` [90107-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:97)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:121)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261)
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:254)
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:54)
+	at org.springframework.boot.jdbc.init.DataSourceScriptDatabaseInitializer.runScripts(DataSourceScriptDatabaseInitializer.java:87)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.runScripts(AbstractScriptDatabaseInitializer.java:146)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applyScripts(AbstractScriptDatabaseInitializer.java:108)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applyDataScripts(AbstractScriptDatabaseInitializer.java:102)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.initializeDatabase(AbstractScriptDatabaseInitializer.java:77)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.afterPropertiesSet(AbstractScriptDatabaseInitializer.java:66)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:941)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294)
+	at com.gareng.app.gareng.GarengApplication.main(GarengApplication.java:10)

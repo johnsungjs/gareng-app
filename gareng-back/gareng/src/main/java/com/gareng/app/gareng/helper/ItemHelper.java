@@ -2,8 +2,8 @@ package com.gareng.app.gareng.helper;
 
 import java.util.List;
 
-import com.gareng.app.gareng.Utility.JwtUtils;
-import com.gareng.app.gareng.Utility.PaginationUtils;
+import com.gareng.app.gareng.utility.JwtUtils;
+import com.gareng.app.gareng.utility.PaginationUtils;
 import com.gareng.app.gareng.http.entity.GetItem.GetItemRequest;
 import com.gareng.app.gareng.http.entity.GetItem.GetItemResponse;
 import com.gareng.app.gareng.model.projection.ItemProjection;

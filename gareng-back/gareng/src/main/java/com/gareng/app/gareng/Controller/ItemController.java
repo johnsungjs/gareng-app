@@ -1,4 +1,4 @@
-package com.gareng.app.gareng.Controller;
+package com.gareng.app.gareng.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

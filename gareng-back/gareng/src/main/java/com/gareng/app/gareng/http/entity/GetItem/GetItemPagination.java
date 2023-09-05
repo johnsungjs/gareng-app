@@ -1,6 +1,6 @@
 package com.gareng.app.gareng.http.entity.GetItem;
 
-import com.gareng.app.gareng.Utility.PaginationUtils;
+import com.gareng.app.gareng.utility.PaginationUtils;
 
 import lombok.Data;
 

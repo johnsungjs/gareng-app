@@ -265,4 +265,26 @@ class APIService {
       }.toString());
     }
   }
+
+  static Future<Map> handleTransaction(Map reqBody) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': token!
+    };
+
+    var url = Uri.http(Config.apiURL, Config.addTransaction);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(reqBody),
+    );
+
+    debugPrint('response login: ${response.body}');
+
+    return jsonDecode(response.body);
+  }
 }

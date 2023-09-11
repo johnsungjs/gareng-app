@@ -11,7 +11,7 @@ import com.gareng.app.gareng.http.entity.historyTransaction.HistoryTransactionRe
 import com.gareng.app.gareng.model.entity.TransactionHeader;
 import com.gareng.app.gareng.model.projection.TransactionDetailProjection;
 import com.gareng.app.gareng.model.repository.TransactionRepository;
-import com.gareng.app.gareng.utility.JwtUtils;
+import com.gareng.app.gareng.Utility.JwtUtils;
 
 public class TransactionHelper {
     public static GetTransactionResponse getTransaction(String accessToken
@@ -47,9 +47,10 @@ public class TransactionHelper {
         );
         TransactionHeader insertedHeader = transactionRepository.getTransactionHeader(uuid.toString());
         for(int i=0;i<request.getItems().size();i++){
+
             transactionRepository.saveDetail(
                 insertedHeader.getId(),
-                request.getItems().get(i).getId(),
+                request.getItems().get(i).getUuid(),
                 request.getItems().get(i).getAmount()
             );
         }

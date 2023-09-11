@@ -1,4 +1,4 @@
-package com.gareng.app.gareng.utility;
+package com.gareng.app.gareng.Utility;
 
 import com.gareng.app.gareng.http.entity.GetItem.GetItemPagination;
 

@@ -2,6 +2,7 @@ package com.gareng.app.gareng.model.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -41,6 +42,7 @@ public interface TransactionRepository extends CrudRepository<TransactionHeader,
     )
     List<TransactionHeader> getTransactionHeaderByUserUUID(String userUUID);
 
+    @Modifying
     @Query(
         nativeQuery = true,
         value =
@@ -50,12 +52,13 @@ public interface TransactionRepository extends CrudRepository<TransactionHeader,
     @Transactional
     void saveHeader(String transactionDate, Integer payment, String paymentMethod, String UUID,String userUUID);
 
+    @Modifying
     @Query(
         nativeQuery = true,
         value =
             "INSERT INTO TRANSACTIONDETAIL(`transactionHeaderId`,`itemId`,`amount`) "+
-            "VALUES(?1,?2,?3);"
+            "VALUES(?1,(SELECT id FROM ITEMs WHERE uuid = ?2),?3);"
     )
     @Transactional
-    void saveDetail(Integer transactionHeaderId, Integer itemId, Integer amount);
+    void saveDetail(Integer transactionHeaderId, String itemUuid, Integer amount);
 }

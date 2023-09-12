@@ -47,9 +47,10 @@ public class TransactionHelper {
         );
         TransactionHeader insertedHeader = transactionRepository.getTransactionHeader(uuid.toString());
         for(int i=0;i<request.getItems().size();i++){
+
             transactionRepository.saveDetail(
                 insertedHeader.getId(),
-                request.getItems().get(i).getId(),
+                request.getItems().get(i).getUuid(),
                 request.getItems().get(i).getAmount()
             );
         }

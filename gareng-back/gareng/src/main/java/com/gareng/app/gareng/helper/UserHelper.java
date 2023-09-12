@@ -2,9 +2,9 @@ package com.gareng.app.gareng.helper;
 
 import java.util.UUID;
 
-import com.gareng.app.gareng.utility.BcryptUtils;
-import com.gareng.app.gareng.utility.FieldValidation;
-import com.gareng.app.gareng.utility.JwtUtils;
+import com.gareng.app.gareng.Utility.BcryptUtils;
+import com.gareng.app.gareng.Utility.FieldValidation;
+import com.gareng.app.gareng.Utility.JwtUtils;
 import com.gareng.app.gareng.http.entity.EditProfile.EditProfileRequest;
 import com.gareng.app.gareng.http.entity.EditProfile.EditProfileResponse;
 import com.gareng.app.gareng.http.entity.GetProfile.GetProfileResponse;

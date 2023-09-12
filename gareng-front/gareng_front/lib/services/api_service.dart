@@ -275,6 +275,8 @@ class APIService {
       'Authorization': token!
     };
 
+    debugPrint('masuk body: $reqBody');
+
     var url = Uri.http(Config.apiURL, Config.addTransaction);
 
     var response = await client.post(

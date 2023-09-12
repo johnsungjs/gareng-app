@@ -1,7 +1,7 @@
 package com.gareng.app.gareng.helper;
 
-import com.gareng.app.gareng.utility.FieldValidation;
-import com.gareng.app.gareng.utility.JwtUtils;
+import com.gareng.app.gareng.Utility.FieldValidation;
+import com.gareng.app.gareng.Utility.JwtUtils;
 import com.gareng.app.gareng.http.entity.AddWishlist.AddWishlistRequest;
 import com.gareng.app.gareng.http.entity.AddWishlist.AddWishlistResponse;
 import com.gareng.app.gareng.http.entity.DeleteWishlist.DeleteWishlistRequest;

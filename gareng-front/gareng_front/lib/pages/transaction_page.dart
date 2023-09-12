@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:gareng_front/constants/FormatCurrency.dart';
 import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/constants/itemsDummy.dart';
+import 'package:gareng_front/services/api_service.dart';
 import 'package:get/get.dart';
 
 import '../models/item_controller.dart';
@@ -13,6 +14,28 @@ class TransactionPage extends StatelessWidget {
   TransactionPage({super.key});
   final dataDummy = itemsDummy;
   final ItemController itemController = Get.put(ItemController());
+
+  final testBody = {
+    "transactionDate": "2023-09-09",
+    "payment": 100000,
+    "paymentMethod": "cash",
+    "items": [
+      {
+        "title": "Es Teh Manis",
+        "price": "2000",
+        "imageUrl": "http://placekitten.com/300/300",
+        "uuid": "bf654113-407c-4dbd-b888-487fea2ba6a5",
+        "amount": 2
+      },
+      {
+        "title": "Es Teh Pahit",
+        "price": "1000",
+        "imageUrl": "http://placekitten.com/300/300",
+        "uuid": "4b6a865e-d7c4-42c6-9bf4-643ff79a4cc9",
+        "amount": 3
+      }
+    ]
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -230,7 +253,11 @@ class TransactionPage extends StatelessWidget {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStatePropertyAll(customBlack)),
-                    onPressed: () {},
+                    onPressed: () {
+                      //cek itemController
+                      debugPrint('pay clicked');
+                      // APIService.handleTransaction(testBody);
+                    },
                     child: Text(
                       "Pay",
                       style: TextStyle(color: Colors.white),

@@ -80,7 +80,7 @@ class CartPage extends StatelessWidget {
                                     width: 20,
                                     child: Center(
                                         child: Text(
-                                            '${itemController.items[index]["quantity"]}'))),
+                                            '${itemController.items[index]["amount"]}'))),
                                 IconButton(
                                     onPressed: () {
                                       ItemData itemData = ItemData(

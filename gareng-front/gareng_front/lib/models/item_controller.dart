@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gareng_front/models/item_response_model.dart';
 import 'package:get/get.dart';
 
-
 class ItemController extends GetxController {
   RxBool hasMore = true.obs;
   RxInt page = 1.obs;
@@ -41,7 +40,7 @@ class ItemController extends GetxController {
         "title": itemData.title,
         "price": itemData.price,
         "imageUrl": itemData.imageUrl,
-        "quantity": 1
+        "amount": 1
       });
       Get.snackbar(
         "Items Added",
@@ -58,7 +57,7 @@ class ItemController extends GetxController {
         "title": itemData.title,
         "price": itemData.price,
         "imageUrl": itemData.imageUrl,
-        "quantity": dataExist["quantity"] + 1
+        "amount": dataExist["amount"] + 1
       };
     }
   }
@@ -68,7 +67,7 @@ class ItemController extends GetxController {
         _items.firstWhereOrNull((e) => e["uuid"] == itemData.uuid);
 
     if (dataExist != null) {
-      if (dataExist["quantity"] == 1) {
+      if (dataExist["amount"] == 1) {
         _items.removeWhere((e) => e["uuid"] == itemData.uuid);
       } else {
         final desiredIndex =
@@ -78,7 +77,7 @@ class ItemController extends GetxController {
           "title": itemData.title,
           "price": itemData.price,
           "imageUrl": itemData.imageUrl,
-          "quantity": dataExist["quantity"] - 1
+          "amount": dataExist["amount"] - 1
         };
       }
     } else {
@@ -89,7 +88,7 @@ class ItemController extends GetxController {
   get items => _items;
 
   get itemSubtotal =>
-      _items.map((e) => e["quantity"] * int.parse(e["price"])).toList();
+      _items.map((e) => e["amount"] * int.parse(e["price"])).toList();
 
 //total seluruh belanjaan
   String getTotalItem() {
@@ -97,11 +96,11 @@ class ItemController extends GetxController {
       return "0";
     } else {
       List itemSubtotal =
-          _items.map((e) => e["quantity"] * int.parse(e["price"])).toList();
+          _items.map((e) => e["amount"] * int.parse(e["price"])).toList();
       var subtotal = 0;
-      itemSubtotal.forEach((e) {
+      for (var e in itemSubtotal) {
         subtotal += e as int;
-      });
+      }
       return subtotal.toString();
     }
   }
@@ -117,9 +116,9 @@ class ItemController extends GetxController {
     final dataExist =
         _items.firstWhereOrNull((e) => e["uuid"] == itemData.uuid);
 
-    //kalau ada return quantity hashmap
+    //kalau ada return amount hashmap
     if (dataExist != null) {
-      return dataExist['quantity'];
+      return dataExist['amount'];
     } else {
       return 0;
     }

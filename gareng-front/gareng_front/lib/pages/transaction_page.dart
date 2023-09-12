@@ -13,8 +13,21 @@ import '../widgets/payment_methods.dart';
 class TransactionPage extends StatelessWidget {
   TransactionPage({super.key});
   final dataDummy = itemsDummy;
-  final ItemController itemController = Get.put(ItemController());
+  static final ItemController itemController = Get.put(ItemController());
 
+  static DateTime today = DateTime.now();
+  //coba cari items, ini yg sulit neh
+  // debugPrint('${itemController.items.toJson()}');
+
+  //total dapet
+  // debugPrint(
+  //     'total: ${itemController.countGrandTotal(10000, 0)}');
+  final reqBody = {
+    "transactionDate": "${today.year}-${today.month}-${today.day}",
+    "payment": itemController.countGrandTotal(10000, 0),
+    "paymentMethod": "cash",
+    "items": itemController.items
+  };
   final testBody = {
     "transactionDate": "2023-09-09",
     "payment": 100000,
@@ -27,13 +40,6 @@ class TransactionPage extends StatelessWidget {
         "uuid": "bf654113-407c-4dbd-b888-487fea2ba6a5",
         "amount": 2
       },
-      {
-        "title": "Es Teh Pahit",
-        "price": "1000",
-        "imageUrl": "http://placekitten.com/300/300",
-        "uuid": "4b6a865e-d7c4-42c6-9bf4-643ff79a4cc9",
-        "amount": 3
-      }
     ]
   };
 
@@ -254,9 +260,8 @@ class TransactionPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStatePropertyAll(customBlack)),
                     onPressed: () {
-                      //cek itemController
-                      debugPrint('pay clicked');
-                      // APIService.handleTransaction(testBody);
+                      //ini udah sukses, abis ini kasih animasi ya
+                      APIService.handleTransaction(reqBody);
                     },
                     child: Text(
                       "Pay",

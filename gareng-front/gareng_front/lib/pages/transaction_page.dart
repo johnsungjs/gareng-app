@@ -217,15 +217,8 @@ class TransactionPage extends StatelessWidget {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    PaymentMethods(),
-                                    PaymentMethods(),
-                                    PaymentMethods(),
-                                    PaymentMethods(),
-                                    PaymentMethods(),
-                                    PaymentMethods(),
-                                    PaymentMethods(),
-                                    PaymentMethods(),
-                                    PaymentMethods(),
+                                    PaymentMethods(paymentMethod: ""),
+                                    PaymentMethods(paymentMethod: "Cash"),
                                   ],
                                 ),
                               ),
@@ -238,9 +231,13 @@ class TransactionPage extends StatelessWidget {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(
-                          "Choose Payment Method",
-                          style: TextStyle(color: Colors.black),
+                        Obx(
+                          () => Text(
+                            itemController.paymentMethod.value.isNotEmpty
+                                ? itemController.paymentMethod.value
+                                : "Choose Payment Method",
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                         Icon(
                           Icons.arrow_drop_up,
@@ -259,9 +256,25 @@ class TransactionPage extends StatelessWidget {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStatePropertyAll(customBlack)),
-                    onPressed: () {
-                      //ini udah sukses, abis ini kasih animasi ya
-                      APIService.handleTransaction(reqBody);
+                    onPressed: () async {
+                      if (itemController.paymentMethod.isEmpty) {
+                        Get.dialog(AlertDialog(
+                          title: Text('Metode Pembayaran Harus Diisi'),
+                          actions: [
+                            TextButton(
+                                onPressed: () => Get.back(),
+                                child: const Text("Ok"))
+                          ],
+                        ));
+                      } else {
+                        final res = await APIService.handleTransaction(reqBody);
+                        if (res["status"] == 200) {
+                          //kasih alert ato modal ato apapunlah
+                          itemController.resetState();
+                          //navigate to homepage
+                          Get.offNamed("/success-pay");
+                        }
+                      }
                     },
                     child: Text(
                       "Pay",

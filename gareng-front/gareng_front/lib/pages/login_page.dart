@@ -166,31 +166,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 25, top: 10),
-              child: RichText(
-                text: TextSpan(
-                  style: const TextStyle(color: Colors.grey, fontSize: 14.0),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Forget Password?',
-                      style: TextStyle(
-                          color: Colors.white,
-                          decoration: TextDecoration.underline),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          print("forgot password clicked");
-                        },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
           SizedBox(
-            height: 20,
+            height: 30,
           ),
           Center(
             child: FormHelper.submitButton(
@@ -209,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                     });
 
                     if (response) {
-                      Get.toNamed('/home');
+                      Get.offNamed('/home');
                     } else {
                       FormHelper.showSimpleAlertDialog(context, Config.appName,
                           "Invalid Username or Password", "OK", () {

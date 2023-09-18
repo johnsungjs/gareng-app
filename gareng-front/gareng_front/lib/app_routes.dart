@@ -1,6 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gareng_front/pages/Core.dart';
 import 'package:gareng_front/pages/backupDetailItem.dart';
+import 'package:gareng_front/pages/success_pay_page.dart';
 import 'package:gareng_front/pages/transaction_page.dart';
 import 'package:gareng_front/pages/login_page.dart';
 import 'package:gareng_front/pages/register_page.dart';
@@ -11,19 +12,19 @@ appRoutes(Widget _defaultHome) => [
         name: '/',
         page: () => _defaultHome,
         transition: Transition.fadeIn,
-        transitionDuration: Duration(milliseconds: 500),
+        transitionDuration: const Duration(milliseconds: 500),
       ),
       GetPage(
         name: '/login',
-        page: () => LoginPage(),
+        page: () => const LoginPage(),
         transition: Transition.fadeIn,
-        transitionDuration: Duration(milliseconds: 500),
+        transitionDuration: const Duration(milliseconds: 500),
       ),
       GetPage(
         name: '/register',
-        page: () => RegisterPage(),
+        page: () => const RegisterPage(),
         transition: Transition.fadeIn,
-        transitionDuration: Duration(milliseconds: 500),
+        transitionDuration: const Duration(milliseconds: 500),
       ),
       GetPage(
         name: '/home',
@@ -31,12 +32,18 @@ appRoutes(Widget _defaultHome) => [
           selectedIndex: 0,
         ),
         transition: Transition.fadeIn,
-        transitionDuration: Duration(milliseconds: 500),
+        transitionDuration: const Duration(milliseconds: 500),
       ),
       GetPage(
         name: '/transaction',
         page: () => TransactionPage(),
         transition: Transition.downToUp,
-        transitionDuration: Duration(milliseconds: 500),
+        transitionDuration: const Duration(milliseconds: 500),
+      ),
+      GetPage(
+        name: '/success-pay',
+        page: () => SuccessPayPage(),
+        transition: Transition.downToUp,
+        transitionDuration: const Duration(milliseconds: 500),
       ),
     ];

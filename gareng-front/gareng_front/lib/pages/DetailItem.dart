@@ -126,6 +126,7 @@ class DetailItem extends StatelessWidget {
                               backgroundColor:
                                   const MaterialStatePropertyAll(Colors.black)),
                           onPressed: () {
+                            itemController.stateItemData.refresh();
                             Navigator.of(context).pop();
                           },
                           child: const Text(

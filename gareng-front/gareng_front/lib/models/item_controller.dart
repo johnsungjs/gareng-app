@@ -21,9 +21,19 @@ class ItemController extends GetxController {
     stateItemData.addAll(listItemData);
   }
 
+  void resetState() {
+    paymentMethod.value = "";
+    _items.value = [];
+  }
+
   RxString searchInput = "".obs;
   void setSearchInput(String inputUser) {
     searchInput.value = inputUser;
+  }
+
+  RxString paymentMethod = "".obs;
+  void setPaymentMethod(String method) {
+    paymentMethod.value = method;
   }
 
   final RxList _items = [].obs;

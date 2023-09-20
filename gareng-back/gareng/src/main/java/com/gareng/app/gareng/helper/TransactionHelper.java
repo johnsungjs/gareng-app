@@ -10,6 +10,7 @@ import com.gareng.app.gareng.http.entity.getTransaction.GetTransactionResponse;
 import com.gareng.app.gareng.http.entity.historyTransaction.HistoryTransactionResponse;
 import com.gareng.app.gareng.model.entity.TransactionHeader;
 import com.gareng.app.gareng.model.projection.TransactionDetailProjection;
+import com.gareng.app.gareng.model.projection.TransactionHeaderProjection;
 import com.gareng.app.gareng.model.repository.TransactionRepository;
 import com.gareng.app.gareng.Utility.JwtUtils;
 
@@ -65,7 +66,7 @@ public class TransactionHelper {
         }
         HistoryTransactionResponse response = new HistoryTransactionResponse();
         String userUUID = JwtUtils.getUuid(accessToken);
-        List<TransactionHeader> transactionHeaders = transactionRepository.getTransactionHeaderByUserUUID(userUUID);
+        List<TransactionHeaderProjection> transactionHeaders = transactionRepository.getTransactionHeaderByUserUUID(userUUID);
         response.setTransactionHeaders(transactionHeaders);
         return response;
     }

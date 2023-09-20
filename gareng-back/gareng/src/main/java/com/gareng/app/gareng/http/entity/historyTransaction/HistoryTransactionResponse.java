@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.gareng.app.gareng.model.entity.TransactionHeader;
+import com.gareng.app.gareng.model.projection.TransactionHeaderProjection;
 
 import lombok.Data;
 
@@ -12,5 +12,5 @@ import lombok.Data;
 @JsonPropertyOrder({"transactionHeaders"})
 public class HistoryTransactionResponse {
     @JsonProperty("transactionHeaders")
-    List<TransactionHeader> transactionHeaders;
+    List<TransactionHeaderProjection> transactionHeaders;
 }

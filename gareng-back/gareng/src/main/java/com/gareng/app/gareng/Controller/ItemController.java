@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -21,6 +22,11 @@ import com.gareng.app.gareng.model.repository.ItemRepository;
 public class ItemController {
     @Autowired
     ItemRepository itemRepository;
+
+    @GetMapping("/testconnection")
+    public ResponseEntity<Object> index(){
+        return ResponseHandler.generateResponse("Server up and running!", HttpStatus.OK, null);
+    }
 
     @CrossOrigin
     @PostMapping("/get")

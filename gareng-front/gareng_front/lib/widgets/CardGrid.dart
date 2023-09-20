@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gareng_front/constants/FormatCurrency.dart';
 import 'package:gareng_front/models/cart_controller.dart';
-import 'package:gareng_front/models/product_model.dart';
+import 'package:gareng_front/models/item_controller.dart';
 import 'package:gareng_front/pages/DetailItem.dart';
 import 'package:get/get.dart';
 
 class CardGrid extends StatelessWidget {
   CardGrid({super.key});
 
-  final cartController = Get.put(CartController());
-
-  final CartController controller = Get.find();
+  final ItemController itemController = Get.put(ItemController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +23,17 @@ class CardGrid extends StatelessWidget {
           mainAxisSpacing: 12,
           mainAxisExtent: 300,
         ),
-        itemCount: controller.filteredData.value.length,
+        itemCount: itemController.stateItemData.value.length,
         itemBuilder: (_, index) {
           return GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetailItem(
-                        item: Product.products[index],
-                      )));
+              Get.to(() =>
+                  DetailItem(itemData: itemController.stateItemData[index]));
             },
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: Colors.grey.shade100,
+                color: const Color.fromARGB(255, 208, 208, 208),
               ),
               child: Column(
                 children: [
@@ -45,7 +42,7 @@ class CardGrid extends StatelessWidget {
                         topLeft: Radius.circular(16),
                         topRight: Radius.circular(16)),
                     child: Image.network(
-                      controller.filteredData.value[index].images,
+                      itemController.stateItemData.value[index].imageUrl,
                       height: 170,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -54,21 +51,22 @@ class CardGrid extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          controller.filteredData.value[index].title,
+                          itemController.stateItemData.value[index].title,
                           style: const TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 18),
+                              fontWeight: FontWeight.w700, fontSize: 14),
                         ),
                         const SizedBox(
                           height: 8,
                           width: double.infinity,
                         ),
                         Text(
-                          controller.filteredData.value[index].price,
+                          FormatCurrency.indo.format(int.parse(
+                              itemController.stateItemData.value[index].price)),
                           style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
+                              fontSize: 14, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 8,
@@ -80,12 +78,23 @@ class CardGrid extends StatelessWidget {
                             IconButton(
                                 onPressed: () {},
                                 icon: const Icon(CupertinoIcons.heart)),
-                            IconButton(
-                                onPressed: () {
-                                  controller.addProduct(
-                                      controller.filteredData.value[index]);
-                                },
-                                icon: const Icon(CupertinoIcons.cart)),
+                            Stack(
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      itemController.addItem(itemController
+                                          .stateItemData.value[index]);
+                                      itemController.stateItemData.refresh();
+                                    },
+                                    icon: const Icon(CupertinoIcons.cart)),
+                                Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: Text(
+                                      '${itemController.getItemQuantity(itemController.stateItemData[index])}'),
+                                ),
+                              ],
+                            )
                           ],
                         )
                       ],

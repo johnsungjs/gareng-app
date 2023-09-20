@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
+import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/models/register_request_model.dart';
 import 'package:gareng_front/models/token_controller.dart';
 import 'package:gareng_front/services/api_service.dart';
@@ -24,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String? username;
   String? password;
   String? address;
-  String? gender;
+  String gender = 'male';
   int? age;
   String? email;
 
@@ -192,29 +193,63 @@ class _RegisterPageState extends State<RegisterPage> {
               borderRadius: 10,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: FormHelper.inputFieldWidget(
-              context,
-              "gender",
-              "Gender",
-              (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return "Gender can't be empty";
-                }
-                return null;
-              },
-              (onSavedVal) {
-                gender = onSavedVal;
-              },
-              borderFocusColor: Colors.white,
-              prefixIcon: const Icon(Icons.person_pin),
-              showPrefixIcon: true,
-              prefixIconColor: Colors.white,
-              borderColor: Colors.white,
-              textColor: Colors.white,
-              hintColor: Colors.white.withOpacity(0.7),
-              borderRadius: 10,
+          Container(
+            margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(15)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    "Gender: ",
+                    style: whiteText,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Radio<String>(
+                      value: 'male',
+                      fillColor: const MaterialStatePropertyAll(Colors.white),
+                      focusColor: Colors.white,
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value!;
+                          print(gender);
+                        });
+                      },
+                    ),
+                    const Text(
+                      "Male",
+                      style: whiteText,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Radio<String>(
+                      value: 'female',
+                      fillColor: const MaterialStatePropertyAll(Colors.white),
+                      focusColor: Colors.white,
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value!;
+                          print(gender);
+                        });
+                      },
+                    ),
+                    const Text(
+                      "Female",
+                      style: whiteText,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           Padding(
@@ -284,11 +319,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       username: username!,
                       password: password!,
                       address: address!,
-                      gender: gender!,
+                      gender: gender,
                       age: age!,
                       email: email!);
 
-                  tokenController.register(model).then((response) {
+                  APIService.register(model).then((response) {
                     setState(() {
                       isAPICallProcess = false;
                     });
@@ -306,7 +341,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         Navigator.pop(context);
                       });
                     }
+                  }).catchError((err) {
+                    setState(() {
+                      isAPICallProcess = false;
+                    });
+                    FormHelper.showSimpleAlertDialog(context, Config.appName,
+                        "The Service has been turned off", "OK", () {
+                      Navigator.pop(context);
+                    });
                   });
+                  ;
                 }
               },
               btnColor: HexColor("#283B71"),

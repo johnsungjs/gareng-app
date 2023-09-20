@@ -3,7 +3,10 @@ package com.gareng.app.gareng.helper;
 import java.util.UUID;
 
 import com.gareng.app.gareng.Utility.BcryptUtils;
+import com.gareng.app.gareng.Utility.FieldValidation;
 import com.gareng.app.gareng.Utility.JwtUtils;
+import com.gareng.app.gareng.http.entity.EditProfile.EditProfileRequest;
+import com.gareng.app.gareng.http.entity.EditProfile.EditProfileResponse;
 import com.gareng.app.gareng.http.entity.GetProfile.GetProfileResponse;
 import com.gareng.app.gareng.http.entity.Login.LoginRequest;
 import com.gareng.app.gareng.http.entity.Login.LoginResponse;
@@ -94,6 +97,31 @@ public class UserHelper {
             response.setAge(profile.getAge());
             response.setEmail(profile.getEmail());
         }
+        return response;
+    }
+
+    public static EditProfileResponse editProfile(String accessToken, UserRepository userRepository
+    , EditProfileRequest editProfileRequest) throws Exception{
+        EditProfileResponse response = new EditProfileResponse();
+        if(!JwtUtils.validateIsUserToken(accessToken)){
+            throw new Exception("Invalid Token");
+        }
+        try {
+            FieldValidation.fieldValidation(editProfileRequest);
+        } catch (Exception e) {
+            throw new Exception("Validation error. "+e.getMessage());
+        }
+
+        User user = userRepository.findByUuid(JwtUtils.getUuid(accessToken));
+
+        user.setGender(editProfileRequest.getGender());
+        user.setAge(Integer.parseInt(editProfileRequest.getAge()));
+        user.setAddress(editProfileRequest.getAddress());
+        user.setEmail(editProfileRequest.getEmail());
+
+        userRepository.save(user);
+        
+        response.setMessage("Success update profile");
         return response;
     }
 }

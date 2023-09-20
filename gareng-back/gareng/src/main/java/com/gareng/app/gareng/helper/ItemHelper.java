@@ -11,7 +11,8 @@ import com.gareng.app.gareng.model.repository.ItemRepository;
 
 public class ItemHelper{
     public static GetItemResponse getItem(ItemRepository itemRepository, 
-        GetItemRequest getItemRequest, String accessToken) throws Exception{
+        GetItemRequest getItemRequest, String accessToken, boolean isWishlist) throws Exception{
+        
         if(!JwtUtils.validateToken(accessToken)){
             throw new Exception("Invalid Token");
         }
@@ -22,16 +23,35 @@ public class ItemHelper{
         List<ItemProjection> itemProjection;
         if(paginateUtils.getLimit().equals(0) && paginateUtils.getPageAt().equals(0)){
             if(!paginateUtils.getSearch().isEmpty()){
-                itemProjection = itemRepository.getItemView(paginateUtils.getSearch());
+                if(isWishlist){
+                    itemProjection = itemRepository.getItemViewWishlist(JwtUtils.getUuid(accessToken),
+                        paginateUtils.getSearch());
+                }else{
+                    itemProjection = itemRepository.getItemView(paginateUtils.getSearch());
+                }
             }else{
-                itemProjection = itemRepository.getItemView();
-            }   
+                if(isWishlist){
+                    itemProjection = itemRepository.getItemViewWishlist(JwtUtils.getUuid(accessToken));
+                }else{
+                    itemProjection = itemRepository.getItemView();
+                }
+            }
         }else{
             if(!paginateUtils.getSearch().isEmpty()){
-                itemProjection = itemRepository.getItemView(
-                    paginateUtils.getLimit(),paginateUtils.getOffset(),paginateUtils.getSearch());
+                if(isWishlist){
+                    itemProjection = itemRepository.getItemViewWishlist(JwtUtils.getUuid(accessToken),
+                        paginateUtils.getLimit(),paginateUtils.getOffset(),paginateUtils.getSearch());
+                }else{
+                    itemProjection = itemRepository.getItemView(
+                        paginateUtils.getLimit(),paginateUtils.getOffset(),paginateUtils.getSearch());
+                }
             }else{
-                itemProjection = itemRepository.getItemView(paginateUtils.getLimit(),paginateUtils.getOffset());
+                if(isWishlist){
+                    itemProjection = itemRepository.getItemViewWishlist(JwtUtils.getUuid(accessToken),
+                        paginateUtils.getLimit(),paginateUtils.getOffset());
+                }else{
+                    itemProjection = itemRepository.getItemView(paginateUtils.getLimit(),paginateUtils.getOffset());
+                }
             }
         }
         

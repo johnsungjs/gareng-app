@@ -1,6 +1,9 @@
+DROP TABLE IF EXISTS `TransactionDetail`;
 DROP TABLE IF EXISTS `USERS`;
 DROP TABLE IF EXISTS `RefreshTokenHistory`;
 DROP TABLE IF EXISTS `ITEMS`;
+DROP TABLE IF EXISTS `WISHLIST`;
+DROP TABLE IF EXISTS `TransactionHeader`;
 
 CREATE TABLE IF NOT EXISTS `USERS`(
     `id` BIGINT primary key auto_increment,
@@ -13,9 +16,12 @@ CREATE TABLE IF NOT EXISTS `USERS`(
     `email` VARCHAR(50)
 );
 
+INSERT INTO USERS (`id`,`uuid`,`username`,`password`,`address`,`gender`,`age`,`email`)
+VALUES('1','88fc35f8-c8c4-47f4-b134-00b3754142ca','MasGareng','123','boulevard hijau harapan indah','male','69','gareng@gmail.com');
+
 CREATE TABLE IF NOT EXISTS `RefreshTokenHistory`(
     `id` BIGINT primary key auto_increment,
-    `token` VARCHAR(150)
+    `token` VARCHAR(220)
 );
 
 CREATE TABLE IF NOT EXISTS `ITEMS`(
@@ -63,3 +69,48 @@ INSERT INTO ITEMS (`id`,`uuid`,`title`,`price`,`imageUrl`)
 VALUES('18','62b98c51-5faa-49bb-9d48-e9c493ead45d','Bihun Goreng Kucing','21000','http://placekitten.com/300/300');
 INSERT INTO ITEMS (`id`,`uuid`,`title`,`price`,`imageUrl`)
 VALUES('19','0b5858e3-1018-4f7b-86a6-e7764ea9029f','Bihun Goreng Babi','50000','http://placekitten.com/300/300');
+
+CREATE TABLE IF NOT EXISTS `Wishlist`(
+    `id` BIGINT primary key auto_increment,
+    `useruuid` VARCHAR(40),
+    `itemuuid` VARCHAR(40)
+);
+
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('1','88fc35f8-c8c4-47f4-b134-00b3754142ca','5d1bdeaa-246e-439d-ac13-7ef5bc72203e');
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('2','88fc35f8-c8c4-47f4-b134-00b3754142ca','0b5858e3-1018-4f7b-86a6-e7764ea9029f');
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('3','88fc35f8-c8c4-47f4-b134-00b3754142ca','59f75496-d1ae-47b7-8a4e-22cfc2caafac');
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('4','88fc35f8-c8c4-47f4-b134-00b3754142ca','584a354c-67e4-4a49-8b58-cba95b8749a1');
+INSERT INTO WISHLIST (`id`,`useruuid`,`itemuuid`)
+VALUES('5','88fc35f8-c8c4-47f4-b134-00b3754142ca','f3853ce1-678d-4ea6-b0ce-2b6e2b17f0a1');
+
+CREATE TABLE IF NOT EXISTS `TransactionHeader`(
+    `id` bigint primary key auto_increment,
+    `transactionDate` datetime,
+    `payment` int,
+    `paymentmethod` VARCHAR(10),
+    `UUID` VARCHAR(40),
+    `useruuid` VARCHAR(40)
+);
+
+INSERT INTO TRANSACTIONHEADER(`id`,`transactionDate`,`payment`,`paymentmethod`,`UUID`,`useruuid`)
+VALUES('69','2023-08-31','50000','cash','88fc35f8-c8c4-47f4-b134-00b3754142ci','88fc35f8-c8c4-47f4-b134-00b3754142ca');
+
+CREATE TABLE IF NOT EXISTS `TransactionDetail`(
+    `id` bigint primary key auto_increment,
+    `transactionHeaderId` bigint not null,
+    `itemId` bigint not null,
+    `amount` int,
+    foreign key(`transactionHeaderId`) references `TransactionHeader`(`id`),
+    foreign key(`itemId`) references `items`(`id`)
+);
+
+INSERT INTO TRANSACTIONDETAIL(`id`,`transactionHeaderId`,`itemId`,`amount`)
+VALUES('101','69','1','1');
+INSERT INTO TRANSACTIONDETAIL(`id`,`transactionHeaderId`,`itemId`,`amount`)
+VALUES('102','69','2','1');
+INSERT INTO TRANSACTIONDETAIL(`id`,`transactionHeaderId`,`itemId`,`amount`)
+VALUES('103','69','3','1');

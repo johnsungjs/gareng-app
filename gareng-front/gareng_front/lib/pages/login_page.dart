@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
               "Password",
               (onValidateVal) {
                 if (onValidateVal.isEmpty) {
-                  return "Password can\'t be empty";
+                  return "Password can't be empty";
                 }
                 return null;
               },
@@ -203,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                   LoginRequestModel model = LoginRequestModel(
                       username: username!, password: password!);
 
-                  tokenController.login(model).then((response) {
+                  APIService.login(model).then((response) {
                     setState(() {
                       isAPICallProcess = false;
                     });

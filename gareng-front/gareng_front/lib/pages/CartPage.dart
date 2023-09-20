@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gareng_front/models/cart_controller.dart';
-import 'package:gareng_front/models/product_model.dart';
+import 'package:gareng_front/models/item_response_model.dart';
 import 'package:get/get.dart';
 import 'package:gareng_front/widgets/CardTotal.dart';
 
+import '../models/item_controller.dart';
+
 class CartPage extends StatelessWidget {
-  final CartController controller = Get.find();
+  final ItemController itemController = Get.put(ItemController());
 
   CartPage({super.key});
 
@@ -14,10 +15,10 @@ class CartPage extends StatelessWidget {
     return Obx(
       () => Column(
         children: [
-          SizedBox(
-            height: 30,
+          const SizedBox(
+            height: 40,
           ),
-          Text(
+          const Text(
             "Your Shopping Cart",
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
           ),
@@ -25,20 +26,78 @@ class CartPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   SizedBox(
-                    height: 600,
+                    height: 500,
                     child: ListView.builder(
-                        itemCount: controller.products.length,
+                        itemCount: itemController.items.length,
                         itemBuilder: (_, index) {
-                          return CartProductCard(
-                            controller: controller,
-                            product: controller.products.keys.toList()[index],
-                            quantity:
-                                controller.products.values.toList()[index],
-                            index: index,
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24.0, vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // CircleAvatar(
+                                //   radius: 40,
+                                //   backgroundImage: NetworkImage(
+                                //       itemController.items[index]["imageUrl"]),
+                                // ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  child: Image.network(
+                                    itemController.items[index]["imageUrl"],
+                                    width: 75,
+                                    height: 75,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      itemController.items[index]["title"]),
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      ItemData itemData = ItemData(
+                                          title: itemController.items[index]
+                                              ["title"],
+                                          price: itemController.items[index]
+                                              ["price"],
+                                          uuid: itemController.items[index]
+                                              ["uuid"],
+                                          imageUrl: itemController.items[index]
+                                              ["imageUrl"]);
+
+                                      itemController.removeItem(itemData);
+                                    },
+                                    icon: const Icon(Icons.remove_circle)),
+                                SizedBox(
+                                    width: 20,
+                                    child: Center(
+                                        child: Text(
+                                            '${itemController.items[index]["quantity"]}'))),
+                                IconButton(
+                                    onPressed: () {
+                                      ItemData itemData = ItemData(
+                                          title: itemController.items[index]
+                                              ["title"],
+                                          price: itemController.items[index]
+                                              ["price"],
+                                          uuid: itemController.items[index]
+                                              ["uuid"],
+                                          imageUrl: itemController.items[index]
+                                              ["imageUrl"]);
+
+                                      itemController.addItem(itemData);
+                                    },
+                                    icon: const Icon(Icons.add_circle)),
+                              ],
+                            ),
                           );
                         }),
                   ),
@@ -47,53 +106,6 @@ class CartPage extends StatelessWidget {
             ),
           ),
           CardTotal()
-        ],
-      ),
-    );
-  }
-}
-
-class CartProductCard extends StatelessWidget {
-  final CartController controller;
-  final Product product;
-  final int quantity;
-  final int index;
-
-  const CartProductCard(
-      {super.key,
-      required this.controller,
-      required this.product,
-      required this.quantity,
-      required this.index});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundImage: NetworkImage(product.images),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Expanded(
-            child: Text(product.title),
-          ),
-          IconButton(
-              onPressed: () {
-                controller.removeProduct(product);
-              },
-              icon: Icon(Icons.remove_circle)),
-          Text("$quantity"),
-          IconButton(
-              onPressed: () {
-                controller.addProduct(product);
-              },
-              icon: Icon(Icons.add_circle)),
         ],
       ),
     );

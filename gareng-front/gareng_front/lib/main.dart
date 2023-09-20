@@ -3,19 +3,24 @@ import 'package:gareng_front/app_routes.dart';
 import 'package:gareng_front/pages/Core.dart';
 import 'package:gareng_front/pages/login_page.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/token_controller.dart';
 
-Widget _defaultHome = LoginPage();
+Widget _defaultHome = const LoginPage();
 
 void main() async {
-  final TokenController tokenController = Get.put(TokenController());
-  bool _result = tokenController.isLoggedIn();
-  if (_result) {
-    _defaultHome = Core(selectedIndex: 0);
-  } else {
-    _defaultHome = LoginPage();
-  }
+  // WidgetsFlutterBinding.ensureInitialized();
+
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
+  // String? token = prefs.getString('token');
+  // if (token != null) {
+  //   debugPrint('token ada isi: $token');
+  //   _defaultHome = Core(selectedIndex: 0);
+  // } else {
+  //   debugPrint('token null: $token');
+  //   _defaultHome = const LoginPage();
+  // }
 
   runApp(const MyApp());
 }

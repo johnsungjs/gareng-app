@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gareng_front/constants/itemsDummy.dart';
 import 'package:gareng_front/models/item_controller.dart';
 import 'package:gareng_front/models/item_response_model.dart';
 import 'package:get/get.dart';
-
 import '../constants/custom_style.dart';
 
 class CheckoutCart extends StatelessWidget {
@@ -12,7 +10,6 @@ class CheckoutCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dataDummy = itemsDummy;
     return Obx(() => SizedBox(
           height: MediaQuery.of(context).size.height / 2,
           child: ListView.builder(

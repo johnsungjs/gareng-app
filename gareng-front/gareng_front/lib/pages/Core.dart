@@ -5,6 +5,8 @@ import 'package:gareng_front/pages/HomePage.dart';
 
 import 'package:gareng_front/pages/AccountPage.dart';
 import 'package:gareng_front/pages/WishlistPage.dart';
+import 'package:gareng_front/pages/transaction_page.dart';
+import 'package:gareng_front/widgets/floating_order_button.dart';
 import 'package:get/get.dart';
 
 class Core extends StatefulWidget {
@@ -46,6 +48,10 @@ class _CoreState extends State<Core> {
       },
       child: SafeArea(
         child: Scaffold(
+          floatingActionButton:
+              _selectedIndex == 0 ? FloatingOrderButton() : null,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           body: Center(
             child: _widgetOptions.elementAt(_selectedIndex),
           ),

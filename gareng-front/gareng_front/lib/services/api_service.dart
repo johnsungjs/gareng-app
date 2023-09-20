@@ -127,6 +127,7 @@ class APIService {
         body: jsonEncode(model.toJson()),
       );
       debugPrint('hasil result status tokenrefresh: ${response.body}');
+      getAllItem(model);
     }
     return itemResponseModelFromJson(response.body);
   }

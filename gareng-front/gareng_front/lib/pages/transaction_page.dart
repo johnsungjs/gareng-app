@@ -13,21 +13,35 @@ import '../widgets/payment_methods.dart';
 class TransactionPage extends StatelessWidget {
   TransactionPage({super.key});
   final dataDummy = itemsDummy;
-  static final ItemController itemController = Get.put(ItemController());
+  final ItemController itemController = Get.put(ItemController());
 
   static DateTime today = DateTime.now();
-  //coba cari items, ini yg sulit neh
-  // debugPrint('${itemController.items.toJson()}');
 
-  //total dapet
-  // debugPrint(
-  //     'total: ${itemController.countGrandTotal(10000, 0)}');
-  final reqBody = {
-    "transactionDate": "${today.year}-${today.month}-${today.day}",
-    "payment": itemController.countGrandTotal(10000, 0),
-    "paymentMethod": "cash",
-    "items": itemController.items
-  };
+  void handleTransactionPage() async {
+    if (itemController.paymentMethod.isEmpty) {
+      Get.dialog(AlertDialog(
+        title: Text('Metode Pembayaran Harus Diisi'),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text("Ok"))
+        ],
+      ));
+    } else {
+      final reqBody = {
+        "transactionDate": "${today.year}-${today.month}-${today.day}",
+        "payment": itemController.countGrandTotal(10000, 0),
+        "paymentMethod": "cash",
+        "items": itemController.items
+      };
+
+      final res = await APIService.handleTransaction(reqBody);
+      if (res["status"] == 200) {
+        itemController.resetState();
+        //navigate to homepage
+        Get.offNamed("/success-pay");
+      }
+    }
+  }
+
   final testBody = {
     "transactionDate": "2023-09-09",
     "payment": 100000,
@@ -256,26 +270,7 @@ class TransactionPage extends StatelessWidget {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStatePropertyAll(customBlack)),
-                    onPressed: () async {
-                      if (itemController.paymentMethod.isEmpty) {
-                        Get.dialog(AlertDialog(
-                          title: Text('Metode Pembayaran Harus Diisi'),
-                          actions: [
-                            TextButton(
-                                onPressed: () => Get.back(),
-                                child: const Text("Ok"))
-                          ],
-                        ));
-                      } else {
-                        final res = await APIService.handleTransaction(reqBody);
-                        if (res["status"] == 200) {
-                          //kasih alert ato modal ato apapunlah
-                          itemController.resetState();
-                          //navigate to homepage
-                          Get.offNamed("/success-pay");
-                        }
-                      }
-                    },
+                    onPressed: handleTransactionPage,
                     child: Text(
                       "Pay",
                       style: TextStyle(color: Colors.white),

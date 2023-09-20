@@ -2,7 +2,6 @@
 //
 //     final getWishlistResponse = getWishlistResponseFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 GetWishlistResponse getWishlistResponseFromJson(String str) =>

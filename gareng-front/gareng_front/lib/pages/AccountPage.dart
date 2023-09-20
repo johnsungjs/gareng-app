@@ -24,14 +24,14 @@ class AccountPage extends StatelessWidget {
     return Obx(
       () => Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          Text(
+          const Text(
             "Your Account",
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -164,13 +164,13 @@ class AccountPage extends StatelessWidget {
                                     RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8))),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(customBlack)),
+                                backgroundColor: const MaterialStatePropertyAll(
+                                    customBlack)),
                             onPressed: () {
                               APIService apiService = APIService();
                               apiService.logout();
                             },
-                            child: Text(
+                            child: const Text(
                               'Logout',
                               style: TextStyle(color: Colors.white),
                             ),

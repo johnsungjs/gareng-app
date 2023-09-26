@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.gareng.app.gareng.model.entity.TransactionHeader;
 import com.gareng.app.gareng.model.projection.TransactionDetailProjection;
+import com.gareng.app.gareng.model.projection.TransactionHeaderProjection;
 
 import jakarta.transaction.Transactional;
 
@@ -36,11 +37,11 @@ public interface TransactionRepository extends CrudRepository<TransactionHeader,
     @Query(
         nativeQuery = true,
         value =
-            "SELECT th.id, th.transactionDate, th.payment, th.paymentmethod, th.UUID, th.userUUID "+
+            "SELECT th.id, th.transactionDate, th.payment, th.paymentmethod, th.UUID, th.userUUID, 'http://localhost:8080/transaction/restaurantimage' as imageUrl "+
             "FROM TransactionHeader th "+
             "WHERE th.userUUID = ?1"
     )
-    List<TransactionHeader> getTransactionHeaderByUserUUID(String userUUID);
+    List<TransactionHeaderProjection> getTransactionHeaderByUserUUID(String userUUID);
 
     @Modifying
     @Query(

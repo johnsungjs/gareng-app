@@ -1,7 +1,10 @@
-package com.gareng.app.gareng.Controller;
+package com.gareng.app.gareng.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gareng.app.gareng.helper.TransactionHelper;
@@ -78,4 +82,13 @@ public class TransactionController {
         }
         return ResponseHandler.generateResponse(responseMessage, httpStatus, historyTransactionResponse);
     }
+
+    @GetMapping("/restaurantimage")
+    @ResponseBody
+    public ResponseEntity<Resource> getImageWithMediaType(){
+        // InputStream in = getClass().getResourceAsStream("/main/resources/restaurant.jpg");
+        Resource imageResource = new ClassPathResource("restaurant.jpg");
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageResource);
+    }
+    //D:\ALVIN\self_learning\gareng-app\gareng-back\gareng\src\main\resources\restaurant.jpg
 }

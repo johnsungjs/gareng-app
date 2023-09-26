@@ -7,6 +7,7 @@ import 'package:gareng_front/services/api_service.dart';
 import 'package:gareng_front/widgets/CardGrid.dart';
 import 'package:gareng_front/widgets/Carousel.dart';
 import 'package:gareng_front/widgets/SearchWidget.dart';
+import 'package:gareng_front/widgets/user_greetings.dart';
 import 'package:get/get.dart';
 
 import '../models/item_request_model.dart';
@@ -99,25 +100,8 @@ class _HomePageState extends State<HomePage> {
               controller: scrollController,
               child: Column(children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Hello ${profilecontroller.dataUser["username"]}!",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w700),
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => NotificationPage()));
-                          },
-                          icon:
-                              const Icon(Icons.notifications_active_outlined)),
-                    ],
-                  ),
-                ),
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: UserGreetings()),
                 const Carousel(),
                 const SizedBox(
                   height: 20,

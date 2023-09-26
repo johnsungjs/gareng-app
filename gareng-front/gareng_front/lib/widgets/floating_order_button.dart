@@ -9,13 +9,15 @@ class FloatingOrderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => FloatingActionButton.extended(
-          onPressed: () {
-            Get.toNamed("/transaction");
-          },
-          backgroundColor: Colors.amber,
-          label: Text(
-              '${itemController.items.value.length} item selected with total ${itemController.total}'),
-        ));
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Get.toNamed("/transaction");
+      },
+      backgroundColor: Colors.black,
+      label: Text(
+        '${itemController.items.value.length} item selected with total ${itemController.total}',
+        style: TextStyle(fontSize: 12),
+      ),
+    );
   }
 }

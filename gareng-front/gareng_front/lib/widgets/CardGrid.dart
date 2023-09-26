@@ -33,7 +33,13 @@ class CardGrid extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: const Color.fromARGB(255, 208, 208, 208),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.shade300,
+                      spreadRadius: 2,
+                      blurRadius: 3)
+                ],
+                color: const Color.fromARGB(255, 255, 255, 255),
               ),
               child: Column(
                 children: [
@@ -85,6 +91,8 @@ class CardGrid extends StatelessWidget {
                                       itemController.addItem(itemController
                                           .stateItemData.value[index]);
                                       itemController.stateItemData.refresh();
+                                      itemController.setIsFabVisible(true);
+                                      itemController.isFabVisible.refresh();
                                     },
                                     icon: const Icon(CupertinoIcons.cart)),
                                 Positioned(

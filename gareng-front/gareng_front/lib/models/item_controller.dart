@@ -133,6 +133,14 @@ class ItemController extends GetxController {
       return 0;
     }
   }
+
+  final RxBool _isFabVisible = false.obs;
+
+  get isFabVisible => _isFabVisible;
+
+  void setIsFabVisible(bool condition) {
+    _isFabVisible.value = condition;
+  }
 }
 
 

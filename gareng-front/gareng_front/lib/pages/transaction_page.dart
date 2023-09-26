@@ -20,7 +20,7 @@ class TransactionPage extends StatelessWidget {
   void handleTransactionPage() async {
     if (itemController.paymentMethod.isEmpty) {
       Get.dialog(AlertDialog(
-        title: Text('Metode Pembayaran Harus Diisi'),
+        title: const Text('Metode Pembayaran Harus Diisi'),
         actions: [
           TextButton(onPressed: () => Get.back(), child: const Text("Ok"))
         ],

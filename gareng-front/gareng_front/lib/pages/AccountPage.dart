@@ -46,7 +46,7 @@ class AccountPage extends StatelessWidget {
                       radius: 100,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -57,7 +57,7 @@ class AccountPage extends StatelessWidget {
                                   return AccountEditPage();
                                 }));
                               },
-                              icon: Icon(Icons.edit))
+                              icon: const Icon(Icons.edit))
                         ],
                       ),
                     ),

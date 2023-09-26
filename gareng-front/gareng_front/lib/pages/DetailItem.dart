@@ -28,7 +28,7 @@ class DetailItem extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Get.back();
                 },
                 icon: const Icon(Icons.arrow_back),
                 color: Colors.black,

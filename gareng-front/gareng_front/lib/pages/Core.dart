@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/models/item_controller.dart';
-import 'package:gareng_front/pages/CartPage.dart';
 import 'package:gareng_front/pages/HomePage.dart';
 
 import 'package:gareng_front/pages/AccountPage.dart';
 import 'package:gareng_front/pages/WishlistPage.dart';
+import 'package:gareng_front/pages/history_page.dart';
 import 'package:gareng_front/widgets/floating_order_button.dart';
 import 'package:get/get.dart';
 
 class Core extends StatefulWidget {
-  int selectedIndex;
+  final int selectedIndex;
   Core({super.key, required this.selectedIndex});
   // final cartController = Get.put(CartController());
 
@@ -31,7 +30,7 @@ class _CoreState extends State<Core> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    CartPage(),
+    HistoryPage(),
     WishlistPage(),
     AccountPage(),
   ];
@@ -86,7 +85,7 @@ class _CoreState extends State<Core> {
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart), label: 'Cart'),
+                  icon: Icon(Icons.history), label: 'History'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.favorite), label: 'Wishlist'),
               BottomNavigationBarItem(

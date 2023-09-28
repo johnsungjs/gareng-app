@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gareng_front/app_routes.dart';
-import 'package:gareng_front/pages/Core.dart';
 import 'package:gareng_front/pages/login_page.dart';
-import 'package:gareng_front/pages/success_pay_page.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'models/token_controller.dart';
 
 Widget _defaultHome = const LoginPage();
-
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
 

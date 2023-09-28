@@ -16,9 +16,9 @@ class CheckoutCart extends StatelessWidget {
               itemCount: itemController.items.length,
               itemBuilder: (_, index) {
                 return Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   width: MediaQuery.of(context).size.width * 0.9,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Column(
                     children: [
                       Row(

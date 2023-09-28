@@ -11,5 +11,6 @@ class Config {
   static const String refreshToken = '/authentication/refreshtoken';
   static const String editProfile = '/profile/update';
   static const String addTransaction = '/transaction/add';
+  static const String getHistoryTransaction = '/transaction/history';
   // static const String userProfileAPI = 'localhost:8080';
 }

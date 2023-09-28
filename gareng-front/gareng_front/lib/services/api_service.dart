@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
+import 'package:gareng_front/models/history_response_model.dart';
 import 'package:gareng_front/models/item_request_model.dart';
 import 'package:gareng_front/models/item_response_model.dart';
 import 'package:gareng_front/models/login_request_model.dart';
@@ -116,7 +117,7 @@ class APIService {
 
       Map<String, String> requestHeaders = {
         'Content-Type': 'application/json',
-        'Authorization': refreshToken!
+        'Authorization': refreshToken
       };
 
       var url = Uri.http(Config.apiURL, Config.getItem);
@@ -291,5 +292,45 @@ class APIService {
     //nongolin snackbar jika response status 200
 
     return jsonDecode(response.body);
+  }
+
+  Future<HistoryResponseModel> getHistoryTransaction() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    String? refreshToken = prefs.getString('refreshToken');
+    debugPrint('refreshToken: $token');
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': token!
+    };
+
+    var url = Uri.http(Config.apiURL, Config.getHistoryTransaction);
+
+    var response = await http.Client().get(
+      url,
+      headers: requestHeaders,
+    );
+
+    debugPrint('response getHistoryTransaction: ${response.body}');
+
+    if (response.statusCode == 500) {
+      debugPrint('token expired with statuscode: ${response.statusCode}');
+
+      Map<String, String> requestHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': refreshToken!
+      };
+
+      var url = Uri.http(Config.apiURL, Config.getItem);
+
+      response = await http.Client().post(
+        url,
+        headers: requestHeaders,
+      );
+      debugPrint('hasil result status tokenrefresh: ${response.body}');
+      getHistoryTransaction();
+    }
+    return historyResponseModelFromJson(response.body);
   }
 }

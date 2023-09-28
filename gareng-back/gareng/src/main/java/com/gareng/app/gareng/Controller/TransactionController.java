@@ -83,6 +83,7 @@ public class TransactionController {
         return ResponseHandler.generateResponse(responseMessage, httpStatus, historyTransactionResponse);
     }
 
+    @CrossOrigin
     @GetMapping("/restaurantimage")
     @ResponseBody
     public ResponseEntity<Resource> getImageWithMediaType(){

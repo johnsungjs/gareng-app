@@ -6,183 +6,107 @@ import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/models/profile_controller.dart';
 import 'package:gareng_front/pages/AccountEditPage.dart';
 import 'package:gareng_front/services/api_service.dart';
+import 'package:gareng_front/widgets/account_button.dart';
+import 'package:gareng_front/widgets/my_profile_card.dart';
 import 'package:get/get.dart';
 
 class AccountPage extends StatelessWidget {
-  AccountPage({super.key});
-
-  final dataUser = accountDummy;
-  final ProfileController profileController = Get.put(ProfileController());
-
-  final styleLeftText =
-      const TextStyle(fontSize: 18, fontWeight: FontWeight.w100);
-  final styleRightText =
-      const TextStyle(fontSize: 18, fontWeight: FontWeight.w700);
+  const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Column(
+    return SingleChildScrollView(
+      child: Column(
         children: [
-          const SizedBox(
-            height: 30,
-          ),
-          const Text(
-            "Your Account",
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "My Profile",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+              ),
+            ),
           ),
           const SizedBox(
             height: 20,
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(dataUser["image"]),
-                      radius: 100,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return AccountEditPage();
-                                }));
-                              },
-                              icon: const Icon(Icons.edit))
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child: Text("user name", style: styleLeftText)),
-                          Text(
-                            ": ",
-                            style: styleRightText,
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: Text(
-                                  profileController.dataUser["username"],
-                                  style: styleRightText)),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child:
-                                  Text("Jenis Klamin", style: styleLeftText)),
-                          Text(
-                            ": ",
-                            style: styleRightText,
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: Text(profileController.dataUser["gender"],
-                                  style: styleRightText)),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child: Text("Usia", style: styleLeftText)),
-                          Text(
-                            ": ",
-                            style: styleRightText,
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: Text(profileController.dataUser["age"],
-                                  style: styleRightText)),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child: Text("Alamat", style: styleLeftText)),
-                          Text(
-                            ": ",
-                            style: styleRightText,
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: Text(profileController.dataUser["address"],
-                                  style: styleRightText)),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child: Text("Email", style: styleLeftText)),
-                          Text(
-                            ": ",
-                            style: styleRightText,
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: Text(profileController.dataUser["email"],
-                                  style: styleRightText)),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 300,
-                          child: TextButton(
-                            style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8))),
-                                backgroundColor: const MaterialStatePropertyAll(
-                                    customBlack)),
-                            onPressed: () {
-                              APIService apiService = APIService();
-                              apiService.logout();
-                            },
-                            child: const Text(
-                              'Logout',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
+          MyProfileCard(),
+          const SizedBox(
+            height: 20,
           ),
+          const AccountButton(
+              buttonText: 'Food App Plus', icon: Icon(Icons.workspace_premium)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'My Order History', icon: Icon(Icons.list)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'My Subscription', icon: Icon(Icons.calendar_month)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'Payment Methods', icon: Icon(Icons.payment)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'Food Donation', icon: Icon(Icons.card_giftcard)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(buttonText: 'Promos', icon: Icon(Icons.discount)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'For Business', icon: Icon(Icons.business)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(buttonText: 'Help', icon: Icon(Icons.help)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'QnA', icon: Icon(Icons.question_answer)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'Request', icon: Icon(Icons.request_page)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'Customer Service', icon: Icon(Icons.calendar_month)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'My Subscription', icon: Icon(Icons.calendar_month)),
+          const Divider(
+            height: 2,
+            thickness: 1,
+          ),
+          const AccountButton(
+              buttonText: 'My Subscription', icon: Icon(Icons.calendar_month)),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:gareng_front/pages/AccountEditPage.dart';
 import 'package:gareng_front/pages/Core.dart';
 import 'package:gareng_front/pages/backupDetailItem.dart';
 import 'package:gareng_front/pages/success_pay_page.dart';
@@ -44,6 +45,12 @@ appRoutes(Widget _defaultHome) => [
         name: '/success-pay',
         page: () => SuccessPayPage(),
         transition: Transition.downToUp,
+        transitionDuration: const Duration(milliseconds: 500),
+      ),
+      GetPage(
+        name: '/account-edit',
+        page: () => AccountEditPage(),
+        transition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 500),
       ),
     ];

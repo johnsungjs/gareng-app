@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gareng_front/constants/accountDummy.dart';
+import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/models/product_model.dart';
 import 'package:gareng_front/models/profile_edit_request.dart';
@@ -65,14 +66,14 @@ class _AccountEditPageState extends State<AccountEditPage> {
       child: Scaffold(
           body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          Text(
+          const Text(
             "Edit Your Account",
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -86,7 +87,7 @@ class _AccountEditPageState extends State<AccountEditPage> {
                       backgroundImage: NetworkImage(dataUser["image"]),
                       radius: 100,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Padding(
@@ -116,38 +117,46 @@ class _AccountEditPageState extends State<AccountEditPage> {
                           Expanded(
                               flex: 1,
                               child: Text("Gender", style: styleLeftText)),
-                          Row(
-                            children: [
-                              Radio<String>(
-                                value: 'male',
-                                fillColor: const MaterialStatePropertyAll(
-                                    Colors.black),
-                                focusColor: Colors.black,
-                                groupValue: radioGender,
-                                onChanged: (value) {
-                                  setState(() {
-                                    radioGender = value!;
-                                  });
-                                },
-                              ),
-                              const Text("Male"),
-                              const SizedBox(
-                                width: 30,
-                              ),
-                              Radio<String>(
-                                value: 'female',
-                                fillColor: const MaterialStatePropertyAll(
-                                    Colors.black),
-                                focusColor: Colors.black,
-                                groupValue: radioGender,
-                                onChanged: (value) {
-                                  setState(() {
-                                    radioGender = value!;
-                                  });
-                                },
-                              ),
-                              const Text("Female"),
-                            ],
+                          Text(
+                            ": ",
+                            style: styleRightText,
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Radio<String>(
+                                  value: 'male',
+                                  fillColor: const MaterialStatePropertyAll(
+                                      Colors.black),
+                                  focusColor: Colors.black,
+                                  groupValue: radioGender,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      radioGender = value!;
+                                    });
+                                  },
+                                ),
+                                const Text("Male"),
+                                const SizedBox(
+                                  width: 30,
+                                ),
+                                Radio<String>(
+                                  value: 'female',
+                                  fillColor: const MaterialStatePropertyAll(
+                                      Colors.black),
+                                  focusColor: Colors.black,
+                                  groupValue: radioGender,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      radioGender = value!;
+                                    });
+                                  },
+                                ),
+                                const Text("Female"),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -212,13 +221,16 @@ class _AccountEditPageState extends State<AccountEditPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ElevatedButton(
+                        TextButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(customBlack)),
                             onPressed: () {
                               //inputUser["username"]!.text
                               ProfileEditRequest model = ProfileEditRequest(
@@ -230,11 +242,11 @@ class _AccountEditPageState extends State<AccountEditPage> {
                               apiService.editProfile(model);
                               Get.back();
                             },
-                            child: Text(
+                            child: const Text(
                               "Save",
-                              style: styleRightText,
+                              style: TextStyle(color: Colors.white),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         TextButton(

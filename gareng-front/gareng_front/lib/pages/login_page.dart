@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
+import 'package:gareng_front/constants/custom_style.dart';
 import 'package:gareng_front/models/login_request_model.dart';
 import 'package:gareng_front/models/token_controller.dart';
 import 'package:gareng_front/services/api_service.dart';
 import 'package:get/get.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
-import 'package:snippet_coder_utils/hex_color.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -39,15 +39,15 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: HexColor("#283B71"),
+        backgroundColor: Colors.white,
         body: ProgressHUD(
           key: UniqueKey(),
+          inAsyncCall: isAPICallProcess,
+          opacity: 0.3,
           child: Form(
             key: globalFormKey,
             child: _loginUI(context),
           ),
-          inAsyncCall: isAPICallProcess,
-          opacity: 0.3,
         ),
       ),
     );
@@ -59,58 +59,56 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 6,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.white,
-                  Colors.white,
-                ],
-              ),
-              // borderRadius: BorderRadius.only(
-              //   bottomLeft: Radius.circular(100),
-              //   bottomRight: Radius.circular(100),
-              // ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          const Padding(
+            padding: EdgeInsets.only(left: 8, top: 60),
+            child: Row(
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Gareng App",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: HexColor("#283B71")),
-                  ),
-                )
+                Icon(
+                  Icons.food_bank_outlined,
+                  size: 75,
+                ),
+                Text(
+                  "Food App",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 45,
+                      color: customBlack),
+                ),
               ],
             ),
           ),
           const Padding(
             padding: EdgeInsets.only(
               left: 20,
-              bottom: 20,
+              bottom: 0,
               top: 50,
             ),
             child: Text(
               "Login",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Colors.white),
+                  fontSize: 45,
+                  color: customBlack),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 20,
+              bottom: 20,
+              top: 0,
+            ),
+            child: Text(
+              "Sign in to continue",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                  color: customBlack),
             ),
           ),
           FormHelper.inputFieldWidget(
             context,
-            // const Icon(Icons.people),
             "username",
-            "UserName",
+            "Username",
             (onValidateVal) {
               if (onValidateVal.isEmpty) {
                 return "Username can't be empty";
@@ -120,20 +118,19 @@ class _LoginPageState extends State<LoginPage> {
             (onSavedVal) {
               username = onSavedVal;
             },
-            borderFocusColor: Colors.white,
+            borderFocusColor: customBlack,
             prefixIcon: const Icon(Icons.person),
             showPrefixIcon: true,
-            prefixIconColor: Colors.white,
-            borderColor: Colors.white,
-            textColor: Colors.white,
-            hintColor: Colors.white.withOpacity(0.7),
+            prefixIconColor: customBlack,
+            borderColor: Colors.grey,
+            textColor: customBlack,
+            hintColor: customBlack.withOpacity(0.7),
             borderRadius: 10,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: FormHelper.inputFieldWidget(
               context,
-              // const Icon(Icons.people),
               "password",
               "Password",
               (onValidateVal) {
@@ -145,13 +142,13 @@ class _LoginPageState extends State<LoginPage> {
               (onSavedVal) {
                 password = onSavedVal;
               },
-              borderFocusColor: Colors.white,
-              prefixIcon: const Icon(Icons.person),
+              borderFocusColor: customBlack,
+              prefixIcon: const Icon(Icons.lock),
               showPrefixIcon: true,
-              prefixIconColor: Colors.white,
-              borderColor: Colors.white,
-              textColor: Colors.white,
-              hintColor: Colors.white.withOpacity(0.7),
+              prefixIconColor: customBlack,
+              borderColor: Colors.grey,
+              textColor: customBlack,
+              hintColor: customBlack.withOpacity(0.7),
               borderRadius: 10,
               obscureText: hidePassword,
               suffixIcon: IconButton(
@@ -160,69 +157,73 @@ class _LoginPageState extends State<LoginPage> {
                     hidePassword = !hidePassword;
                   });
                 },
-                color: Colors.white,
+                color: customBlack,
                 icon: Icon(
                     hidePassword ? Icons.visibility_off : Icons.visibility),
               ),
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
-          Center(
-            child: FormHelper.submitButton(
-              "Login",
-              () {
-                if (validateAndSave()) {
-                  setState(() {
-                    isAPICallProcess = true;
-                  });
-                  LoginRequestModel model = LoginRequestModel(
-                      username: username!, password: password!);
-
-                  APIService.login(model).then((response) {
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: SizedBox(
+              width: double.infinity,
+              child: FormHelper.submitButton(
+                "Login",
+                () {
+                  if (validateAndSave()) {
                     setState(() {
-                      isAPICallProcess = false;
+                      isAPICallProcess = true;
                     });
+                    LoginRequestModel model = LoginRequestModel(
+                        username: username!, password: password!);
 
-                    if (response) {
-                      Get.offNamed('/home');
-                    } else {
+                    APIService.login(model).then((response) {
+                      setState(() {
+                        isAPICallProcess = false;
+                      });
+
+                      if (response) {
+                        Get.offNamed('/home');
+                      } else {
+                        FormHelper.showSimpleAlertDialog(
+                            context,
+                            Config.appName,
+                            "Invalid Username or Password",
+                            "OK", () {
+                          Navigator.pop(context);
+                        });
+                      }
+                    }).catchError((err) {
+                      setState(() {
+                        isAPICallProcess = false;
+                      });
                       FormHelper.showSimpleAlertDialog(context, Config.appName,
-                          "Invalid Username or Password", "OK", () {
+                          "The Service has been turned off", "OK", () {
                         Navigator.pop(context);
                       });
-                    }
-                  }).catchError((err) {
-                    setState(() {
-                      isAPICallProcess = false;
                     });
-                    FormHelper.showSimpleAlertDialog(context, Config.appName,
-                        "The Service has been turned off", "OK", () {
-                      Navigator.pop(context);
-                    });
-                  });
-                }
-              },
-              btnColor: HexColor("#283B71"),
-              borderColor: Colors.white,
-              txtColor: Colors.white,
-              borderRadius: 10,
+                  }
+                },
+                btnColor: customBlack,
+                borderColor: customBlack,
+                txtColor: Colors.white,
+                borderRadius: 10,
+              ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Center(
+          const Center(
             child: Text(
               "OR",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: Colors.white),
+                  color: customBlack),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Align(
@@ -231,13 +232,13 @@ class _LoginPageState extends State<LoginPage> {
               text: TextSpan(
                 style: const TextStyle(color: Colors.grey, fontSize: 14.0),
                 children: <TextSpan>[
-                  TextSpan(
+                  const TextSpan(
                     text: "Don't have an account? ",
                   ),
                   TextSpan(
                     text: 'Sign up',
-                    style: TextStyle(
-                        color: Colors.white,
+                    style: const TextStyle(
+                        color: customBlack,
                         decoration: TextDecoration.underline),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
@@ -248,6 +249,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 50,
+          )
         ],
       ),
     );

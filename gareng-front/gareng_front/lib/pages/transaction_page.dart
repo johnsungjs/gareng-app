@@ -116,8 +116,8 @@ class TransactionPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.card_giftcard),
-                    SizedBox(
+                    const Icon(Icons.card_giftcard),
+                    const SizedBox(
                       width: 10,
                     ),
                     Expanded(
@@ -142,14 +142,14 @@ class TransactionPage extends StatelessWidget {
                             backgroundColor:
                                 MaterialStatePropertyAll(customBlack)),
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           'apply',
                           style: TextStyle(color: Colors.white),
                         ))
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Obx(
@@ -158,7 +158,7 @@ class TransactionPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Subtotal'),
+                      const Text('Subtotal'),
                       Text(FormatCurrency.indo
                           .format(int.parse(itemController.total))),
                     ],
@@ -170,7 +170,7 @@ class TransactionPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Delivery fee'),
+                    const Text('Delivery fee'),
                     Text(FormatCurrency.indo.format(10000)),
                   ],
                 ),
@@ -180,10 +180,10 @@ class TransactionPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Discount'),
+                    const Text('Discount'),
                     Text(
                       '-${FormatCurrency.indo.format(0)}',
-                      style: TextStyle(color: Colors.red),
+                      style: const TextStyle(color: Colors.red),
                     ),
                   ],
                 ),
@@ -196,14 +196,15 @@ class TransactionPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Total',
                       style: TextStyle(
                           color: customBlack, fontWeight: FontWeight.bold),
                     ),
                     Obx(() => Text(
-                        '${FormatCurrency.indo.format(itemController.countGrandTotal(10000, 0))}',
-                        style: TextStyle(
+                        FormatCurrency.indo
+                            .format(itemController.countGrandTotal(10000, 0)),
+                        style: const TextStyle(
                             color: customBlack, fontWeight: FontWeight.bold))),
                   ],
                 ),
@@ -212,7 +213,7 @@ class TransactionPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: TextButton(
                     style: ButtonStyle(
-                      side: MaterialStatePropertyAll(BorderSide(
+                      side: const MaterialStatePropertyAll(BorderSide(
                           color: customBlack,
                           width: 1.0,
                           style: BorderStyle.solid)),
@@ -228,7 +229,7 @@ class TransactionPage extends StatelessWidget {
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
                                     PaymentMethods(paymentMethod: ""),
@@ -242,7 +243,7 @@ class TransactionPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Obx(
@@ -250,17 +251,17 @@ class TransactionPage extends StatelessWidget {
                             itemController.paymentMethod.value.isNotEmpty
                                 ? itemController.paymentMethod.value
                                 : "Choose Payment Method",
-                            style: TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black),
                           ),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.arrow_drop_up,
                           color: Colors.black,
                         )
                       ],
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               SizedBox(
@@ -271,7 +272,7 @@ class TransactionPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStatePropertyAll(customBlack)),
                     onPressed: handleTransactionPage,
-                    child: Text(
+                    child: const Text(
                       "Pay",
                       style: TextStyle(color: Colors.white),
                     )),

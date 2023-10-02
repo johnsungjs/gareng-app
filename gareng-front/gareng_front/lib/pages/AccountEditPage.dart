@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import '../models/profile_controller.dart';
 
 class AccountEditPage extends StatefulWidget {
-  AccountEditPage({super.key});
+  const AccountEditPage({super.key});
 
   @override
   State<AccountEditPage> createState() => _AccountEditPageState();

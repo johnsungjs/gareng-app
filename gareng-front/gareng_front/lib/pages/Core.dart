@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gareng_front/models/item_controller.dart';
-import 'package:gareng_front/pages/HomePage.dart';
-
-import 'package:gareng_front/pages/AccountPage.dart';
-import 'package:gareng_front/pages/WishlistPage.dart';
+import 'package:gareng_front/pages/home_page.dart';
 import 'package:gareng_front/pages/history_page.dart';
+import 'package:gareng_front/pages/wishlist_page.dart';
 import 'package:gareng_front/widgets/floating_order_button.dart';
 import 'package:get/get.dart';
+
+import 'account_page.dart';
 
 class Core extends StatefulWidget {
   final int selectedIndex;
@@ -24,15 +24,16 @@ class _CoreState extends State<Core> {
 
   @override
   void initState() {
+    super.initState();
     // TODO: implement initState
     _selectedIndex = widget.selectedIndex;
   }
 
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    HistoryPage(),
+    const HistoryPage(),
     WishlistPage(),
-    AccountPage(),
+    const AccountPage(),
   ];
 
   void _onItemTapped(int index) {

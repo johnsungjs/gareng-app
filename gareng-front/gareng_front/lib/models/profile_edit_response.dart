@@ -2,7 +2,6 @@
 //
 //     final profileEditResponse = profileEditResponseFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ProfileEditResponse profileEditResponseFromJson(String str) =>

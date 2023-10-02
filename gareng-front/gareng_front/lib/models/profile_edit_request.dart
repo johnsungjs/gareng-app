@@ -2,7 +2,6 @@
 //
 //     final profileEditRequest = profileEditRequestFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ProfileEditRequest profileEditRequestFromJson(String str) =>

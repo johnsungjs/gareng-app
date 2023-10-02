@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({super.key});
@@ -86,8 +84,8 @@ class _CarouselState extends State<Carousel> {
                           right: 8, left: 8, top: 36, bottom: 12),
                       decoration: BoxDecoration(
                           image: const DecorationImage(
-                              image: NetworkImage(
-                                'https://i0.wp.com/pointsgeek.id/wp-content/uploads/2018/09/Go-Food.jpg?fit=1200%2C628&ssl=1',
+                              image: AssetImage(
+                                'assets/images/carousel.png',
                               ),
                               fit: BoxFit.fill),
                           borderRadius: BorderRadius.circular(24),

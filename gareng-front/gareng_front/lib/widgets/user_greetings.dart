@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gareng_front/models/profile_controller.dart';
-import 'package:gareng_front/pages/NotificationPage.dart';
+import 'package:gareng_front/pages/notification_page.dart';
 import 'package:get/get.dart';
 
 class UserGreetings extends StatelessWidget {

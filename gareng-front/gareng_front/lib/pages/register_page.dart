@@ -7,7 +7,6 @@ import 'package:gareng_front/services/api_service.dart';
 import 'package:get/get.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
-import 'package:snippet_coder_utils/hex_color.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

@@ -2,7 +2,6 @@
 //
 //     final itemRequestModel = itemRequestModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ItemRequestModel itemRequestModelFromJson(String str) =>

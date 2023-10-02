@@ -2,7 +2,6 @@
 //
 //     final refreshTokenResponseModel = refreshTokenResponseModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 RefreshTokenResponseModel refreshTokenResponseModelFromJson(String str) =>

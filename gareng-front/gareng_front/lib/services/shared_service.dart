@@ -25,6 +25,7 @@ class SharedService {
 
       return loginResponseJson(cacheData.syncData);
     }
+    return null;
   }
 
   static Future<void> setLoginDetails(LoginResponseModel model) async {

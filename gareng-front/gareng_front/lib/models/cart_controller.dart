@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:gareng_front/models/product_model.dart';
 import 'package:get/get.dart';
 

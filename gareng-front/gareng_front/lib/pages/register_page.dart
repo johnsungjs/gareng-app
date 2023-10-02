@@ -43,15 +43,15 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: HexColor("#283B71"),
+        backgroundColor: Colors.white,
         body: ProgressHUD(
           key: UniqueKey(),
+          inAsyncCall: isAPICallProcess,
+          opacity: 0.3,
           child: Form(
             key: globalFormKey,
             child: _registerUI(context),
           ),
-          inAsyncCall: isAPICallProcess,
-          opacity: 0.3,
         ),
       ),
     );
@@ -63,36 +63,21 @@ class _RegisterPageState extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 6,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.white,
-                  Colors.white,
-                ],
-              ),
-              // borderRadius: BorderRadius.only(
-              //   bottomLeft: Radius.circular(100),
-              //   bottomRight: Radius.circular(100),
-              // ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          const Padding(
+            padding: EdgeInsets.only(left: 8, top: 60),
+            child: Row(
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Gareng App",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: HexColor("#283B71")),
-                  ),
-                )
+                Icon(
+                  Icons.food_bank_outlined,
+                  size: 75,
+                ),
+                Text(
+                  "Food App",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 45,
+                      color: customBlack),
+                ),
               ],
             ),
           ),
@@ -106,8 +91,8 @@ class _RegisterPageState extends State<RegisterPage> {
               "Register",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Colors.white),
+                  fontSize: 45,
+                  color: customBlack),
             ),
           ),
           FormHelper.inputFieldWidget(
@@ -123,13 +108,13 @@ class _RegisterPageState extends State<RegisterPage> {
             (onSavedVal) {
               username = onSavedVal;
             },
-            borderFocusColor: Colors.white,
+            borderFocusColor: customBlack,
             prefixIcon: const Icon(Icons.person),
             showPrefixIcon: true,
-            prefixIconColor: Colors.white,
-            borderColor: Colors.white,
-            textColor: Colors.white,
-            hintColor: Colors.white.withOpacity(0.7),
+            prefixIconColor: customBlack,
+            borderColor: Colors.grey,
+            textColor: customBlack,
+            hintColor: customBlack.withOpacity(0.7),
             borderRadius: 10,
           ),
           Padding(
@@ -147,13 +132,13 @@ class _RegisterPageState extends State<RegisterPage> {
               (onSavedVal) {
                 password = onSavedVal;
               },
-              borderFocusColor: Colors.white,
+              borderFocusColor: customBlack,
               prefixIcon: const Icon(Icons.password),
               showPrefixIcon: true,
-              prefixIconColor: Colors.white,
-              borderColor: Colors.white,
-              textColor: Colors.white,
-              hintColor: Colors.white.withOpacity(0.7),
+              prefixIconColor: customBlack,
+              borderColor: Colors.grey,
+              textColor: customBlack,
+              hintColor: customBlack.withOpacity(0.7),
               borderRadius: 10,
               obscureText: hidePassword,
               suffixIcon: IconButton(
@@ -162,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     hidePassword = !hidePassword;
                   });
                 },
-                color: Colors.white,
+                color: customBlack,
                 icon: Icon(
                     hidePassword ? Icons.visibility_off : Icons.visibility),
               ),
@@ -183,13 +168,13 @@ class _RegisterPageState extends State<RegisterPage> {
               (onSavedVal) {
                 address = onSavedVal;
               },
-              borderFocusColor: Colors.white,
+              borderFocusColor: customBlack,
               prefixIcon: const Icon(Icons.person_pin),
               showPrefixIcon: true,
-              prefixIconColor: Colors.white,
-              borderColor: Colors.white,
-              textColor: Colors.white,
-              hintColor: Colors.white.withOpacity(0.7),
+              prefixIconColor: customBlack,
+              borderColor: Colors.grey,
+              textColor: customBlack,
+              hintColor: customBlack.withOpacity(0.7),
               borderRadius: 10,
             ),
           ),
@@ -197,55 +182,56 @@ class _RegisterPageState extends State<RegisterPage> {
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
+                border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(15)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: 20),
                   child: Text(
                     "Gender: ",
-                    style: whiteText,
+                    style: blackText,
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Radio<String>(
                       value: 'male',
-                      fillColor: const MaterialStatePropertyAll(Colors.white),
-                      focusColor: Colors.white,
+                      fillColor: const MaterialStatePropertyAll(customBlack),
+                      focusColor: customBlack,
                       groupValue: gender,
                       onChanged: (value) {
                         setState(() {
                           gender = value!;
-                          print(gender);
                         });
                       },
                     ),
                     const Text(
                       "Male",
-                      style: whiteText,
+                      style: blackText,
                     ),
                     const SizedBox(
                       width: 30,
                     ),
                     Radio<String>(
                       value: 'female',
-                      fillColor: const MaterialStatePropertyAll(Colors.white),
-                      focusColor: Colors.white,
+                      fillColor: const MaterialStatePropertyAll(customBlack),
+                      focusColor: customBlack,
                       groupValue: gender,
                       onChanged: (value) {
                         setState(() {
                           gender = value!;
-                          print(gender);
                         });
                       },
                     ),
                     const Text(
                       "Female",
-                      style: whiteText,
+                      style: blackText,
                     ),
                   ],
                 ),
@@ -268,13 +254,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 age = int.parse(onSavedVal);
               },
               isNumeric: true,
-              borderFocusColor: Colors.white,
+              borderFocusColor: customBlack,
               prefixIcon: const Icon(Icons.add_task_outlined),
               showPrefixIcon: true,
-              prefixIconColor: Colors.white,
-              borderColor: Colors.white,
-              textColor: Colors.white,
-              hintColor: Colors.white.withOpacity(0.7),
+              prefixIconColor: customBlack,
+              borderColor: Colors.grey,
+              textColor: customBlack,
+              hintColor: customBlack.withOpacity(0.7),
               borderRadius: 10,
             ),
           ),
@@ -293,72 +279,80 @@ class _RegisterPageState extends State<RegisterPage> {
               (onSavedVal) {
                 email = onSavedVal;
               },
-              borderFocusColor: Colors.white,
+              borderFocusColor: customBlack,
               prefixIcon: const Icon(Icons.mail),
               showPrefixIcon: true,
-              prefixIconColor: Colors.white,
-              borderColor: Colors.white,
-              textColor: Colors.white,
-              hintColor: Colors.white.withOpacity(0.7),
+              prefixIconColor: customBlack,
+              borderColor: Colors.grey,
+              textColor: customBlack,
+              hintColor: customBlack.withOpacity(0.7),
               borderRadius: 10,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Center(
-            child: FormHelper.submitButton(
-              "Sign Up",
-              () {
-                if (validateAndSave()) {
-                  setState(() {
-                    isAPICallProcess = true;
-                  });
-
-                  RegisterRequestModel model = RegisterRequestModel(
-                      username: username!,
-                      password: password!,
-                      address: address!,
-                      gender: gender,
-                      age: age!,
-                      email: email!);
-
-                  APIService.register(model).then((response) {
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: SizedBox(
+              width: double.infinity,
+              child: FormHelper.submitButton(
+                "Sign Up",
+                () {
+                  if (validateAndSave()) {
                     setState(() {
-                      isAPICallProcess = false;
+                      isAPICallProcess = true;
                     });
 
-                    if (response.data != null) {
-                      FormHelper.showSimpleAlertDialog(
-                          context, Config.appName, "Success Add User", "OK",
-                          () {
-                        // Navigator.pop(context);
-                        Get.toNamed('/login');
+                    RegisterRequestModel model = RegisterRequestModel(
+                        username: username!,
+                        password: password!,
+                        address: address!,
+                        gender: gender,
+                        age: age!,
+                        email: email!);
+
+                    APIService.register(model).then((response) {
+                      setState(() {
+                        isAPICallProcess = false;
                       });
-                    } else {
-                      FormHelper.showSimpleAlertDialog(
-                          context, Config.appName, response.message, "OK", () {
+
+                      if (response.data != null) {
+                        FormHelper.showSimpleAlertDialog(
+                            context, Config.appName, "Success Add User", "OK",
+                            () {
+                          // Navigator.pop(context);
+                          Get.toNamed('/login');
+                        });
+                      } else {
+                        FormHelper.showSimpleAlertDialog(
+                            context, Config.appName, response.message, "OK",
+                            () {
+                          Navigator.pop(context);
+                        });
+                      }
+                    }).catchError((err) {
+                      setState(() {
+                        isAPICallProcess = false;
+                      });
+                      FormHelper.showSimpleAlertDialog(context, Config.appName,
+                          "The Service has been turned off", "OK", () {
                         Navigator.pop(context);
                       });
-                    }
-                  }).catchError((err) {
-                    setState(() {
-                      isAPICallProcess = false;
                     });
-                    FormHelper.showSimpleAlertDialog(context, Config.appName,
-                        "The Service has been turned off", "OK", () {
-                      Navigator.pop(context);
-                    });
-                  });
-                  ;
-                }
-              },
-              btnColor: HexColor("#283B71"),
-              borderColor: Colors.white,
-              txtColor: Colors.white,
-              borderRadius: 10,
+                    ;
+                  }
+                },
+                btnColor: customBlack,
+                borderColor: customBlack,
+                txtColor: Colors.white,
+                borderRadius: 10,
+              ),
             ),
           ),
+          const SizedBox(
+            height: 50,
+          )
         ],
       ),
     );

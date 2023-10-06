@@ -66,9 +66,17 @@ class _RegisterPageState extends State<RegisterPage> {
             padding: EdgeInsets.only(left: 8, top: 60),
             child: Row(
               children: [
-                Icon(
-                  Icons.food_bank_outlined,
-                  size: 75,
+                // Icon(
+                //   Icons.food_bank_outlined,
+                //   size: 75,
+                // ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/logoFood.png'),
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                  ),
                 ),
                 Text(
                   "Food App",

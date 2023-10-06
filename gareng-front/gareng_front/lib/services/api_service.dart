@@ -289,6 +289,9 @@ class APIService {
 
     debugPrint('response login: ${response.body}');
 
+    if (response.statusCode == 500) {
+      Get.toNamed('/login');
+    }
     //nongolin snackbar jika response status 200
 
     return jsonDecode(response.body);

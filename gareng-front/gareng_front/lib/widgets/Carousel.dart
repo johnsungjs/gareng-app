@@ -89,7 +89,7 @@ class _CarouselState extends State<Carousel> {
                               ),
                               fit: BoxFit.fill),
                           borderRadius: BorderRadius.circular(24),
-                          color: Colors.amber),
+                          color: Colors.white),
                     ),
                   ));
             },

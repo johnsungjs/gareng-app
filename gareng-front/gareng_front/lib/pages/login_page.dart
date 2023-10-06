@@ -59,22 +59,38 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 8, top: 60),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.food_bank_outlined,
-                  size: 75,
-                ),
-                Text(
-                  "Food App",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 45,
-                      color: customBlack),
-                ),
-              ],
+          // const Padding(
+          //   padding: EdgeInsets.only(left: 8, top: 60),
+          //   child: Row(
+          //     children: [
+          //       Icon(
+          //         Icons.food_bank_outlined,
+          //         size: 75,
+          //       ),
+          //       Text(
+          //         "Food App",
+          //         style: TextStyle(
+          //             fontWeight: FontWeight.bold,
+          //             fontSize: 45,
+          //             color: customBlack),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          const SizedBox(
+            height: 50,
+          ),
+          const Center(
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/logoFood.png'),
+              radius: 100,
+              backgroundColor: Colors.white,
+            ),
+          ),
+          const Center(
+            child: Text(
+              'Food App',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45),
             ),
           ),
           const Padding(
@@ -243,6 +259,11 @@ class _LoginPageState extends State<LoginPage> {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         Get.toNamed("/register");
+                        // if (Get.previousRoute.isNotEmpty) {
+                        //   Get.back();
+                        // } else {
+                        //   Get.toNamed("/register");
+                        // }
                       },
                   ),
                 ],

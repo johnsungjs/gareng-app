@@ -1,3 +1,4 @@
+// ignore: implementation_imports
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gareng_front/pages/account_edit_page.dart';
 import 'package:gareng_front/pages/core.dart';
@@ -7,10 +8,10 @@ import 'package:gareng_front/pages/login_page.dart';
 import 'package:gareng_front/pages/register_page.dart';
 import 'package:get/get.dart';
 
-appRoutes(Widget _defaultHome) => [
+appRoutes(Widget defaultHome) => [
       GetPage(
         name: '/',
-        page: () => _defaultHome,
+        page: () => defaultHome,
         transition: Transition.downToUp,
         transitionDuration: const Duration(milliseconds: 500),
       ),
@@ -28,7 +29,7 @@ appRoutes(Widget _defaultHome) => [
       ),
       GetPage(
         name: '/home',
-        page: () => Core(
+        page: () => const Core(
           selectedIndex: 0,
         ),
         transition: Transition.fadeIn,
@@ -48,7 +49,7 @@ appRoutes(Widget _defaultHome) => [
       ),
       GetPage(
         name: '/account-edit',
-        page: () => AccountEditPage(),
+        page: () => const AccountEditPage(),
         transition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 500),
       ),

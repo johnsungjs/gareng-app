@@ -1,4 +1,4 @@
-import 'package:gareng_front/constants/itemsDummy.dart';
+import 'package:gareng_front/constants/items_dummy.dart';
 
 class Product {
   final int id;

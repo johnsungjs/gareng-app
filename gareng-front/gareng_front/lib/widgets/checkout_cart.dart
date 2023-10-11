@@ -33,7 +33,7 @@ class CheckoutCart extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -43,7 +43,8 @@ class CheckoutCart extends StatelessWidget {
                                 Text(itemController.items[index]["title"]),
                                 Text(
                                   itemController.items[index]["price"],
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -53,7 +54,7 @@ class CheckoutCart extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             'Order Quantity:',
                             style: TextStyle(
                                 color: customBlack,
@@ -74,7 +75,7 @@ class CheckoutCart extends StatelessWidget {
 
                                   itemController.removeItem(itemData);
                                 },
-                                icon: Icon(Icons.remove_circle_outline),
+                                icon: const Icon(Icons.remove_circle_outline),
                               ),
                               SizedBox(
                                   width: 20,
@@ -93,7 +94,7 @@ class CheckoutCart extends StatelessWidget {
                                           ["imageUrl"]);
                                   itemController.addItem(itemData);
                                 },
-                                icon: Icon(Icons.add_circle),
+                                icon: const Icon(Icons.add_circle),
                               ),
                             ],
                           ),

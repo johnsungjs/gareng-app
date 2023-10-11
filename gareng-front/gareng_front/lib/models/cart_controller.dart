@@ -2,7 +2,7 @@ import 'package:gareng_front/models/product_model.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  var _products = {}.obs;
+  final _products = {}.obs;
 
   void addProduct(Product product) {
     if (_products.containsKey(product)) {
@@ -62,7 +62,7 @@ class CartController extends GetxController {
     }
   }
 
-  RxList _filteredData = [].obs;
+  final RxList _filteredData = [].obs;
 
   @override
   void onInit() {

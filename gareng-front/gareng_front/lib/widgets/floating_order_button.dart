@@ -16,7 +16,7 @@ class FloatingOrderButton extends StatelessWidget {
       backgroundColor: Colors.black,
       label: Text(
         '${itemController.items.value.length} item selected with total ${itemController.total}',
-        style: TextStyle(fontSize: 12),
+        style: const TextStyle(fontSize: 12),
       ),
     );
   }

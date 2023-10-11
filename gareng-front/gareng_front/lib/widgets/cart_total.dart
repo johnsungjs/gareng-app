@@ -19,7 +19,7 @@ class CardTotal extends StatelessWidget {
             children: [
               Text(
                 "Rp.${itemController.total}",
-                style: TextStyle(fontSize: 28),
+                style: const TextStyle(fontSize: 28),
               ),
               const Text(
                 "Total Price",

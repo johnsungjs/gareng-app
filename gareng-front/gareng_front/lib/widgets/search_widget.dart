@@ -22,7 +22,7 @@ class SearchWidget extends StatelessWidget {
         search: itemController.searchInput.value);
     ItemRequestModel model = ItemRequestModel(getItemPagination: reqbody);
     apiService.getAllItem(model).then((e) => {
-          if (e.data.itemData.length == 0)
+          if (e.data.itemData.isEmpty)
             {
               itemController.hasMore.value = false,
             }

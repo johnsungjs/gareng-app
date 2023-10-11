@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class TokenController extends GetxController {
-  RxString _token = "".obs;
-  RxString _refreshToken = "".obs;
+  final RxString _token = "".obs;
+  final RxString _refreshToken = "".obs;
 
   RxMap loginDetails = {}.obs;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
-import 'package:gareng_front/constants/FormatCurrency.dart';
-import 'package:gareng_front/constants/FormatDate.dart';
+import 'package:gareng_front/constants/format_currency.dart';
+import 'package:gareng_front/constants/format_date.dart';
 import 'package:gareng_front/models/history_response_model.dart';
 
 import '../constants/custom_style.dart';
@@ -75,8 +75,8 @@ class HistoryList extends StatelessWidget {
                   ),
                   TextButton(
                     style: ButtonStyle(
-                        padding: const MaterialStatePropertyAll(
-                            const EdgeInsets.all(10)),
+                        padding:
+                            const MaterialStatePropertyAll(EdgeInsets.all(10)),
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                         backgroundColor:

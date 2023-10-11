@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gareng_front/constants/notifDummy.dart';
+import 'package:gareng_front/constants/notif_dummy.dart';
 import 'package:gareng_front/models/cart_controller.dart';
 import 'package:gareng_front/widgets/notif_container.dart';
 import 'package:get/get.dart';
@@ -31,7 +31,7 @@ class NotificationPage extends StatelessWidget {
                 "Notifications",
                 style: TextStyle(color: Colors.grey[900]),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               )
             ],

@@ -8,7 +8,7 @@ import 'package:gareng_front/widgets/search_widget.dart';
 import 'package:get/get.dart';
 
 class WishlistPage extends StatefulWidget {
-  WishlistPage({super.key});
+  const WishlistPage({super.key});
 
   @override
   State<WishlistPage> createState() => _WishlistPageState();
@@ -80,7 +80,6 @@ class _WishlistPageState extends State<WishlistPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     scrollController.dispose();
     super.dispose();
   }

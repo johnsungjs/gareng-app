@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class NotifContainer extends StatelessWidget {
   final String title;
@@ -15,8 +13,8 @@ class NotifContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10),
@@ -26,22 +24,22 @@ class NotifContainer extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.info),
-              SizedBox(
+              const Icon(Icons.info),
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
                   child: Text(
                 title,
-                style: TextStyle(fontWeight: FontWeight.w700),
+                style: const TextStyle(fontWeight: FontWeight.w700),
               )),
               Text(
                 time,
-                style: TextStyle(fontWeight: FontWeight.w300),
+                style: const TextStyle(fontWeight: FontWeight.w300),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(content),

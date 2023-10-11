@@ -111,7 +111,7 @@ class _DetailItemState extends State<DetailItem> {
                       children: [
                         Text(
                           "Rp.$itemPriceTotal",
-                          style: TextStyle(fontSize: 28),
+                          style: const TextStyle(fontSize: 28),
                         ),
                         const Text(
                           "Total Price",

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:gareng_front/constants/FormatCurrency.dart';
+import 'package:gareng_front/constants/format_currency.dart';
 import 'package:gareng_front/constants/custom_style.dart';
-import 'package:gareng_front/constants/itemsDummy.dart';
+import 'package:gareng_front/constants/items_dummy.dart';
 import 'package:gareng_front/services/api_service.dart';
 import 'package:get/get.dart';
 
@@ -93,8 +92,8 @@ class TransactionPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -109,10 +108,10 @@ class TransactionPage extends StatelessWidget {
               ),
               CheckoutCart(),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: 50,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -140,7 +139,7 @@ class TransactionPage extends StatelessWidget {
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8))),
                             backgroundColor:
-                                MaterialStatePropertyAll(customBlack)),
+                                const MaterialStatePropertyAll(customBlack)),
                         onPressed: () {},
                         child: const Text(
                           'apply',
@@ -270,7 +269,8 @@ class TransactionPage extends StatelessWidget {
                     style: ButtonStyle(
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18))),
-                        backgroundColor: MaterialStatePropertyAll(customBlack)),
+                        backgroundColor:
+                            const MaterialStatePropertyAll(customBlack)),
                     onPressed: handleTransactionPage,
                     child: const Text(
                       "Pay",

@@ -22,7 +22,8 @@ class AccountButton extends StatelessWidget {
               ),
               Text(
                 buttonText,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const Spacer(),
               const Icon(Icons.arrow_right)

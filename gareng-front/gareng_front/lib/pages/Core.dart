@@ -11,7 +11,7 @@ import 'account_page.dart';
 
 class Core extends StatefulWidget {
   final int selectedIndex;
-  Core({super.key, required this.selectedIndex});
+  const Core({super.key, required this.selectedIndex});
   // final cartController = Get.put(CartController());
 
   @override
@@ -25,14 +25,13 @@ class _CoreState extends State<Core> {
   @override
   void initState() {
     super.initState();
-    // TODO: implement initState
     _selectedIndex = widget.selectedIndex;
   }
 
   static final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
+    const HomePage(),
     const HistoryPage(),
-    WishlistPage(),
+    const WishlistPage(),
     const AccountPage(),
   ];
 

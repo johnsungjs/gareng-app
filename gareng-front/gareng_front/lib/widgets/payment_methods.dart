@@ -18,15 +18,15 @@ class PaymentMethods extends StatelessWidget {
           itemController.setPaymentMethod(paymentMethod);
           Navigator.pop(context);
         },
-        child: Text(
-          paymentMethod.isNotEmpty ? paymentMethod : "Cancel",
-          style: TextStyle(color: customBlack),
-        ),
         style: ButtonStyle(
-          side: MaterialStatePropertyAll(BorderSide(
+          side: const MaterialStatePropertyAll(BorderSide(
               color: customBlack, width: 1.0, style: BorderStyle.solid)),
           shape: MaterialStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
+        ),
+        child: Text(
+          paymentMethod.isNotEmpty ? paymentMethod : "Cancel",
+          style: const TextStyle(color: customBlack),
         ),
       ),
     );

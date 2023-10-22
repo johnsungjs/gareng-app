@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
@@ -60,6 +62,12 @@ class _LoginPageState extends State<LoginPage> {
               image: DecorationImage(
                   image: AssetImage("assets/images/background.jpg"),
                   fit: BoxFit.cover)),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+            child: Container(
+              decoration: BoxDecoration(color: Colors.white.withOpacity(0)),
+            ),
+          ),
         ),
         SingleChildScrollView(
           child: Column(

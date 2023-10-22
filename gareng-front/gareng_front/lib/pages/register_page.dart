@@ -57,310 +57,326 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _registerUI(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 8, top: 60),
-            child: Row(
-              children: [
-                // Icon(
-                //   Icons.food_bank_outlined,
-                //   size: 75,
-                // ),
-                Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/logoFood.png'),
-                    radius: 30,
-                    backgroundColor: Colors.white,
-                  ),
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/background.jpg"),
+                fit: BoxFit.cover),
+          ),
+        ),
+        SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 8, top: 60),
+                child: Row(
+                  children: [
+                    // Icon(
+                    //   Icons.food_bank_outlined,
+                    //   size: 75,
+                    // ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/images/logoFood.png'),
+                        radius: 30,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      "Food App",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 45,
+                          color: customBlack),
+                    ),
+                  ],
                 ),
-                Text(
-                  "Food App",
+              ),
+              const Padding(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  bottom: 20,
+                  top: 50,
+                ),
+                child: Text(
+                  "Register",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 45,
                       color: customBlack),
                 ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 20,
-              bottom: 20,
-              top: 50,
-            ),
-            child: Text(
-              "Register",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 45,
-                  color: customBlack),
-            ),
-          ),
-          FormHelper.inputFieldWidget(
-            context,
-            "username",
-            "UserName",
-            (onValidateVal) {
-              if (onValidateVal.isEmpty) {
-                return "Username can't be empty";
-              }
-              return null;
-            },
-            (onSavedVal) {
-              username = onSavedVal;
-            },
-            borderFocusColor: customBlack,
-            prefixIcon: const Icon(Icons.person),
-            showPrefixIcon: true,
-            prefixIconColor: customBlack,
-            borderColor: Colors.grey,
-            textColor: customBlack,
-            hintColor: customBlack.withOpacity(0.7),
-            borderRadius: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: FormHelper.inputFieldWidget(
-              context,
-              "password",
-              "Password",
-              (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return "Password can't be empty";
-                }
-                return null;
-              },
-              (onSavedVal) {
-                password = onSavedVal;
-              },
-              borderFocusColor: customBlack,
-              prefixIcon: const Icon(Icons.password),
-              showPrefixIcon: true,
-              prefixIconColor: customBlack,
-              borderColor: Colors.grey,
-              textColor: customBlack,
-              hintColor: customBlack.withOpacity(0.7),
-              borderRadius: 10,
-              obscureText: hidePassword,
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    hidePassword = !hidePassword;
-                  });
-                },
-                color: customBlack,
-                icon: Icon(
-                    hidePassword ? Icons.visibility_off : Icons.visibility),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: FormHelper.inputFieldWidget(
-              context,
-              "address",
-              "Address",
-              (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return "Address can't be empty";
-                }
-                return null;
-              },
-              (onSavedVal) {
-                address = onSavedVal;
-              },
-              borderFocusColor: customBlack,
-              prefixIcon: const Icon(Icons.person_pin),
-              showPrefixIcon: true,
-              prefixIconColor: customBlack,
-              borderColor: Colors.grey,
-              textColor: customBlack,
-              hintColor: customBlack.withOpacity(0.7),
-              borderRadius: 10,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(15)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "Gender: ",
-                    style: blackText,
+              FormHelper.inputFieldWidget(
+                context,
+                "username",
+                "UserName",
+                (onValidateVal) {
+                  if (onValidateVal.isEmpty) {
+                    return "Username can't be empty";
+                  }
+                  return null;
+                },
+                (onSavedVal) {
+                  username = onSavedVal;
+                },
+                borderFocusColor: customBlack,
+                prefixIcon: const Icon(Icons.person),
+                showPrefixIcon: true,
+                prefixIconColor: customBlack,
+                borderColor: Colors.grey,
+                textColor: customBlack,
+                hintColor: customBlack.withOpacity(0.7),
+                borderRadius: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: FormHelper.inputFieldWidget(
+                  context,
+                  "password",
+                  "Password",
+                  (onValidateVal) {
+                    if (onValidateVal.isEmpty) {
+                      return "Password can't be empty";
+                    }
+                    return null;
+                  },
+                  (onSavedVal) {
+                    password = onSavedVal;
+                  },
+                  borderFocusColor: customBlack,
+                  prefixIcon: const Icon(Icons.password),
+                  showPrefixIcon: true,
+                  prefixIconColor: customBlack,
+                  borderColor: Colors.grey,
+                  textColor: customBlack,
+                  hintColor: customBlack.withOpacity(0.7),
+                  borderRadius: 10,
+                  obscureText: hidePassword,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        hidePassword = !hidePassword;
+                      });
+                    },
+                    color: customBlack,
+                    icon: Icon(
+                        hidePassword ? Icons.visibility_off : Icons.visibility),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: FormHelper.inputFieldWidget(
+                  context,
+                  "address",
+                  "Address",
+                  (onValidateVal) {
+                    if (onValidateVal.isEmpty) {
+                      return "Address can't be empty";
+                    }
+                    return null;
+                  },
+                  (onSavedVal) {
+                    address = onSavedVal;
+                  },
+                  borderFocusColor: customBlack,
+                  prefixIcon: const Icon(Icons.person_pin),
+                  showPrefixIcon: true,
+                  prefixIconColor: customBlack,
+                  borderColor: Colors.grey,
+                  textColor: customBlack,
+                  hintColor: customBlack.withOpacity(0.7),
+                  borderRadius: 10,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(15)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      width: 5,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text(
+                        "Gender: ",
+                        style: blackText,
+                      ),
                     ),
-                    Radio<String>(
-                      value: 'male',
-                      fillColor: const MaterialStatePropertyAll(customBlack),
-                      focusColor: customBlack,
-                      groupValue: gender,
-                      onChanged: (value) {
-                        setState(() {
-                          gender = value!;
-                        });
-                      },
-                    ),
-                    const Text(
-                      "Male",
-                      style: blackText,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    Radio<String>(
-                      value: 'female',
-                      fillColor: const MaterialStatePropertyAll(customBlack),
-                      focusColor: customBlack,
-                      groupValue: gender,
-                      onChanged: (value) {
-                        setState(() {
-                          gender = value!;
-                        });
-                      },
-                    ),
-                    const Text(
-                      "Female",
-                      style: blackText,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Radio<String>(
+                          value: 'male',
+                          fillColor:
+                              const MaterialStatePropertyAll(customBlack),
+                          focusColor: customBlack,
+                          groupValue: gender,
+                          onChanged: (value) {
+                            setState(() {
+                              gender = value!;
+                            });
+                          },
+                        ),
+                        const Text(
+                          "Male",
+                          style: blackText,
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Radio<String>(
+                          value: 'female',
+                          fillColor:
+                              const MaterialStatePropertyAll(customBlack),
+                          focusColor: customBlack,
+                          groupValue: gender,
+                          onChanged: (value) {
+                            setState(() {
+                              gender = value!;
+                            });
+                          },
+                        ),
+                        const Text(
+                          "Female",
+                          style: blackText,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: FormHelper.inputFieldWidget(
-              context,
-              "age",
-              "Age",
-              (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return "Age can't be empty";
-                }
-                return null;
-              },
-              (onSavedVal) {
-                age = int.parse(onSavedVal);
-              },
-              isNumeric: true,
-              borderFocusColor: customBlack,
-              prefixIcon: const Icon(Icons.add_task_outlined),
-              showPrefixIcon: true,
-              prefixIconColor: customBlack,
-              borderColor: Colors.grey,
-              textColor: customBlack,
-              hintColor: customBlack.withOpacity(0.7),
-              borderRadius: 10,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: FormHelper.inputFieldWidget(
-              context,
-              "email",
-              "Email",
-              (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return "Email can't be empty";
-                }
-                return null;
-              },
-              (onSavedVal) {
-                email = onSavedVal;
-              },
-              borderFocusColor: customBlack,
-              prefixIcon: const Icon(Icons.mail),
-              showPrefixIcon: true,
-              prefixIconColor: customBlack,
-              borderColor: Colors.grey,
-              textColor: customBlack,
-              hintColor: customBlack.withOpacity(0.7),
-              borderRadius: 10,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-            child: SizedBox(
-              width: double.infinity,
-              child: FormHelper.submitButton(
-                "Sign Up",
-                () {
-                  if (validateAndSave()) {
-                    setState(() {
-                      isAPICallProcess = true;
-                    });
-
-                    RegisterRequestModel model = RegisterRequestModel(
-                        username: username!,
-                        password: password!,
-                        address: address!,
-                        gender: gender,
-                        age: age!,
-                        email: email!);
-
-                    APIService.register(model).then((response) {
-                      setState(() {
-                        isAPICallProcess = false;
-                      });
-
-                      if (response.data != null) {
-                        FormHelper.showSimpleAlertDialog(
-                            context, Config.appName, "Success Add User", "OK",
-                            () {
-                          // Navigator.pop(context);
-                          Get.toNamed('/login');
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: FormHelper.inputFieldWidget(
+                  context,
+                  "age",
+                  "Age",
+                  (onValidateVal) {
+                    if (onValidateVal.isEmpty) {
+                      return "Age can't be empty";
+                    }
+                    return null;
+                  },
+                  (onSavedVal) {
+                    age = int.parse(onSavedVal);
+                  },
+                  isNumeric: true,
+                  borderFocusColor: customBlack,
+                  prefixIcon: const Icon(Icons.add_task_outlined),
+                  showPrefixIcon: true,
+                  prefixIconColor: customBlack,
+                  borderColor: Colors.grey,
+                  textColor: customBlack,
+                  hintColor: customBlack.withOpacity(0.7),
+                  borderRadius: 10,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: FormHelper.inputFieldWidget(
+                  context,
+                  "email",
+                  "Email",
+                  (onValidateVal) {
+                    if (onValidateVal.isEmpty) {
+                      return "Email can't be empty";
+                    }
+                    return null;
+                  },
+                  (onSavedVal) {
+                    email = onSavedVal;
+                  },
+                  borderFocusColor: customBlack,
+                  prefixIcon: const Icon(Icons.mail),
+                  showPrefixIcon: true,
+                  prefixIconColor: customBlack,
+                  borderColor: Colors.grey,
+                  textColor: customBlack,
+                  hintColor: customBlack.withOpacity(0.7),
+                  borderRadius: 10,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: FormHelper.submitButton(
+                    "Sign Up",
+                    () {
+                      if (validateAndSave()) {
+                        setState(() {
+                          isAPICallProcess = true;
                         });
-                      } else {
-                        FormHelper.showSimpleAlertDialog(
-                            context, Config.appName, response.message, "OK",
-                            () {
-                          Navigator.pop(context);
+
+                        RegisterRequestModel model = RegisterRequestModel(
+                            username: username!,
+                            password: password!,
+                            address: address!,
+                            gender: gender,
+                            age: age!,
+                            email: email!);
+
+                        APIService.register(model).then((response) {
+                          setState(() {
+                            isAPICallProcess = false;
+                          });
+
+                          if (response.data != null) {
+                            FormHelper.showSimpleAlertDialog(context,
+                                Config.appName, "Success Add User", "OK", () {
+                              // Navigator.pop(context);
+                              Get.toNamed('/login');
+                            });
+                          } else {
+                            FormHelper.showSimpleAlertDialog(
+                                context, Config.appName, response.message, "OK",
+                                () {
+                              Navigator.pop(context);
+                            });
+                          }
+                        }).catchError((err) {
+                          setState(() {
+                            isAPICallProcess = false;
+                          });
+                          FormHelper.showSimpleAlertDialog(
+                              context,
+                              Config.appName,
+                              "The Service has been turned off",
+                              "OK", () {
+                            Navigator.pop(context);
+                          });
                         });
                       }
-                    }).catchError((err) {
-                      setState(() {
-                        isAPICallProcess = false;
-                      });
-                      FormHelper.showSimpleAlertDialog(context, Config.appName,
-                          "The Service has been turned off", "OK", () {
-                        Navigator.pop(context);
-                      });
-                    });
-                  }
-                },
-                btnColor: customBlack,
-                borderColor: customBlack,
-                txtColor: Colors.white,
-                borderRadius: 10,
+                    },
+                    btnColor: customBlack,
+                    borderColor: customBlack,
+                    txtColor: Colors.white,
+                    borderRadius: 10,
+                  ),
+                ),
               ),
-            ),
+              const SizedBox(
+                height: 50,
+              )
+            ],
           ),
-          const SizedBox(
-            height: 50,
-          )
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

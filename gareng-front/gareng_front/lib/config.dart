@@ -1,7 +1,7 @@
 class Config {
   static const String appName = 'Gareng App';
   // static const String apiURL = 'localhost:8080';
-  static const String apiURL = '192.168.100.92:8080';
+  static const String apiURL = '192.168.100.103:8080';
   static const String loginAPI = '/authentication/login';
   static const String logoutAPI = '/authentication/logout';
   static const String registerAPI = '/authentication/register';

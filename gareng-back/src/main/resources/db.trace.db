@@ -1180,3 +1180,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: D:/TELE Project/
 	... 46 more
 2023-10-21 15:02:53 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-10-22 19:19:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-10-22 19:23:17 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]

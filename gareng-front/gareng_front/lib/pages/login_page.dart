@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                   image: AssetImage("assets/images/background.jpg"),
                   fit: BoxFit.cover)),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: Container(
               decoration: BoxDecoration(color: Colors.white.withOpacity(0)),
             ),

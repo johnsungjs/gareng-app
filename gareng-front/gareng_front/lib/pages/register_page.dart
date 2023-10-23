@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:gareng_front/config.dart';
 import 'package:gareng_front/constants/custom_style.dart';
@@ -64,6 +66,12 @@ class _RegisterPageState extends State<RegisterPage> {
             image: DecorationImage(
                 image: AssetImage("assets/images/background.jpg"),
                 fit: BoxFit.cover),
+          ),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              decoration: BoxDecoration(color: Colors.white.withOpacity(0)),
+            ),
           ),
         ),
         SingleChildScrollView(
